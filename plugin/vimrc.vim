@@ -4,7 +4,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
-Plugin 'msanders/snipmate.vim'
+Plugin 'johnzeng/snipmate.vim'
 
 call vundle#end()
 filetype plugin indent on
