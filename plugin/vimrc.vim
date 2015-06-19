@@ -22,7 +22,8 @@ set cindent
 
 nmap <C-p> :LeaderfMru<CR>
 nmap <C-b> :NERDTree<CR>
-nmap <F2> :mksession!<CR>
+nmap <leader>s <Esc>:wa<CR>a
+nmap <F2> :mksession!<CR>:wa<CR>:qa<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
