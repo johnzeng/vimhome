@@ -30,7 +30,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set formatoptions=ql
 
 "nmap <C-n> :vimgrep/<C-r>=expand("<cword>")<CR>/gj **/*.{cpp,h} <CR>:copen<CR>
-nmap <silent><C-n> :grep -IR '<C-r>=expand("<cword>")<CR>' ./*<CR>
+nmap <silent><C-n> ma:grep -IR '<C-r>=expand("<cword>")<CR>' ./*<CR>`a
 "<CR> <CR>:copen<CR>
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
@@ -51,6 +51,6 @@ function! CommentTrigger(...)
 	exec a:exec_command
 endfunction
 
-nmap <leader>c :call CommentTrigger()<CR>
-vmap <leader>c :call CommentTrigger()<CR>
+nmap <leader>c :call CommentTrigger()<CR>$
+vmap <leader>c :call CommentTrigger()<CR>$
 
