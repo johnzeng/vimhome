@@ -5,6 +5,7 @@ call vundle#begin()
 Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
 Plugin 'johnzeng/snipmate.vim'
+Plugin 'derekwyatt/vim-scala'
 
 call vundle#end()
 filetype plugin indent on
