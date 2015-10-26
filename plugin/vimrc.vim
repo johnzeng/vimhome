@@ -15,7 +15,7 @@ set incsearch
 set hlsearch
 set number
 set ruler
-set mouse=a
+"set mouse=a
 set ts=4
 set noexpandtab
 set shiftwidth=4
