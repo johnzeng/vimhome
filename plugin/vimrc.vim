@@ -17,7 +17,7 @@ set number
 set ruler
 "set mouse=a
 set ts=4
-set noexpandtab
+set expandtab
 set shiftwidth=4
 set cindent
 
