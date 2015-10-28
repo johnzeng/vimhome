@@ -31,7 +31,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set formatoptions=ql
 
 "nmap <C-n> :vimgrep/<C-r>=expand("<cword>")<CR>/gj **/*.{cpp,h} <CR>:copen<CR>
-nmap <silent><C-n> ma:grep -IR '<C-r>=expand("<cword>")<CR>' ./*<CR>`a
+nmap <silent><C-n> ma:grep -IR '<C-r>=expand("<cword>")<CR>' ./*<CR>
 "<CR> <CR>:copen<CR>
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
