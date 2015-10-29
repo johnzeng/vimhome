@@ -20,7 +20,7 @@ set ts=4
 set expandtab
 set shiftwidth=4
 set cindent
-
+set pastetoggle=<leader>p
 nmap <C-p> :LeaderfMru<CR>
 nmap <C-b> :NERDTree<CR>
 nmap <leader>s <Esc>:wa<CR>a
@@ -31,7 +31,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set formatoptions=ql
 
 "nmap <C-n> :vimgrep/<C-r>=expand("<cword>")<CR>/gj **/*.{cpp,h} <CR>:copen<CR>
-nmap <silent><C-n> ma:grep -IR '<C-r>=expand("<cword>")<CR>' ./*<CR>
+nmap <silent><C-n> mA:grep -IR '<C-r>=expand("<cword>")<CR>' ./*<CR><CR>`A:cw<CR>
 "<CR> <CR>:copen<CR>
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
