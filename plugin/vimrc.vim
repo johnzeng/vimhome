@@ -40,7 +40,14 @@ function! CommentTrigger(...)
 	let a:comment_word="\\/\\/"
 	if a:0 >= 1
 		let a:comment_word=a:1
+    else
+        let a:curFileType = &filetype
+        if 1 == has_key(g:comment_map,a:curFileType)
+            let a:comment_word=g:comment_map[a:curFileType]
+        endif
 	endif
+"now comment
+
 	let a:curLine = getline('.')
 
 	if 0 == match(a:curLine, a:comment_word)
@@ -52,6 +59,13 @@ function! CommentTrigger(...)
 	exec a:exec_command
 endfunction
 
+let g:comment_map={'vim': '"', 'sh': '#','python': '#'}
+
 nmap <leader>c :call CommentTrigger()<CR>$
 vmap <leader>c :call CommentTrigger()<CR>$
 
+let g:Lf_WildIgnore = {
+        \ 'dir': ['.svn','.git','target'],
+        \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache']
+        \}
+let g:Lf_MruFileExclude = ['*.so','*.log',]
