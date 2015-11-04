@@ -63,6 +63,7 @@ let g:comment_map={'vim': '"', 'sh': '#','python': '#'}
 
 nmap <leader>c :call CommentTrigger()<CR>$
 vmap <leader>c :call CommentTrigger()<CR>$
+imap <leader>c <Esc>ma:call CommentTrigger()<CR>`a
 
 let g:Lf_WildIgnore = {
         \ 'dir': ['.svn','.git','target'],
