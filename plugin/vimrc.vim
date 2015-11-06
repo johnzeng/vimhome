@@ -33,9 +33,19 @@ set formatoptions=ql
 
 "nmap <C-n> :vimgrep/<C-r>=expand("<cword>")<CR>/gj **/*.{cpp,h} <CR>:copen<CR>
 nmap <silent><C-n> mA:grep --exclude-dir=node_modules -IR '<C-r>=expand("<cword>")<CR>' ./*<CR><CR>`A:cw<CR>
-"<CR> <CR>:copen<CR>
+nmap <silent><leader>n mA:call GrepFromInput()<CR>
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
+
+function! GrepFromInput(...)
+    let a:inputword = input("Grep:")
+    if strlen(a:inputword) == 0
+        return
+    endif
+    let a:exec_command = "grep --exclude-dir=node_modules -IR '".a:inputword."' ./*"
+    exec a:exec_command
+	exec 'cw'
+endfunction
 
 function! CommentTrigger(...) 
 	let a:comment_word="\\/\\/"
