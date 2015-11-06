@@ -6,6 +6,7 @@ Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
 Plugin 'johnzeng/snipmate.vim'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'rizzatti/dash.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -31,7 +32,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set formatoptions=ql
 
 "nmap <C-n> :vimgrep/<C-r>=expand("<cword>")<CR>/gj **/*.{cpp,h} <CR>:copen<CR>
-nmap <silent><C-n> mA:grep -IR '<C-r>=expand("<cword>")<CR>' ./*<CR><CR>`A:cw<CR>
+nmap <silent><C-n> mA:grep --exclude-dir=node_modules -IR '<C-r>=expand("<cword>")<CR>' ./*<CR><CR>`A:cw<CR>
 "<CR> <CR>:copen<CR>
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
