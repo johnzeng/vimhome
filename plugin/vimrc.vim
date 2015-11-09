@@ -34,6 +34,7 @@ set formatoptions=ql
 "nmap <C-n> :vimgrep/<C-r>=expand("<cword>")<CR>/gj **/*.{cpp,h} <CR>:copen<CR>
 nmap <silent><C-n> mA:grep --exclude-dir=node_modules -IR '<C-r>=expand("<cword>")<CR>' ./*<CR><CR>`A:cw<CR>
 nmap <silent><leader>n mA:call GrepFromInput()<CR>
+nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
 
@@ -77,7 +78,9 @@ vmap <leader>c :call CommentTrigger()<CR>$
 imap <leader>c <Esc>ma:call CommentTrigger()<CR>`a
 
 let g:Lf_WildIgnore = {
-        \ 'dir': ['.svn','.git','target'],
+        \ 'dir': ['.svn','.git','target','node_modules'],
         \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache']
         \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
+"I think I can do something on this so I can set cache for every project
+"let g:Lf_CacheDiretory = '/root'
