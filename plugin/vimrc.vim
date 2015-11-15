@@ -23,9 +23,10 @@ set shiftwidth=4
 set cindent
 set pastetoggle=<leader>p
 nmap <C-p> :LeaderfMru<CR>
-nmap <C-b> :NERDTree<CR>
+nmap <C-b> :NERDTreeToggle<CR>
 nmap <leader>s <Esc>:wa<CR>a
-nmap <F2> :mksession!<CR>:wa<CR>:qa<CR>
+nmap <F2> :wa<CR>:mksession!<CR>
+
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -71,7 +72,7 @@ function! CommentTrigger(...)
 	exec a:exec_command
 endfunction
 
-let g:comment_map={'vim': '"', 'sh': '#','python': '#'}
+let g:comment_map={'vim': '"', 'sh': '#','python': '#','yaml': '#'}
 
 nmap <leader>c :call CommentTrigger()<CR>$
 vmap <leader>c :call CommentTrigger()<CR>$
@@ -79,8 +80,8 @@ imap <leader>c <Esc>ma:call CommentTrigger()<CR>`a
 
 let g:Lf_WildIgnore = {
         \ 'dir': ['.svn','.git','target','node_modules'],
-        \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache']
+        \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar']
         \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
 "I think I can do something on this so I can set cache for every project
-"let g:Lf_CacheDiretory = '/root'
+"let g:Lf_CacheDiretory = '~/cloud_lucifer/'
