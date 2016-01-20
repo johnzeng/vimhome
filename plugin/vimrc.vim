@@ -7,7 +7,10 @@ Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
 Plugin 'johnzeng/snipmate.vim'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'fatih/vim-go'
 Plugin 'rizzatti/dash.vim'
+
+"Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tenfyzhong/file_template.vim'
 
 call vundle#end()
@@ -35,9 +38,10 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set formatoptions=ql
 
 "nmap <C-n> :vimgrep/<C-r>=expand("<cword>")<CR>/gj **/*.{cpp,h} <CR>:copen<CR>
-nmap <silent><C-n> mA:grep --exclude-dir=node_modules -IR '<C-r>=expand("<cword>")<CR>' ./*<CR><CR>`A:cw<CR>
+nmap <silent><C-n> mA:grep --exclude-dir=target --exclude-dir=node_modules -IR '<C-r>=expand("<cword>")<CR>' ./*<CR><CR>`A:cw<CR>
 nmap <silent><leader>n mA:call GrepFromInput()<CR>
 nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
+vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
 
@@ -46,7 +50,7 @@ function! GrepFromInput(...)
     if strlen(a:inputword) == 0
         return
     endif
-    let a:exec_command = "grep --exclude-dir=node_modules -IR '".a:inputword."' ./*"
+    let a:exec_command = "grep --exclude-dir=node_modules --exclude-dir=target -IR '".a:inputword."' ./*"
     exec a:exec_command
 	exec 'cw'
 endfunction
@@ -74,7 +78,7 @@ function! CommentTrigger(...)
 	exec a:exec_command
 endfunction
 
-let g:comment_map={'vim': '"', 'sh': '#','python': '#','yaml': '#'}
+let g:comment_map={'vim': '"', 'sh': '#','python': '#','yaml': '#','conf':'?'}
 
 nmap <leader>c :call CommentTrigger()<CR>$
 vmap <leader>c :call CommentTrigger()<CR>$
@@ -87,3 +91,15 @@ let g:Lf_WildIgnore = {
 let g:Lf_MruFileExclude = ['*.so','*.log',]
 "I think I can do something on this so I can set cache for every project
 "let g:Lf_CacheDiretory = '~/cloud_lucifer/'
+autocmd VimLeave * :call SaveSession()
+
+let g:LessSaveBufNum = 5
+function! SaveSession()
+    if filereadable("Session.vim")
+        let a:bufNum = bufnr('$')
+        "" save session only when buff num more then 5
+        if a:bufNum > g:LessSaveBufNum
+            exec "mksession!"
+        end
+    end
+endfunction
