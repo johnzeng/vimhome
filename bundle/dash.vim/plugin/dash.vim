@@ -6,7 +6,7 @@ if exists('loaded_dash') || &compatible || v:version < 700
   finish
 endif
 
-if has('win32') || match(system('uname'), 'Darwin') == -1
+if !has('unix') " OS X's vim and MacVim have this feature
   finish
 endif
 let loaded_dash = 1
@@ -37,13 +37,17 @@ if exists(':DashKeywords') == 2
   echomsg 'dash.vim: could not create command DashKeywords'
   echohl None
 else
-  command -complete=customlist,dash#complete -nargs=* DashKeywords call dash#keywords(<f-args>)
+  command -bang -complete=customlist,dash#complete -nargs=* DashKeywords call dash#keywords("<bang>", <f-args>)
 endif
 "}}}
 
 if !exists('g:dash_autocommands')
   let g:dash_autocommands = 1
   call dash#autocommands()
+endif
+
+if !exists('g:dash_activate')
+  let g:dash_activate = 1
 endif
 
 let &cpoptions = s:save_cpoptions

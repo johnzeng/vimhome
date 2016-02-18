@@ -2,47 +2,11 @@
 " Author: José Otávio Rizzatti <zehrizzatti@gmail.com>
 " License: MIT
 
-"{{{ Creates dummy versions of entry points if Dash.app is not present
-function! s:check_for_dash()
-  let script = expand('<sfile>:h:h') . '/script/check_for_dash.sh'
-  call system(script)
-  if v:shell_error " script returns 1 == Dash is present
-    return
-  endif
-
-  function! s:dummy()
-    redraw
-    echohl WarningMsg
-    echomsg 'dash.vim: Dash.app does not seem to be installed.'
-    echohl None
-  endfunction
-
-  function! dash#add_keywords_for_filetype(...)
-  endfunction
-
-  function! dash#autocommands(...)
-  endfunction
-
-  function! dash#complete(...)
-  endfunction
-
-  function! dash#keywords(...)
-    call s:dummy()
-  endfunction
-
-  function! dash#search(...)
-    call s:dummy()
-  endfunction
-
-  finish
-endfunction
-"}}}
-
 let s:groups = dash#defaults#module.groups
 
 function! dash#add_keywords_for_filetype(filetype) "{{{
   let keywords = get(s:groups, a:filetype, [])
-  call s:add_buffer_keywords(keywords)
+  call s:add_buffer_keywords("", keywords)
 endfunction
 "}}}
 
@@ -67,11 +31,11 @@ function! dash#complete(arglead, cmdline, cursorpos) "{{{
 endfunction
 "}}}
 
-function! dash#keywords(...) "{{{
+function! dash#keywords(bang, ...) "{{{
   if a:0 == 0
     call s:show_buffer_keywords()
   else
-    call s:add_buffer_keywords(a:000)
+    call s:add_buffer_keywords(a:bang, a:000)
   endif
 endfunction
 "}}}
@@ -90,7 +54,6 @@ function! dash#search(bang, ...) "{{{
     let filetype = get(split(&filetype, '\.'), -1, '')
     if exists('b:dash_keywords')
       if v:count == 0
-        call add(keywords, filetype)
         call extend(keywords, b:dash_keywords)
       else
         let position = v:count1 - 1
@@ -105,12 +68,16 @@ function! dash#search(bang, ...) "{{{
 endfunction
 "}}}
 
-function! s:add_buffer_keywords(keyword_list) "{{{
+function! s:add_buffer_keywords(bang, keyword_list) "{{{
   let keywords = []
-  if exists('b:dash_keywords')
+  if empty(a:bang) && exists('b:dash_keywords')
     let keywords = b:dash_keywords
   endif
-  call extend(keywords, a:keyword_list)
+  for item in a:keyword_list
+    if index(keywords, item) == -1
+       call add(keywords, item)
+    endif
+  endfor
   let b:dash_keywords = keywords
 endfunction
 "}}}
@@ -146,7 +113,12 @@ function! s:search(term, keywords) "{{{
     let keys = 'keys=' . join(a:keywords, ',') . '&'
   endif
   let query = 'query=' . a:term
-  let url = 'dash-plugin://' . shellescape(keys . query)
+  if (exists('g:dash_activate') && g:dash_activate == 0)
+    let activation = '&prevent_activation=true'
+  else
+    let activation = ''
+  endif
+  let url = 'dash-plugin://' . shellescape(keys . query . activation)
   silent execute '!open -g ' . url
   redraw!
 endfunction

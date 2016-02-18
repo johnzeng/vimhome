@@ -9,6 +9,7 @@ Plugin 'johnzeng/snipmate.vim'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
 Plugin 'rizzatti/dash.vim'
+Plugin 'yegappan/grep'
 
 "Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tenfyzhong/file_template.vim'
@@ -22,15 +23,22 @@ set hlsearch
 set number
 set ruler
 "set mouse=a
-set ts=4
+set ts=2
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 set cindent
 set pastetoggle=<leader>p
+
 nmap <C-p> :LeaderfMru<CR>
 nmap <C-b> :NERDTreeToggle<CR>
 nmap <leader>s <Esc>:wa<CR>a
 nmap <F2> :wa<CR>:mksession!<CR>
+imap <C-e> <Esc>
+vmap <C-e> <Esc>
+" we don't use it usually, so we just use a far funcion
+nmap <F11> :%!xxd<CR>
+nmap <F12> :%!xxd -r<CR>
+
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -78,7 +86,7 @@ function! CommentTrigger(...)
 	exec a:exec_command
 endfunction
 
-let g:comment_map={'vim': '"', 'sh': '#','python': '#','yaml': '#','conf':'?'}
+let g:comment_map={'vim': '"', 'sh': '#','python': '#','yaml': '#','conf':'#'}
 
 nmap <leader>c :call CommentTrigger()<CR>$
 vmap <leader>c :call CommentTrigger()<CR>$
@@ -103,3 +111,12 @@ function! SaveSession()
         end
     end
 endfunction
+
+
+"config about grep
+let Grep_Skip_Files = '*.bak *~' 
+let Grep_Default_Options = '--exclude-dir=node_modules --exclude-dir=target -IR'
+let Grep_Skip_Dirs = 'project'
+
+"seting for scala
+au FileType scala nmap <leader>s :SortScalaImports
