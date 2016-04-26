@@ -1,1 +1,1 @@
-nmap <leader>d :SortScalaImports<CR>
+nmap <leader>t :SortScalaImports<CR>

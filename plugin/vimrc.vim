@@ -10,7 +10,6 @@ Plugin 'fatih/vim-go'
 Plugin 'rizzatti/dash.vim'
 Plugin 'yegappan/grep'
 
-Plugin 'johnzeng/vim-cmd'
 Plugin 'johnzeng/snipmate.vim'
 Plugin 'johnzeng/leader-c'
 
@@ -22,7 +21,9 @@ set incsearch
 set hlsearch
 set number
 set ruler
-"set mouse=a
+set hidden 
+set backspace=2
+set mouse=a
 set ts=2
 set expandtab
 set shiftwidth=2
@@ -32,6 +33,8 @@ set autoread
 
 nmap <C-p> :LeaderfMru<CR>
 nmap <C-b> :NERDTreeToggle<CR>
+vmap <C-e> "+y
+imap <C-e> \p<C-r>+\p
 nmap <leader>s <Esc>:wa<CR>
 nmap <F2> :wa<CR>:mksession!<CR>
 " we don't use it usually, so we just use a far funcion
@@ -47,6 +50,10 @@ nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
+nmap <leader>l :cn<CR>
+nmap <leader>h :ccl<CR>
+nmap <leader>d "_d
+vmap <leader>d "_d
 
 function! GrepFromInput(...)
     let a:inputword = input("Grep:")
@@ -59,7 +66,7 @@ endfunction
 
 let g:Lf_WildIgnore = {
         \ 'dir': ['.svn','.git','target','node_modules'],
-        \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar']
+        \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda']
         \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
 "I think I can do something on this so I can set cache for every project
@@ -79,7 +86,6 @@ endfunction
 
 
 "config about grep
-let Grep_Skip_Files = '*.bak *~' 
+let Grep_Skip_Files = '*.bak *~ *.o *.jar *.class *.log, *.scala' 
 let Grep_Default_Options = '--exclude-dir=node_modules --exclude-dir=target -IR'
 let Grep_Skip_Dirs = 'project'
-
