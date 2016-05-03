@@ -9,6 +9,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
 Plugin 'rizzatti/dash.vim'
 Plugin 'yegappan/grep'
+Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'johnzeng/snipmate.vim'
 Plugin 'johnzeng/leader-c'
