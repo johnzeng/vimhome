@@ -18,6 +18,7 @@ Plugin 'johnzeng/leader-c'
 call vundle#end()
 filetype plugin indent on
 
+colorscheme elflord
 syntax on
 set incsearch
 set hlsearch
