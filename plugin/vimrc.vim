@@ -12,6 +12,7 @@ Plugin 'yegappan/grep'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 
+Plugin 'Yggdroot/indentLine'
 Plugin 'johnzeng/snipmate.vim'
 Plugin 'johnzeng/leader-c'
 
