@@ -39,7 +39,7 @@ set autoread
 nmap <C-p> :LeaderfMru<CR>
 
 nmap <C-b> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.gcno','\.gcda', "\.o" ,'\~$']
+let NERDTreeIgnore=['\.gcno','\.gcda', '\.o' ,'\~$']
 
 vmap <C-e> "+y
 imap <C-e> \p<C-r>+\p
@@ -81,6 +81,7 @@ let g:Lf_MruFileExclude = ['*.so','*.log',]
 "let g:Lf_CacheDiretory = '~/cloud_lucifer/'
 
 "config about grep
-let Grep_Skip_Files = '*.bak *~ *.o *.jar *.class *.log, *.scala' 
-let Grep_Default_Options = '--exclude-dir=node_modules --exclude-dir=target -IR'
-let Grep_Skip_Dirs = 'project'
+let g:Grep_Skip_Files = '*.bak *~ *.o *.jar *.class, *.log' 
+"let Grep_Default_Options = '--exclude-dir=node_modules --exclude-dir=target -IR'
+let g:Grep_Default_Options = '-IR'
+let g:Grep_Skip_Dirs = 'project target node_modules'
