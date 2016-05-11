@@ -11,6 +11,7 @@ Plugin 'fatih/vim-go'
 Plugin 'yegappan/grep'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
+Plugin 'johnzeng/VimSessionManager'
 
 "Plugin 'Yggdroot/indentLine'
 Plugin 'johnzeng/snipmate.vim'
@@ -44,7 +45,6 @@ vmap <C-e> "+y
 imap <C-e> \p<C-r>+\p
 nmap <leader>s <Esc>:wa<CR>
 nmap <leader>q <Esc>:qa<CR>
-nmap <F2> :wa<CR>:mksession!<CR>
 " we don't use it usually, so we just use a far funcion
 nmap <F11> :%!xxd<CR>
 nmap <F12> :%!xxd -r<CR>
@@ -79,30 +79,6 @@ let g:Lf_WildIgnore = {
 let g:Lf_MruFileExclude = ['*.so','*.log',]
 "I think I can do something on this so I can set cache for every project
 "let g:Lf_CacheDiretory = '~/cloud_lucifer/'
-
-function! LoadSession()
-  if filereadable("Session.vim")
-    let a:bufNum = bufnr('$')
-    if a:bufNum == 1 && bufname(1) == ""
-      exec "source Session.vim\n"
-    endif
-  endif
-endfunction
-
-autocmd BufEnter * :call LoadSession()
-autocmd VimLeave * :call SaveSession()
-
-let g:LessSaveBufNum = 5
-function! SaveSession()
-    if filereadable("Session.vim")
-        let a:bufNum = bufnr('$')
-        "" save session only when buff num more then 5
-        if a:bufNum > g:LessSaveBufNum 
-            exec "NERDTreeClose"
-            exec "mksession!"
-        end
-    end
-endfunction
 
 "config about grep
 let Grep_Skip_Files = '*.bak *~ *.o *.jar *.class *.log, *.scala' 
