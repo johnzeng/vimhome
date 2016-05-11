@@ -36,10 +36,14 @@ set pastetoggle=<leader>p
 set autoread
 
 nmap <C-p> :LeaderfMru<CR>
+
 nmap <C-b> :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.gcno','\.gcda', "\.o" ,'\~$']
+
 vmap <C-e> "+y
 imap <C-e> \p<C-r>+\p
 nmap <leader>s <Esc>:wa<CR>
+nmap <leader>q <Esc>:qa<CR>
 nmap <F2> :wa<CR>:mksession!<CR>
 " we don't use it usually, so we just use a far funcion
 nmap <F11> :%!xxd<CR>
