@@ -52,7 +52,7 @@ nmap <F12> :%!xxd -r<CR>
 
 set formatoptions=ql
 
-nmap <silent><C-n> :Grep '<C-r>=expand("<cword>")<CR>' *<CR>
+nmap <silent><C-n> :Regrep '<C-r>=expand("<cword>")<CR>' *<CR>
 nmap <silent><leader>n mA:call GrepFromInput()<CR>
 nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
@@ -68,7 +68,7 @@ function! GrepFromInput(...)
     if strlen(a:inputword) == 0
         return
     endif
-    let a:exec_command = "Grep '".a:inputword."' *"
+    let a:exec_command = "Regrep ".a:inputword." *"
     exec a:exec_command
 endfunction
 
@@ -81,7 +81,7 @@ let g:Lf_MruFileExclude = ['*.so','*.log',]
 "let g:Lf_CacheDiretory = '~/cloud_lucifer/'
 
 "config about grep
-let g:Grep_Skip_Files = '*.bak *~ *.o *.jar *.class, *.log' 
+let g:Grep_Skip_Files = '*.bak *~ *.o *.jar *.class, *.log *.gcda *.gcno *.pyc *.pyo' 
 "let Grep_Default_Options = '--exclude-dir=node_modules --exclude-dir=target -IR'
-let g:Grep_Default_Options = '-IR'
-let g:Grep_Skip_Dirs = 'project target node_modules'
+let g:Grep_Default_Options = '-I'
+let g:Grep_Skip_Dirs = 'project target .git node_modules'
