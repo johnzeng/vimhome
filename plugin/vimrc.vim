@@ -85,3 +85,18 @@ let g:Grep_Skip_Files = '*.bak *~ *.o *.jar *.class, *.log *.gcda *.gcno *.pyc *
 "let Grep_Default_Options = '--exclude-dir=node_modules --exclude-dir=target -IR'
 let g:Grep_Default_Options = '-I'
 let g:Grep_Skip_Dirs = 'project target .git node_modules'
+
+nmap <C-e> :call ListRegAndPaste()<CR>
+
+func! ListRegAndPaste()
+  exec "reg 0123456789\""
+  let a:regId = input("which reg do you want?[0-9,\"]:")
+  if strlen(a:regId) != 0 && -1 == match(a:regId, "[0-9\"]")
+    exec "redraw"
+    echon 'illegal register id'
+    return 
+  endif
+  exec "set paste"
+  exec "normal \"".a:regId."p"
+  exec "set nopaste"
+endfunc
