@@ -9,13 +9,13 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
 "Plugin 'rizzatti/dash.vim'
 Plugin 'johnzeng/grep'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-surround'
 Plugin 'johnzeng/VimSessionManager'
-
-"Plugin 'Yggdroot/indentLine'
 Plugin 'johnzeng/snipmate.vim'
 Plugin 'johnzeng/leader-c'
+"Plugin 'Shougo/neocomplete.vim'
+
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()
 filetype plugin indent on
@@ -100,3 +100,4 @@ func! ListRegAndPaste()
   exec "normal \"".a:regId."p"
   exec "set nopaste"
 endfunc
+
