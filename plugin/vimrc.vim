@@ -33,7 +33,7 @@ set ts=2
 set expandtab
 set shiftwidth=2
 set cindent
-set pastetoggle=<leader>p
+set pastetoggle=<F10>
 set autoread
 
 nmap <C-p> :LeaderfMru<CR>
@@ -42,7 +42,7 @@ nmap <C-b> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.gcno','\.gcda', '\.o' ,'\~$']
 
 vmap <C-e> "+y
-imap <C-e> \p<C-r>+\p
+imap <C-e> <F10><C-r>+<F10>
 nmap <leader>s <Esc>:wa<CR>
 nmap <leader>q <Esc>:qa<CR>
 " we don't use it usually, so we just use a far funcion
@@ -73,7 +73,7 @@ function! GrepFromInput(...)
 endfunction
 
 let g:Lf_WildIgnore = {
-        \ 'dir': ['.svn','.git','target','node_modules'],
+        \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor'],
         \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda']
         \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
@@ -101,3 +101,4 @@ func! ListRegAndPaste()
   exec "set nopaste"
 endfunc
 
+au BufEnter *.pig set filetype=pig
