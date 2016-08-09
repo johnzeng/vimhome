@@ -32,7 +32,7 @@ set mouse=a
 set ts=2
 set expandtab
 set shiftwidth=2
-set cindent
+set smartindent
 set pastetoggle=<F10>
 set autoread
 
