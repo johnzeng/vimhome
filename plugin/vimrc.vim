@@ -7,6 +7,7 @@ Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
+Plugin 'Yggdroot/indentLine'
 "Plugin 'rizzatti/dash.vim'
 Plugin 'johnzeng/grep'
 Plugin 'johnzeng/VimSessionManager'
@@ -102,3 +103,7 @@ func! ListRegAndPaste()
 endfunc
 
 au BufEnter *.pig set filetype=pig
+
+"config for indent
+let g:indentLine_enabled = 0
+nmap <F3> :IndentLinesToggle<CR>
