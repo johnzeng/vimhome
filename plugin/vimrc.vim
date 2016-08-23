@@ -116,6 +116,7 @@ nmap <F3> :IndentLinesToggle<CR>
 
 "config for airline
 "let g:airline#extensions#tabline#enabled = 1
+au VimEnter * :AirlineTheme base16_codeschool
 
 " You can use other keymappings like <C-l> instead of <CR> if you want to
 " use these mappings as default search and somtimes want to move cursor with
