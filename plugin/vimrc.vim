@@ -157,3 +157,16 @@ let g:jedi#documentation_command = "K"
 "let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-n>"
 let g:jedi#rename_command = "<leader>r"
+
+nmap J :call ListMarksAndJump()<CR>
+
+func! ListMarksAndJump()
+  exec "marks"
+  let a:markId = input("which mark do you want?[0-9,\"a-zA-Z]:")
+  if strlen(a:markId) != 0 && -1 == match(a:markId, "[0-9\"a-zA-Z]")
+    exec "redraw"
+    echon 'illegal mark id'
+    return 
+  endif
+  exec "normal `".a:markId
+endfunc
