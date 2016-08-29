@@ -8,6 +8,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
 Plugin 'Yggdroot/indentLine'
+Plugin 'justmao945/vim-clang'
 "Plugin 'rizzatti/dash.vim'
 Plugin 'johnzeng/grep'
 Plugin 'johnzeng/VimSessionManager'
@@ -15,6 +16,8 @@ Plugin 'johnzeng/snipmate.vim'
 Plugin 'johnzeng/leader-c'
 "Plugin 'Shougo/neocomplete.vim'
 Plugin 'vim-airline/vim-airline'
+
+"don't forget to run 'pip install jedi' before you use it.
 Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
@@ -25,6 +28,7 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/matchit.zip'
+Plugin 'artur-shaik/vim-javacomplete2'
 
 call vundle#end()
 filetype plugin indent on
@@ -149,7 +153,6 @@ endfunction
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 "jedi , just a little better, it's still not working with other define
-"don't forget to run 'pip install jedi' before you use it.
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = ""
@@ -170,3 +173,7 @@ func! ListMarksAndJump()
   endif
   exec "normal `".a:markId
 endfunc
+
+"java complete 2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+autocmd FileType java imap <C-n> <C-x><C-o>
