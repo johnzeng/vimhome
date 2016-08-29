@@ -15,14 +15,16 @@ Plugin 'johnzeng/snipmate.vim'
 Plugin 'johnzeng/leader-c'
 "Plugin 'Shougo/neocomplete.vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'haya14busa/incsearch-fuzzy.vim'
 Plugin 'haya14busa/incsearch-easymotion.vim'
-
+Plugin 'gregsexton/MatchTag'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/matchit.zip'
 
 call vundle#end()
 filetype plugin indent on
@@ -145,3 +147,12 @@ function! s:config_easyfuzzymotion(...) abort
 endfunction
 
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+"jedi , just a little better, it's still not working with other define
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-n>"
+let g:jedi#rename_command = "<leader>r"
