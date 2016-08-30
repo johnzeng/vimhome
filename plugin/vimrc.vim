@@ -176,4 +176,9 @@ endfunc
 
 "java complete 2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-autocmd FileType java imap <C-n> <C-x><C-o>
+
+"file type setting
+autocmd FileType scala nmap <leader>t :SortScalaImports<CR>
+autocmd FileType go,java,python,c,cpp,objc,csharp imap <C-n> <C-R>=pumvisible() ? "\<lt>C-n>" : "\<lt>C-x>\<lt>C-o>"<CR>
+autocmd FileType go,java,python,c,cpp,objc,csharp imap <C-l> <ESC>:pclose<CR>a
+
