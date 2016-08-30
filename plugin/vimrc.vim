@@ -181,4 +181,5 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 autocmd FileType scala nmap <leader>t :SortScalaImports<CR>
 autocmd FileType go,java,python,c,cpp,objc,csharp imap <C-n> <C-R>=pumvisible() ? "\<lt>C-n>" : "\<lt>C-x>\<lt>C-o>"<CR>
 autocmd FileType go,java,python,c,cpp,objc,csharp imap <C-l> <ESC>:pclose<CR>a
+autocmd FileType go,java,python,c,cpp,objc,csharp map <C-l> :pclose<CR>
 
