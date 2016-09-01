@@ -9,12 +9,10 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
 Plugin 'Yggdroot/indentLine'
 Plugin 'justmao945/vim-clang'
-"Plugin 'rizzatti/dash.vim'
 Plugin 'johnzeng/grep'
 Plugin 'johnzeng/VimSessionManager'
 Plugin 'johnzeng/snipmate.vim'
 Plugin 'johnzeng/leader-c'
-"Plugin 'Shougo/neocomplete.vim'
 Plugin 'vim-airline/vim-airline'
 
 "don't forget to run 'pip install jedi' before you use it.
@@ -71,6 +69,8 @@ nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
+nmap <leader>i :tabp<CR>
+nmap <leader>o :tabn<CR>
 nmap <leader>l :cn<CR>
 nmap <leader>h :ccl<CR>
 nmap <leader>d "_d
@@ -121,8 +121,8 @@ let g:indentLine_enabled = 0
 nmap <F3> :IndentLinesToggle<CR>
 
 "config for airline
-"let g:airline#extensions#tabline#enabled = 1
-au VimEnter * :AirlineTheme base16_codeschool
+let g:airline_left_sep='>'
+let g:airline_theme='solarized'
 
 " You can use other keymappings like <C-l> instead of <CR> if you want to
 " use these mappings as default search and somtimes want to move cursor with
