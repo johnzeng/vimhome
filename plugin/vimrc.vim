@@ -12,6 +12,7 @@ Plugin 'justmao945/vim-clang'
 Plugin 'johnzeng/grep'
 Plugin 'johnzeng/VimSessionManager'
 Plugin 'johnzeng/snipmate.vim'
+Plugin 'Misfit-John/Scala-Completion-vim'
 Plugin 'johnzeng/leader-c'
 Plugin 'vim-airline/vim-airline'
 
@@ -48,6 +49,8 @@ set pastetoggle=<F10>
 set autoread
 
 nmap <C-p> :LeaderfMru<CR>
+"let g:Lf_CacheDiretory = '.'
+
 
 nmap <C-b> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.gcno','\.gcda', '\.o' ,'\~$']
@@ -157,9 +160,9 @@ let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = ""
 let g:jedi#documentation_command = "K"
-"let g:jedi#usages_command = "<leader>n"
+let g:jedi#usages_command = "<leader>d"
 let g:jedi#completions_command = "<C-n>"
-let g:jedi#rename_command = "<leader>r"
+let g:jedi#rename_command = "<leader>e"
 
 nmap J :call ListMarksAndJump()<CR>
 
@@ -179,7 +182,9 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 "file type setting
 autocmd FileType scala nmap <leader>t :SortScalaImports<CR>
-autocmd FileType go,java,python,c,cpp,objc,csharp imap <C-n> <C-R>=pumvisible() ? "\<lt>C-n>" : "\<lt>C-x>\<lt>C-o>"<CR>
+autocmd FileType go,java,python,c,cpp,objc,csharp imap <C-o> <C-x><C-o>
 autocmd FileType go,java,python,c,cpp,objc,csharp imap <C-l> <ESC>:pclose<CR>a
 autocmd FileType go,java,python,c,cpp,objc,csharp map <C-l> :pclose<CR>
 
+"auto source
+autocmd BufWritePost *.vim so %

@@ -10,6 +10,19 @@ Some of these settings may need a vim version large than 7.4 with pyhton2 suppor
 - run this shell command : `echo "source ~/.vim/plugin/vimrc.vim" > ~/.vimrc`
 - re-start a vim and run `:BundleInstall`
 
+# included plugins
+Please read to plugin/vimrc.vim, you can see all plugins there, you can get help from their doc file or github repo, you should learn the key mapping at first.Some of the frequently used plugins are:
+- vim-airline
+- vim-go
+- vim-scala
+- leaderf
+- nerdtree
+- grep
+- leader-c
+- vim-surround
+- auto-pairs
+You should learn to use leaderf , nerdtree and grep at first, with them you can work in most of situation
+
 # Optional for completion
 If you need to do **pyhotn completion**, please install jedi, which is needed by jedi-vim
 
@@ -31,17 +44,30 @@ What, you use gcc? Drop it , trust me.
 
 If you need to use **golang completion**, please run  the following command in vim after you have finished installing all package
 
+If you need to use **java completion**, you may suffer from long latency when you open a `.java` at first time, don't worry, it won't take such long latency the next time. Maybe you will need a `javac` to compile some jar file that the script needed.
+
 ```
 :GoInstallBinaries
 ```
 
 # custom keyboard mapping that is different from official plugin
-- For all completion plugin I use `<C-n>` to trigger completion list (But I still recommand that you use `<C-p>` and `<C-n>`  to do completion, that is more vim style)
+- For all completion plugin I use `<C-o>` to trigger completion list .But I still recommand that you use `<C-p>` and `<C-n>`  to do most of your completion, that is faster and more vim style.
 - `<C-p>` to open LeaderMru in normal mode
 - `<C-b>` to troggle nertree
 - `<C-n>` to grep the key word under course
 - `<leader>n` to grep a key word
 
+# custom feature that you may need to know
+- auto reload a vim script after saving it if you are editing a `.vim` file.
+- `<leader>r` to open a `:%s/[word under cursor]/` command
+- `<leader>q` to quit vim
+- `<F11>` to trans content in vim to binary viewer and `<F12>` to turn it back
+- `<leader>s` to save all files you have opened
+- `<leader>j` and `<leader>k` to move to next buffer or previous buffer
+- `<C-e>` in normal mode to open a register list and then input any id so you can paste the content in the register into your buffer
+- `<C-e>` in virsual mode to copy from vim to system clipboard (need clipboard feature support, read `:help clipboard` for more info)
+- `<C-e>` in insert mode to paste to vim from system clipboard (need clipboard feature support, read `:help clipboard` for more info)
+- `<C-l>` in insert mode or normal mode to close preview window
+- J (Shift + j)in normal mode to show all bookmarks and input a key for it to jump to it.
+- `<leader>d` to begin a delete that will cut to black whole register (like `<leader>dd` will delete a line, and you won't get it again even if you us `p` command)
 
-# included plugins
-Please read to plugin/vimrc.vim, you can see all plugins there, you can get help from their doc file or github repo
