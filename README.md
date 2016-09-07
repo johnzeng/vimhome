@@ -56,12 +56,13 @@ If you need to use **java completion**, you may suffer from long latency when yo
 - `<C-b>` to troggle nertree
 - `<C-n>` to grep the key word under course
 - `<leader>n` to grep a key word
+- `<F3>` to toggle the indent line
+
 
 # custom feature that you may need to know
 - auto reload a vim script after saving it if you are editing a `.vim` file.
 - `<leader>r` to open a `:%s/[word under cursor]/` command
 - `<leader>q` to quit vim
-- `<F11>` to trans content in vim to binary viewer and `<F12>` to turn it back
 - `<leader>s` to save all files you have opened
 - `<leader>j` and `<leader>k` to move to next buffer or previous buffer
 - `<C-e>` in normal mode to open a register list and then input any id so you can paste the content in the register into your buffer
@@ -70,4 +71,7 @@ If you need to use **java completion**, you may suffer from long latency when yo
 - `<C-l>` in insert mode or normal mode to close preview window
 - J (Shift + j)in normal mode to show all bookmarks and input a key for it to jump to it.
 - `<leader>d` to begin a delete that will cut to black whole register (like `<leader>dd` will delete a line, and you won't get it again even if you us `p` command)
-
+- `<F11>` to trans content in vim to binary viewer (if you press multiple time, it will trans the binary code to the "binary code 's binary code", intersting ha?)
+- `<F12>` to turn the binary veiw back(same as F11, pressing multiple time will do some strange thing)
+- `<F2>` to save a session in the current directory
+- `<F4>` Toggle the tagbar (this will need ctags support, and it must be exuberant ctags🙃)
