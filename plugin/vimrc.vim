@@ -16,7 +16,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-"Plugin 'Misfit-John/Scala-Completion-vim'
+Plugin 'johnzeng/Scala-Completion-vim'
 Plugin 'johnzeng/leader-c'
 Plugin 'vim-airline/vim-airline'
 
