@@ -10,13 +10,13 @@ Plugin 'majutsushi/tagbar'
 Plugin 'fatih/vim-go'
 Plugin 'Yggdroot/indentLine'
 Plugin 'justmao945/vim-clang'
-Plugin 'johnzeng/grep'
 Plugin 'johnzeng/VimSessionManager'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'johnzeng/Scala-Completion-vim'
+"Plugin 'johnzeng/Scala-Completion-vim'
+Plugin 'johnzeng/SimpleGrep'
 Plugin 'johnzeng/leader-c'
 Plugin 'vim-airline/vim-airline'
 
@@ -70,8 +70,6 @@ nmap <F12> :%!xxd -r<CR>
 
 set formatoptions=ql
 
-nmap <silent><C-n> :Regrep '<C-r>=expand("<cword>")<CR>' *<CR>
-nmap <silent><leader>n mA:call GrepFromInput()<CR>
 nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
 nmap <leader>j :bn<CR>
