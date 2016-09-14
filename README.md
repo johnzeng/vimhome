@@ -31,6 +31,7 @@ pip install jedi
 ```
 
 If you need to use **c family completion**, please install clang compiler by yourself. I believe it's not that hard, you will also need to create a `.clang` file under your working dir to specify some pre-compile options. Here are some command you may use to install clang:
+
 ```
 #For mac brew user
 brew install clang
@@ -39,16 +40,18 @@ apt install clang
 #for centos/redhat user
 yum install clang
 ```
-🙃YYes, I haven't tested any one of the above commands, just wanna remind you that you need to install a clang to make it work.
+
+🙃Yes, I haven't tested any one of the above commands, just wanna remind you that you need to install a clang to make it work.
 What, you use gcc? Drop it , trust me.
 
 If you need to use **golang completion**, please run  the following command in vim after you have finished installing all package
 
-If you need to use **java completion**, you may suffer from long latency when you open a `.java` at first time, don't worry, it won't take such long latency the next time. Maybe you will need a `javac` to compile some jar file that the script needed.
-
 ```
 :GoInstallBinaries
 ```
+
+If you need to use **java completion**, you may suffer from long latency when you open a `.java` at first time, don't worry, it won't take such long latency the next time. Maybe you will need a `javac` to compile some jar file that the script needed.
+
 
 # custom keyboard mapping that is different from official plugin
 - For all completion plugin I use `<C-o>` to trigger completion list .But I still recommand that you use `<C-p>` and `<C-n>`  to do most of your completion, that is faster and more vim style.

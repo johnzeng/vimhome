@@ -15,7 +15,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-"Plugin 'johnzeng/Scala-Completion-vim'
+Plugin 'johnzeng/Scala-Completion-vim'
 Plugin 'johnzeng/SimpleGrep'
 Plugin 'johnzeng/leader-c'
 Plugin 'vim-airline/vim-airline'
@@ -53,7 +53,7 @@ set pastetoggle=<F10>
 set autoread
 
 nmap <C-p> :LeaderfMru<CR>
-"let g:Lf_CacheDiretory = '.'
+let g:Lf_MruInCurDirOnly= 1
 
 
 nmap <C-b> :NERDTreeToggle<CR>
