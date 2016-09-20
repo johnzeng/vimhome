@@ -82,18 +82,18 @@ nmap <leader>d "_d
 vmap <leader>d "_d
 
 function! GrepFromInput(...)
-    let a:inputword = input("Grep:")
-    if strlen(a:inputword) == 0
-        return
-    endif
-    let a:exec_command = "Regrep ".a:inputword." *"
-    exec a:exec_command
+  let a:inputword = input("Grep:")
+  if strlen(a:inputword) == 0
+    return
+  endif
+  let a:exec_command = "Regrep ".a:inputword." *"
+  exec a:exec_command
 endfunction
 
 let g:Lf_WildIgnore = {
-        \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor'],
-        \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda']
-        \}
+      \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor'],
+      \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda']
+      \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
 "I think I can do something on this so I can set cache for every project
 "let g:Lf_CacheDiretory = '~/cloud_lucifer/'
@@ -134,12 +134,12 @@ let g:airline_theme='solarized'
 " EasyMotion.
 function! s:incsearch_config(...) abort
   return incsearch#util#deepextend(deepcopy({
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {
-  \     "\<CR>": '<Over>(easymotion)'
-  \   },
-  \   'is_expr': 0
-  \ }), get(a:, 1, {}))
+        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+        \   'keymap': {
+        \     "\<CR>": '<Over>(easymotion)'
+        \   },
+        \   'is_expr': 0
+        \ }), get(a:, 1, {}))
 endfunction
 
 noremap <silent><expr> <leader>/  incsearch#go(<SID>incsearch_config())
@@ -147,12 +147,12 @@ noremap <silent><expr> <leader>?  incsearch#go(<SID>incsearch_config({'command':
 
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
+        \   'converters': [incsearch#config#fuzzyword#converter()],
+        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+        \   'is_expr': 0,
+        \   'is_stay': 1
+        \ }), get(a:, 1, {}))
 endfunction
 
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
@@ -191,3 +191,12 @@ autocmd FileType go,java,python,c,cpp,objc,csharp,scala map <C-l> :pclose<CR>
 "auto source
 autocmd BufWritePost *.vim so %
 nmap <F4> :TagbarToggle<CR>
+
+let g:html_indent_script1 = "inc" 
+let g:html_indent_style1 = "inc" 
+let g:html_indent_inctags = "html,body,head"
+function! FormatHtml()
+  execute "normal ggVGgJ"
+  execute "%s/>\s*</>\r</g"
+  execute "normal ggVG="
+endfunction
