@@ -5,11 +5,12 @@ call vundle#begin()
 Bundle 'gmarik/vundle'
 Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
-Plugin 'derekwyatt/vim-scala'
+"Plugin 'derekwyatt/vim-scala'
 Plugin 'majutsushi/tagbar'
+Plugin 'vim-erlang/vim-erlang-omnicomplete'
 "Plugin 'fatih/vim-go'
 Plugin 'Yggdroot/indentLine'
-Plugin 'justmao945/vim-clang'
+"Plugin 'justmao945/vim-clang'
 Plugin 'johnzeng/VimSessionManager'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -21,7 +22,7 @@ Plugin 'johnzeng/leader-c'
 Plugin 'vim-airline/vim-airline'
 
 "don't forget to run 'pip install jedi' before you use it.
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'haya14busa/incsearch.vim'
@@ -31,7 +32,7 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/matchit.zip'
-Plugin 'artur-shaik/vim-javacomplete2'
+au BufEnter *.java Plugin 'artur-shaik/vim-javacomplete2'
 
 call vundle#end()
 filetype plugin indent on
@@ -43,11 +44,13 @@ set hlsearch
 set number
 set ruler
 set hidden 
-set backspace=2
 set mouse=a
 set ts=2
-set expandtab
+set backspace=2
 set shiftwidth=2
+au BufEnter *.erlang ts=4
+au BufEnter *.erlang shiftwidth=4
+set expandtab
 set smartindent
 set pastetoggle=<F10>
 set autoread
@@ -184,12 +187,12 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 "file type setting
 autocmd FileType scala nmap <leader>t :SortScalaImports<CR>
-autocmd FileType go,java,python,c,cpp,objc,csharp,scala imap <C-o> <C-x><C-o>
-autocmd FileType go,java,python,c,cpp,objc,csharp,scala imap <C-l> <ESC>:pclose<CR>a
-autocmd FileType go,java,python,c,cpp,objc,csharp,scala map <C-l> :pclose<CR>
+autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-i> <C-x><C-o>
+autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-l> <ESC>:pclose<CR>a
+autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala map <C-l> :pclose<CR>
 
 "auto source
-autocmd BufWritePost *.vim so %
+"autocmd BufWritePost *.vim so %
 nmap <F4> :TagbarToggle<CR>
 
 let g:html_indent_script1 = "inc" 
