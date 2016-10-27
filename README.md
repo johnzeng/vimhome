@@ -6,7 +6,7 @@ Some of these settings may need a vim version large than 7.4 with pyhton2 suppor
 
 # Setting up
 - clone this repo into ~/.vim
-- install vundle into  ~/.vim/bundle/vundle
+- install vundle into  ~/.vim/bundle/vundle: `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 - run this shell command : `echo "source ~/.vim/plugin/vimrc.vim" > ~/.vimrc`
 - re-start a vim and run `:BundleInstall`
 
