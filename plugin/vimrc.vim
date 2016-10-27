@@ -32,7 +32,7 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/matchit.zip'
-au BufEnter *.java Plugin 'artur-shaik/vim-javacomplete2'
+"Plugin 'artur-shaik/vim-javacomplete2'
 
 call vundle#end()
 filetype plugin indent on
@@ -45,11 +45,11 @@ set number
 set ruler
 set hidden 
 set mouse=a
-set ts=2
+"set ts=2
 set backspace=2
-set shiftwidth=2
-au BufEnter *.erlang ts=4
-au BufEnter *.erlang shiftwidth=4
+"set shiftwidth=2
+"au BufEnter *.erlang ts=4
+"au BufEnter *.erlang shiftwidth=4
 set expandtab
 set smartindent
 set pastetoggle=<F10>
@@ -94,7 +94,7 @@ function! GrepFromInput(...)
 endfunction
 
 let g:Lf_WildIgnore = {
-      \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor'],
+      \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor', 'deps'],
       \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda']
       \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
