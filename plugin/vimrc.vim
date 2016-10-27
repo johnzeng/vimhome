@@ -45,12 +45,11 @@ set number
 set ruler
 set hidden 
 set mouse=a
-"set ts=2
+set ts=4
 set backspace=2
-"set shiftwidth=2
-"au BufEnter *.erlang ts=4
-"au BufEnter *.erlang shiftwidth=4
+set shiftwidth=4
 set expandtab
+"set noexpandtab
 set smartindent
 set pastetoggle=<F10>
 set autoread
@@ -187,7 +186,7 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 "file type setting
 autocmd FileType scala nmap <leader>t :SortScalaImports<CR>
-autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-i> <C-x><C-o>
+"autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-i> <C-x><C-o>
 autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-l> <ESC>:pclose<CR>a
 autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala map <C-l> :pclose<CR>
 
@@ -203,3 +202,7 @@ function! FormatHtml()
   execute "%s/>\s*</>\r</g"
   execute "normal ggVG="
 endfunction
+
+"exclude dir for simple grep
+let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", 'deps']
+
