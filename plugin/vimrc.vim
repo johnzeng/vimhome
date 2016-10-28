@@ -94,7 +94,7 @@ endfunction
 
 let g:Lf_WildIgnore = {
       \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor', 'deps', 'rel'],
-      \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda']
+      \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda', '*.beam']
       \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
 "I think I can do something on this so I can set cache for every project
