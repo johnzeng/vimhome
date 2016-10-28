@@ -93,7 +93,7 @@ function! GrepFromInput(...)
 endfunction
 
 let g:Lf_WildIgnore = {
-      \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor', 'deps'],
+      \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor', 'deps', 'rel'],
       \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda']
       \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
