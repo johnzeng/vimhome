@@ -5,12 +5,12 @@ call vundle#begin()
 Bundle 'gmarik/vundle'
 Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'derekwyatt/vim-scala'
+Plugin 'derekwyatt/vim-scala'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-erlang/vim-erlang-omnicomplete'
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 Plugin 'Yggdroot/indentLine'
-"Plugin 'justmao945/vim-clang'
+Plugin 'justmao945/vim-clang'
 Plugin 'johnzeng/VimSessionManager'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -22,7 +22,7 @@ Plugin 'johnzeng/leader-c'
 Plugin 'vim-airline/vim-airline'
 
 "don't forget to run 'pip install jedi' before you use it.
-"Plugin 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'haya14busa/incsearch.vim'
@@ -32,7 +32,7 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/matchit.zip'
-"Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'artur-shaik/vim-javacomplete2'
 
 call vundle#end()
 filetype plugin indent on
@@ -93,7 +93,7 @@ function! GrepFromInput(...)
 endfunction
 
 let g:Lf_WildIgnore = {
-      \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor', 'deps', 'rel'],
+      \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor', 'deps', 'rel', 'logs'],
       \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda', '*.beam']
       \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
@@ -206,3 +206,4 @@ endfunction
 "exclude dir for simple grep
 let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", 'deps']
 
+au BufEnter *.erl imap <buffer> << <<>><Esc>hi
