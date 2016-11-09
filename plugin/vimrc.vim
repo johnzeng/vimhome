@@ -100,12 +100,6 @@ let g:Lf_MruFileExclude = ['*.so','*.log',]
 "I think I can do something on this so I can set cache for every project
 "let g:Lf_CacheDiretory = '~/cloud_lucifer/'
 
-"config about grep
-let g:Grep_Skip_Files = '*.bak *~ *.o *.jar *.class, *.log *.gcda *.gcno *.pyc *.pyo' 
-"let Grep_Default_Options = '--exclude-dir=node_modules --exclude-dir=target -IR'
-let g:Grep_Default_Options = '-I'
-let g:Grep_Skip_Dirs = 'project target .git node_modules'
-
 nmap <C-e> :call ListRegAndPaste()<CR>
 
 func! ListRegAndPaste()
@@ -204,6 +198,7 @@ function! FormatHtml()
 endfunction
 
 "exclude dir for simple grep
-let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", 'deps']
+let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", "log", "logs", "deps"]
+let g:grep_exclude_file=[".gitignore", "*.beam", "*.o", "*.pyc", "*.swp", "*.zip", "*.rar", "*.dump"]
 
 au BufEnter *.erl imap <buffer> << <<>><Esc>hi
