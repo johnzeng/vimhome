@@ -7,7 +7,6 @@ Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'majutsushi/tagbar'
-Plugin 'vim-erlang/vim-erlang-omnicomplete'
 Plugin 'fatih/vim-go'
 Plugin 'Yggdroot/indentLine'
 Plugin 'justmao945/vim-clang'
@@ -17,6 +16,8 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 "Plugin 'johnzeng/Scala-Completion-vim'
+Plugin 'vim-erlang/vim-erlang-tags'
+Plugin 'vim-erlang/vim-erlang-omnicomplete'
 Plugin 'johnzeng/SimpleGrep'
 Plugin 'johnzeng/leader-c'
 Plugin 'vim-airline/vim-airline'
@@ -202,3 +203,4 @@ let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", "log", "
 let g:grep_exclude_file=[".gitignore", "*.beam", "*.o", "*.pyc", "*.swp", "*.zip", "*.rar", "*.dump"]
 
 au BufEnter *.erl imap <buffer> << <<>><Esc>hi
+  let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
