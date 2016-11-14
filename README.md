@@ -11,7 +11,8 @@ Some of these settings may need a vim version large than 7.4 with pyhton2 suppor
 - re-start a vim and run `:BundleInstall`
 
 # included plugins
-Please read to plugin/vimrc.vim, you can see all plugins there, you can get help from their doc file or github repo, you should learn the key mapping at first.Some of the frequently used plugins are:
+Please read to [vimrc](plugin/vimrc.vim), you can see all plugins there, you can get help from their doc file or git readme file so you will know how to use them, Some of the frequently used plugins are:
+
 - vim-airline
 - vim-go
 - vim-scala
@@ -21,9 +22,13 @@ Please read to plugin/vimrc.vim, you can see all plugins there, you can get help
 - leader-c
 - vim-surround
 - auto-pairs
+
+....
+
 You should learn to use leaderf , nerdtree and grep at first, with them you can work in most of situation
 
 # Optional for completion
+
 If you need to do **pyhotn completion**, please install jedi, which is needed by jedi-vim
 
 ```
@@ -51,6 +56,8 @@ If you need to use **golang completion**, please run  the following command in v
 ```
 
 If you need to use **java completion**, you may suffer from long latency when you open a `.java` at first time, don't worry, it won't take such long latency the next time. Maybe you will need a `javac` to compile some jar file that the script needed.
+
+If you need to use **erlang completion** , you may need to have escript excutable file in your $PATH , which means that you need to install erlang locally so you can have erlang completion.
 
 
 # custom keyboard mapping that is different from official plugin

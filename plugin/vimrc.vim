@@ -181,7 +181,6 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 "file type setting
 autocmd FileType scala nmap <leader>t :SortScalaImports<CR>
-"autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-i> <C-x><C-o>
 autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-l> <ESC>:pclose<CR>a
 autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala map <C-l> :pclose<CR>
 
