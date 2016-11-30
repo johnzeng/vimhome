@@ -5,10 +5,14 @@ This is my vim setting colleciton, it's make for OSX , so I am not sure if it ca
 Some of these settings may need a vim version large than 7.4 with pyhton2 support, if you are using native vim on Mac OSX, you may need to install a new one by `brew`
 
 # Setting up
-- clone this repo into ~/.vim
-- install vundle into  ~/.vim/bundle/vundle: `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle`
-- run this shell command : `echo "source ~/.vim/plugin/vimrc.vim" > ~/.vimrc`
-- re-start a vim and run `:BundleInstall`
+
+via wget
+
+`sh -c "$(wget https://raw.githubusercontent.com/johnzeng/vimhome/master/install.sh -O -)"`
+
+via curl
+
+`sh -c "$(curl -fsSL https://raw.githubusercontent.com/johnzeng/vimhome/master/install.sh)"`
 
 # included plugins
 Please read to [vimrc](plugin/vimrc.vim), you can see all plugins there, you can get help from their doc file or git readme file so you will know how to use them, Some of the frequently used plugins are:
