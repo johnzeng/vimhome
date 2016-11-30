@@ -4,7 +4,9 @@ This is my vim setting colleciton, it's make for OSX , so I am not sure if it ca
 
 Some of these settings may need a vim version large than 7.4 with pyhton2 support, if you are using native vim on Mac OSX, you may need to install a new one by `brew`
 
-# Setting up
+# install by one command
+
+** The installation will take a long time to run :BundleInstall in vi, if you get stuck at the last step, you can just reopen a vim and re-run `:BundleInstall`  **
 
 via wget
 
