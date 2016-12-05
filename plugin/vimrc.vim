@@ -55,7 +55,7 @@ set smartindent
 set pastetoggle=<F10>
 set autoread
 
-nmap <C-p> :LeaderfMru<CR>
+nmap <C-p> :LeaderfMruCwd<CR>
 let g:Lf_MruInCurDirOnly= 1
 
 
