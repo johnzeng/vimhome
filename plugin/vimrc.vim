@@ -54,6 +54,7 @@ set expandtab
 set smartindent
 set pastetoggle=<F10>
 set autoread
+set formatoptions-=c formatoptions-=r formatoptions-=o
 
 nmap <C-p> :LeaderfMruCwd<CR>
 let g:Lf_MruInCurDirOnly= 1
