@@ -9,4 +9,6 @@ echo 'now clone the vundle'
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
 echo 'now write the source'
 echo "source ~/.vim/plugin/vimrc.vim" > ~/.vimrc
+echo 'now add some scripte command'
+echo "alias erltag='sh ~/.vim/auto_erlang_tag_hook.sh'"
 vi -c :BundleInstall
