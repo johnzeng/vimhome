@@ -203,4 +203,4 @@ let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", "log", "
 let g:grep_exclude_file=[".gitignore", "*.beam", "*.o", "*.pyc", "*.swp", "*.zip", "*.rar", "*.dump", "tags", "*.pem"]
 
 au BufEnter *.erl imap <buffer> << <<>><Esc>hi
-  let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
