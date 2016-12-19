@@ -3,7 +3,8 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 Bundle 'gmarik/vundle'
-Plugin 'Yggdroot/LeaderF'
+"Plugin 'Yggdroot/LeaderF'
+Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'majutsushi/tagbar'
@@ -56,8 +57,7 @@ set pastetoggle=<F10>
 set autoread
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
-nmap <C-p> :LeaderfMruCwd<CR>
-let g:Lf_MruInCurDirOnly= 1
+nmap <leader>f :CtrlPTag<CR>
 
 
 nmap <C-b> :NERDTreeToggle<CR>

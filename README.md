@@ -22,7 +22,7 @@ Please read to [vimrc](plugin/vimrc.vim), you can see all plugins there, you can
 - vim-airline
 - vim-go
 - vim-scala
-- leaderf
+- ctrl-p 
 - nerdtree
 - grep
 - leader-c
@@ -31,7 +31,7 @@ Please read to [vimrc](plugin/vimrc.vim), you can see all plugins there, you can
 
 ....
 
-You should learn to use leaderf , nerdtree and grep at first, with them you can work in most of situation
+You should learn to use ctrl-p, nerdtree and grep at first, with them you can work in most of situation
 
 # Optional for completion
 
@@ -76,7 +76,6 @@ If you need to use **erlang completion** , you may need to have escript excutabl
 
 
 # custom feature that you may need to know
-- auto reload a vim script after saving it if you are editing a `.vim` file.
 - `<leader>r` to open a `:%s/[word under cursor]/` command
 - `<leader>q` to quit vim
 - `<leader>s` to save all files you have opened
