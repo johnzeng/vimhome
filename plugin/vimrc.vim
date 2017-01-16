@@ -7,6 +7,8 @@ Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'majutsushi/tagbar'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'fatih/vim-go'
 Plugin 'Yggdroot/indentLine'
 Plugin 'justmao945/vim-clang'
@@ -204,3 +206,6 @@ let g:grep_exclude_file=[".gitignore", "*.beam", "*.o", "*.pyc", "*.swp", "*.zip
 
 au BufEnter *.erl imap <buffer> << <<>><Esc>hi
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+
+" seting about markdown
+let g:vim_markdown_folding_disabled = 1

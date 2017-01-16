@@ -33,7 +33,7 @@ Please read to [vimrc](plugin/vimrc.vim), you can see all plugins there, you can
 
 You should learn to use leaderf , nerdtree and grep at first, with them you can work in most of situation
 
-# Optional for completion
+# Optional post installation for completion
 
 If you need to do **pyhotn completion**, please install jedi, which is needed by jedi-vim
 
@@ -91,3 +91,15 @@ If you need to use **erlang completion** , you may need to have escript excutabl
 - `<F12>` to turn the binary veiw back(same as F11, pressing multiple time will do some strange thing)
 - `<F2>` to save a session in the current directory
 - `<F4>` Toggle the tagbar (this will need ctags support, and it must be exuberant ctags🙃)
+
+# Supporting language
+
+- erlang
+- c/cpp/ojbc
+- golang
+- java
+- markdown
+- python
+- scala
+- shell
+- xml
