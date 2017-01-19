@@ -201,7 +201,7 @@ function! FormatHtml()
 endfunction
 
 "exclude dir for simple grep
-let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", "log", "logs", "deps", "bin", "lib"]
+let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", "log", "logs", "deps", "bin" ]
 let g:grep_exclude_file=[".gitignore", "*.beam", "*.o", "*.pyc", "*.swp", "*.zip", "*.rar", "*.dump", "tags", "*.pem"]
 
 au BufEnter *.erl imap <buffer> << <<>><Esc>hi
