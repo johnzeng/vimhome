@@ -6,7 +6,7 @@ Some of these settings may need a vim version large than 7.4 with pyhton2 suppor
 
 # install by one command
 
-** The installation will take a long time to run :BundleInstall in vi, if you get stuck at the last step, you can just reopen a vim and re-run `:BundleInstall`  **
+**The installation will take a long time to run :BundleInstall in vi, if you get stuck at the last step, you can just reopen a vim and re-run `:BundleInstall`**
 
 via wget
 
