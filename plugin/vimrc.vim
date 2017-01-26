@@ -3,6 +3,7 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 Bundle 'gmarik/vundle'
+Plugin 'johnzeng/vim-erlang'
 Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-scala'
@@ -210,3 +211,4 @@ let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
 " seting about markdown
 let g:vim_markdown_folding_disabled = 1
+set nofoldenable

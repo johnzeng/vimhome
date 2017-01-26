@@ -20,8 +20,6 @@ via curl
 Please read to [vimrc](plugin/vimrc.vim), you can see all plugins there, you can get help from their doc file or git readme file so you will know how to use them, Some of the frequently used plugins are:
 
 - vim-airline
-- vim-go
-- vim-scala
 - leaderf
 - nerdtree
 - grep
@@ -31,17 +29,19 @@ Please read to [vimrc](plugin/vimrc.vim), you can see all plugins there, you can
 
 ....
 
-You should learn to use leaderf , nerdtree and grep at first, with them you can work in most of situation
+You can start from `leaderf`, nerdtree and grep at first, with them you can work in most of situation
 
-# Optional post installation for completion
+# Optional post installation
 
-If you need to do **pyhotn completion**, please install jedi, which is needed by jedi-vim
+## python completion
+If you need to do **pyhotn completion**, please install jedi, which is needed by [ jedi-vim ](https://github.com/davidhalter/jedi-vim)
 
 ```
 pip install jedi
 ```
 
-If you need to use **c family completion**, please install clang compiler by yourself. I believe it's not that hard, you will also need to create a `.clang` file under your working dir to specify some pre-compile options. Here are some command you may use to install clang:
+## c completion
+If you need to use **c family completion**, please install clang compiler by yourself, c family completion is provied by [vim-clang](https://github.com/justmao945/vim-clang). I believe it's not that hard, you will also need to create a `.clang` file under your working dir to specify some pre-compile options. Here are some command you may use to install clang:
 
 ```
 #For mac brew user
@@ -55,16 +55,22 @@ yum install clang
 🙃Yes, I haven't tested any one of the above commands, just wanna remind you that you need to install a clang to make it work.
 What, you use gcc? Drop it , trust me.
 
-If you need to use **golang completion**, please run  the following command in vim after you have finished installing all package
+## go completion
+If you need to use **golang completion**, please run  the following command provided by [vim-go](https://github.com/fatih/vim-go) in vim after you have finished installing all package
 
 ```
 :GoInstallBinaries
 ```
 
-If you need to use **java completion**, you may suffer from long latency when you open a `.java` at first time, don't worry, it won't take such long latency the next time. Maybe you will need a `javac` to compile some jar file that the script needed.
+## java completion
+If you need to use **java completion**, you may suffer from long latency when you open a `.java` at first time, don't worry, it won't take such long latency the next time. Maybe you will need a `javac` to compile some jar file needed by [vim-javacomplete2](https://github.com/artur-shaik/vim-javacomplete2).
 
-If you need to use **erlang completion** , you may need to have escript excutable file in your $PATH , which means that you need to install erlang locally so you can have erlang completion.
+## erlang completion
+If you need to use **erlang completion** , you may need to have escript excutable file in your $PATH , which means that you need to install erlang locally so you can have [erlang-completion](https://github.com/vim-erlang/vim-erlang-omnicomplete).
 
+## erlang refactoring
+
+Refer to the readme in [erlang-vim](https://github.com/johnzeng/erlang-vim) , you will  need to set up wrangler and host name to make the plugin work
 
 # custom keyboard mapping that is different from official plugin
 - For all completion plugin I use `<C-o>` to trigger completion list .But I still recommand that you use `<C-p>` and `<C-n>`  to do most of your completion, that is faster and more vim style.
