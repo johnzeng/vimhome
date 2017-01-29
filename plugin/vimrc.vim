@@ -212,3 +212,6 @@ let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 " seting about markdown
 let g:vim_markdown_folding_disabled = 1
 set nofoldenable
+
+au BufNewFile,BufRead SConStruct set filetype=python
+au BufNewFile,BufRead SConScript set filetype=python
