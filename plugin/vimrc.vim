@@ -1,46 +1,38 @@
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#begin()
-Bundle 'gmarik/vundle'
-Plugin 'johnzeng/vim-erlang'
-Plugin 'Yggdroot/LeaderF'
-Plugin 'scrooloose/nerdtree'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'majutsushi/tagbar'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'fatih/vim-go'
-Plugin 'Yggdroot/indentLine'
-Plugin 'justmao945/vim-clang'
-Plugin 'johnzeng/VimSessionManager'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-Plugin 'diepm/vim-rest-console'
-"Plugin 'johnzeng/Scala-Completion-vim'
-Plugin 'johnzeng/vim-erlang-tags'
-Plugin 'vim-erlang/vim-erlang-omnicomplete'
-Plugin 'johnzeng/SimpleGrep'
-Plugin 'johnzeng/leader-c'
-Plugin 'vim-airline/vim-airline'
+call plug#begin('~/.vim/bundle')
+Plug 'johnzeng/vim-erlang'
+" let try it and let's see how good it is
+Plug 'scrooloose/nerdtree'
+Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
+Plug 'majutsushi/tagbar'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
+Plug 'fatih/vim-go' , {'for' : 'go'}
+Plug 'Yggdroot/indentLine'
+Plug 'justmao945/vim-clang' , {'for' : ['c', 'cpp', 'objc']}
+Plug 'johnzeng/VimSessionManager'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+Plug 'diepm/vim-rest-console'
+"Plug 'johnzeng/Scala-Completion-vim'
+Plug 'johnzeng/vim-erlang-tags'
+Plug 'vim-erlang/vim-erlang-omnicomplete' , {'for' : 'erlang'}
+Plug 'johnzeng/SimpleGrep'
+Plug 'johnzeng/leader-c'
+Plug 'vim-airline/vim-airline'
 
 "don't forget to run 'pip install jedi' before you use it.
-Plugin 'davidhalter/jedi-vim'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'haya14busa/incsearch.vim'
-Plugin 'haya14busa/incsearch-fuzzy.vim'
-Plugin 'haya14busa/incsearch-easymotion.vim'
-Plugin 'gregsexton/MatchTag'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'artur-shaik/vim-javacomplete2'
+Plug 'davidhalter/jedi-vim' ,{'for' : 'python'}
+Plug 'vim-airline/vim-airline-themes'
+Plug 'justinmk/vim-sneak'
+Plug 'gregsexton/MatchTag'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/matchit.zip'
+Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
 colorscheme elflord
 syntax on
@@ -60,8 +52,6 @@ set pastetoggle=<F10>
 set autoread
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
-nmap <C-p> :LeaderfMruCwd<CR>
-let g:Lf_MruInCurDirOnly= 1
 
 
 nmap <C-b> :NERDTreeToggle<CR>
@@ -98,13 +88,13 @@ function! GrepFromInput(...)
   exec a:exec_command
 endfunction
 
+nmap <C-p> :LeaderfMruCwd<CR>
+let g:Lf_MruInCurDirOnly= 1
 let g:Lf_WildIgnore = {
       \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor', 'deps', 'rel', 'logs'],
       \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda', '*.beam']
       \}
 let g:Lf_MruFileExclude = ['*.so','*.log',]
-"I think I can do something on this so I can set cache for every project
-"let g:Lf_CacheDiretory = '~/cloud_lucifer/'
 
 nmap <C-e> :call ListRegAndPaste()<CR>
 
