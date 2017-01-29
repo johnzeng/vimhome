@@ -205,3 +205,10 @@ set nofoldenable
 
 au BufNewFile,BufRead SConStruct set filetype=python
 au BufNewFile,BufRead SConScript set filetype=python
+
+"uncomment this when you need to use meta key or alt key
+"for i in range(97,122)
+"  let c = nr2char(i)
+"  exec "map \e".c." <M-".c.">"
+"  exec "map! \e".c." <M-".c.">"
+"endfor
