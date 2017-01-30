@@ -5,8 +5,9 @@ echo 'Installing johnzeng/vimhome, this script will need vim and git installed'
 echo 'After the installation, you can folow the Opitonal for completion to do futher installation'
 echo 'now clone the source repo'
 git clone https://github.com/johnzeng/vimhome.git ~/.vim
-echo 'now clone the vundle'
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
+echo 'now install plug-vim'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 echo 'now write the source'
 echo "source ~/.vim/plugin/vimrc.vim" >> ~/.vimrc
 echo 'now add some scripte command'

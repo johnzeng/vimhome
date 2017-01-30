@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/bundle')
-Plug 'johnzeng/vim-erlang'
-" let try it and let's see how good it is
+Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
+Plug 'Yggdroot/LeaderF'
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'majutsushi/tagbar'
