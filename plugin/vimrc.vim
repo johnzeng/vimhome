@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
-Plug 'Yggdroot/LeaderF'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'mhinz/vim-grepper'
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'majutsushi/tagbar'
@@ -18,11 +20,9 @@ Plug 'diepm/vim-rest-console'
 "Plug 'johnzeng/Scala-Completion-vim'
 Plug 'johnzeng/vim-erlang-tags'
 Plug 'vim-erlang/vim-erlang-omnicomplete' , {'for' : 'erlang'}
-Plug 'johnzeng/SimpleGrep'
 Plug 'johnzeng/leader-c'
 Plug 'vim-airline/vim-airline'
 
-"don't forget to run 'pip install jedi' before you use it.
 Plug 'davidhalter/jedi-vim' ,{'for' : 'python'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'justinmk/vim-sneak'
@@ -78,23 +78,15 @@ nmap <leader>l :cn<CR>
 nmap <leader>h :ccl<CR>
 nmap <leader>d "_d
 vmap <leader>d "_d
+nmap <C-n> :Grepper-cword<CR>
+nmap <leader>n :Grepper-query<CR>
 
-function! GrepFromInput(...)
-  let a:inputword = input("Grep:")
-  if strlen(a:inputword) == 0
-    return
-  endif
-  let a:exec_command = "Regrep ".a:inputword." *"
-  exec a:exec_command
-endfunction
-
-nmap <C-p> :LeaderfMruCwd<CR>
-let g:Lf_MruInCurDirOnly= 1
-let g:Lf_WildIgnore = {
-      \ 'dir': ['.svn','.git','target','node_modules','metastore_db', 'vendor', 'deps', 'rel', 'logs'],
-      \ 'file': ['*.DS_Store','*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.log','*.class','*.cache','*.jar', '*.gcno','*.gcda', '*.beam']
-      \}
-let g:Lf_MruFileExclude = ['*.so','*.log',]
+nmap <C-p> :FZF<CR>
+let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 
 nmap <C-e> :call ListRegAndPaste()<CR>
 
@@ -120,34 +112,6 @@ nmap <F3> :IndentLinesToggle<CR>
 "config for airline
 let g:airline_left_sep='>'
 let g:airline_theme='solarized'
-
-" You can use other keymappings like <C-l> instead of <CR> if you want to
-" use these mappings as default search and somtimes want to move cursor with
-" EasyMotion.
-function! s:incsearch_config(...) abort
-  return incsearch#util#deepextend(deepcopy({
-        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-        \   'keymap': {
-        \     "\<CR>": '<Over>(easymotion)'
-        \   },
-        \   'is_expr': 0
-        \ }), get(a:, 1, {}))
-endfunction
-
-noremap <silent><expr> <leader>/  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> <leader>?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-        \   'converters': [incsearch#config#fuzzyword#converter()],
-        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-        \   'is_expr': 0,
-        \   'is_stay': 1
-        \ }), get(a:, 1, {}))
-endfunction
-
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 "jedi , just a little better, it's still not working with other define
 let g:jedi#goto_command = "<leader>d"
@@ -191,10 +155,6 @@ function! FormatHtml()
   execute "%s/>\s*</>\r</g"
   execute "normal ggVG="
 endfunction
-
-"exclude dir for simple grep
-let g:grep_exclude_dir=[".git", ".svn", ".tmp", "node_model", "vendor", "log", "logs", "deps", "bin" ]
-let g:grep_exclude_file=[".gitignore", "*.beam", "*.o", "*.pyc", "*.swp", "*.zip", "*.rar", "*.dump", "tags", "*.pem"]
 
 au BufEnter *.erl imap <buffer> << <<>><Esc>hi
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
