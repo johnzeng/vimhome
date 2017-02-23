@@ -70,7 +70,7 @@ If you need to use **erlang completion** , you may need to have escript excutabl
 
 ## erlang refactoring
 
-Refer to the readme in [erlang-vim](https://github.com/johnzeng/erlang-vim) , you will  need to set up wrangler and host name to make the plugin work
+Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , you will  need to set up wrangler and host name to make the plugin work
 
 # custom keyboard mapping that is different from official plugin
 - For all completion plugin I use `<C-o>` to trigger completion list .But I still recommand that you use `<C-p>` and `<C-n>`  to do most of your completion, that is faster and more vim style.
