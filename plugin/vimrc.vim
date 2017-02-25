@@ -36,6 +36,7 @@ call plug#end()
 
 colorscheme elflord
 syntax on
+let $LANG = 'en'
 set incsearch
 set hlsearch
 set number
@@ -81,7 +82,10 @@ vmap <leader>d "_d
 nmap <C-n> :Grepper-cword<CR>
 nmap <leader>n :Grepper-query<CR>
 
-nmap <C-p> :FZF<CR>
+nmap <C-p> :History<CR>
+nmap <leader>f :FZF<CR>
+nmap <leader>b :Buffers<CR>
+nmap <M-t> :Tags<CR>
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
