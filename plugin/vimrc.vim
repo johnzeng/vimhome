@@ -2,7 +2,9 @@ call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
+Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'majutsushi/tagbar'
@@ -18,7 +20,7 @@ Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'diepm/vim-rest-console'
 "Plug 'johnzeng/Scala-Completion-vim'
-Plug 'johnzeng/vim-erlang-tags'
+Plug 'johnzeng/vim-erlang-tags' , {'for': 'erlang'}
 Plug 'vim-erlang/vim-erlang-omnicomplete' , {'for' : 'erlang'}
 Plug 'johnzeng/leader-c'
 Plug 'vim-airline/vim-airline'
@@ -34,10 +36,14 @@ Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
 
 call plug#end()
 
-colorscheme elflord
+"colorscheme elflord
+set background=dark
+colorscheme solarized
+
 syntax on
-let $LANG = 'en'
+"let $LANG = 'en'
 set incsearch
+set so=5
 set hlsearch
 set number
 set ruler
@@ -47,7 +53,6 @@ set ts=4
 set backspace=2
 set shiftwidth=4
 set expandtab
-"set noexpandtab
 set smartindent
 set pastetoggle=<F10>
 set autoread
@@ -148,7 +153,6 @@ autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-l> <ESC>:
 autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala map <C-l> :pclose<CR>
 
 "auto source
-"autocmd BufWritePost *.vim so %
 nmap <F4> :TagbarToggle<CR>
 
 let g:html_indent_script1 = "inc" 
@@ -169,10 +173,3 @@ set nofoldenable
 
 au BufNewFile,BufRead SConstruct set filetype=python
 au BufNewFile,BufRead SConscript set filetype=python
-
-"uncomment this when you need to use meta key or alt key
-"for i in range(97,122)
-"  let c = nr2char(i)
-"  exec "map \e".c." <M-".c.">"
-"  exec "map! \e".c." <M-".c.">"
-"endfor
