@@ -16,20 +16,23 @@ via curl
 
 `sh -c "$(curl -fsSL https://raw.githubusercontent.com/johnzeng/vimhome/master/install.sh)"`
 
+# pre-request
+This plugin set is using [ ag ](https://github.com/ggreer/the_silver_searcher) as fuzzy finder source, so you may need to install it by yourself. Trust me, this is amazing.
+
 # included plugins
 Please read to [vimrc](plugin/vimrc.vim), you can see all plugins there, you can get help from their doc file or git readme file so you will know how to use them, Some of the frequently used plugins are:
 
 - vim-airline
-- leaderf
+- fzf
 - nerdtree
-- grep
+- grepper
 - leader-c
 - vim-surround
 - auto-pairs
 
 ....
 
-You can start from `leaderf`, nerdtree and grep at first, with them you can work in most of situation
+You can start from `fzf`, nerdtree and grep at first, with them you can work in most of situation
 
 # Optional post installation
 
@@ -74,7 +77,7 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 
 # custom keyboard mapping that is different from official plugin
 - For all completion plugin I use `<C-o>` to trigger completion list .But I still recommand that you use `<C-p>` and `<C-n>`  to do most of your completion, that is faster and more vim style.
-- `<C-p>` to open LeaderMru in normal mode
+- <leader> key is ` `(space) instead of `\`
 - `<C-b>` to troggle nertree
 - `<C-n>` to grep the key word under course
 - `<leader>n` to grep a key word
@@ -83,7 +86,9 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 
 # custom feature that you may need to know
 - auto reload a vim script after saving it if you are editing a `.vim` file.
-- `<leader>r` to open a `:%s/[word under cursor]/` command
+- `<leader>f` to open a fzf (fuzzy finder)
+- `<leader>b` to open a buff searcher
+- `<c-p>` to open a fuuzy history searcher
 - `<leader>q` to quit vim
 - `<leader>s` to save all files you have opened
 - `<leader>j` and `<leader>k` to move to next buffer or previous buffer
@@ -109,3 +114,5 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 - scala
 - shell
 - xml
+
+

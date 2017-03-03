@@ -42,6 +42,7 @@ colorscheme solarized
 
 syntax on
 "let $LANG = 'en'
+let mapleader = " "
 set incsearch
 set so=5
 set hlsearch
