@@ -4,21 +4,22 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
+Plug 'luochen1990/rainbow'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
-Plug 'majutsushi/tagbar'
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
 Plug 'fatih/vim-go' , {'for' : 'go'}
 Plug 'Yggdroot/indentLine'
 Plug 'justmao945/vim-clang' , {'for' : ['c', 'cpp', 'objc']}
-Plug 'johnzeng/VimSessionManager'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
+
+" snipmate and its dependency
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
-Plug 'diepm/vim-rest-console'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+
 "Plug 'johnzeng/Scala-Completion-vim'
 Plug 'johnzeng/vim-erlang-tags' , {'for': 'erlang'}
 Plug 'vim-erlang/vim-erlang-omnicomplete' , {'for' : 'erlang'}
@@ -27,7 +28,6 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'davidhalter/jedi-vim' ,{'for' : 'python'}
 Plug 'vim-airline/vim-airline-themes'
-Plug 'justinmk/vim-sneak'
 Plug 'gregsexton/MatchTag'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
@@ -174,3 +174,4 @@ set nofoldenable
 
 au BufNewFile,BufRead SConstruct set filetype=python
 au BufNewFile,BufRead SConscript set filetype=python
+let g:deoplete#enable_at_startup = 1
