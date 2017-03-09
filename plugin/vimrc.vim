@@ -2,7 +2,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'for' : 'erlang' }
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
 Plug 'luochen1990/rainbow'
