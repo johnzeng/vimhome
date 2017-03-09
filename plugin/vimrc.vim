@@ -2,6 +2,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
 Plug 'luochen1990/rainbow'
@@ -33,6 +34,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
 Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
+Plug 'mattboehm/vim-unstack'
 
 call plug#end()
 
@@ -174,4 +176,29 @@ set nofoldenable
 
 au BufNewFile,BufRead SConstruct set filetype=python
 au BufNewFile,BufRead SConscript set filetype=python
+
 let g:deoplete#enable_at_startup = 1
+
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
+
+au BufEnter *.erl call CreateAleOpts()
+
+function! CreateAleOpts()
+    if exists('g:ale_erlang_erlc_options') && g:ale_erlang_erlc_options != ''
+        return 0
+    endif
+    let $ERL_LIBS='deps:.'
+    let alllibs = finddir('lib', '**/', -1)
+    for one_lib in alllibs
+        let $ERL_LIBS.=':' . one_lib
+    endfor 
+    let g:ale_erlang_erlc_options = ''
+    let allinclude = finddir('include', '**/', -1)
+    for path in allinclude
+        let g:ale_erlang_erlc_options .= '-I ' . path . ' '
+    endfor
+endfunction
+
+let g:unstack_mapkey="<leader>u"
+
