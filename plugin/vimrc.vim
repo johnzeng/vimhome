@@ -2,7 +2,8 @@ call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'w0rp/ale', { 'for' : 'erlang' }
+"ale is so bad 
+"Plug 'w0rp/ale', { 'for' : 'erlang' }
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
 Plug 'luochen1990/rainbow'
@@ -34,7 +35,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
 Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
-Plug 'mattboehm/vim-unstack'
+"Plug 'mattboehm/vim-unstack'
 
 call plug#end()
 
@@ -182,7 +183,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni#input_patterns = {}
 let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
 
-au BufEnter *.erl call CreateAleOpts()
+"au BufEnter *.erl call CreateAleOpts()
 
 function! CreateAleOpts()
     if exists('g:ale_erlang_erlc_options') && g:ale_erlang_erlc_options != ''
