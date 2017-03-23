@@ -13,4 +13,4 @@ echo "source ~/.vim/plugin/vimrc.vim" >> ~/.vimrc
 echo 'now add some scripte command'
 echo "alias erltag='sh ~/.vim/auto_erlang_tag_hook.sh'" >> ~/.bash_profile
 echo "now install plguins from vim"
-vi -c :BundleInstall
+vi -c :PlugInstall

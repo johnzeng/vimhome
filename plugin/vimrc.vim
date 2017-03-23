@@ -6,7 +6,6 @@ Plug 'junegunn/fzf.vim'
 "Plug 'w0rp/ale', { 'for' : 'erlang' }
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
-Plug 'luochen1990/rainbow'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree'
@@ -69,6 +68,12 @@ let NERDTreeIgnore=['\.gcno','\.gcda', '\.o' ,'\~$']
 
 vmap <C-e> "+y
 imap <C-e> <F10><C-r>+<F10>
+imap <C-f> <Right>
+imap <C-b> <Left>
+imap <A-a> <C-Home>
+imap <A-e> <C-End>
+imap <A-b> <S-Left>
+imap <A-f> <S-Right>
 nmap <leader>s <Esc>:wa<CR>
 nmap <leader>q <Esc>:qa<CR>
 " we don't use it usually, so we just use a far funcion
@@ -93,6 +98,7 @@ nmap <leader>n :Grepper-query<CR>
 
 nmap <C-p> :History<CR>
 nmap <leader>f :FZF<CR>
+nmap <C-l> :BLines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <M-t> :Tags<CR>
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
@@ -170,6 +176,7 @@ endfunction
 
 au BufEnter *.erl imap <buffer> << <<>><Esc>hi
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+let g:AutoPairsShortcutBackInsert="<M-d>"
 
 " seting about markdown
 let g:vim_markdown_folding_disabled = 1
