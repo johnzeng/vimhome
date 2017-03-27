@@ -70,8 +70,8 @@ vmap <C-e> "+y
 imap <C-e> <F10><C-r>+<F10>
 imap <C-f> <Right>
 imap <C-b> <Left>
-imap <A-a> <C-Home>
-imap <A-e> <C-End>
+imap <C-a> <Home>
+imap <C-d> <End>
 imap <A-b> <S-Left>
 imap <A-f> <S-Right>
 nmap <leader>s <Esc>:wa<CR>
