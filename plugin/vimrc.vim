@@ -209,4 +209,4 @@ function! CreateAleOpts()
 endfunction
 
 let g:unstack_mapkey="<leader>u"
-
+command! JsonFormat execute('%!python -m json.tool')
