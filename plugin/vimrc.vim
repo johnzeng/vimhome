@@ -174,7 +174,7 @@ function! FormatHtml()
   execute "normal ggVG="
 endfunction
 
-au BufEnter *.erl imap <buffer> << <<>><Esc>hi
+au BufEnter *.erl,*.hrl imap <buffer> << <<>><Esc>hi
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 let g:AutoPairsShortcutBackInsert="<M-d>"
 
