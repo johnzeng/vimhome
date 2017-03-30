@@ -77,7 +77,7 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 
 # custom keyboard mapping that is different from official plugin
 - For all completion plugin I use `<C-o>` to trigger completion list .But I still recommand that you use `<C-p>` and `<C-n>`  to do most of your completion, that is faster and more vim style.
-- `<leader>` key is ` <space> ` instead of `\\` 
+- `<leader>` key is ` <space> ` instead of `\ ` 
 - `<C-b>` to troggle nertree
 - `<C-n>` to grep the key word under course
 - `<leader>n` to grep a key word
