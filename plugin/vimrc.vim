@@ -2,6 +2,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'maxbrunsfeld/vim-yankstack'
 "ale is so bad 
 "Plug 'w0rp/ale', { 'for' : 'erlang' }
 Plug 'tpope/vim-fugitive'
@@ -210,3 +211,6 @@ endfunction
 
 let g:unstack_mapkey="<leader>u"
 command! JsonFormat execute('%!python -m json.tool')
+let g:yankstack_map_keys = 0
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
