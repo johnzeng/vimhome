@@ -87,14 +87,14 @@ if has("cscope")
     " go back to where you were before the search.  
     "
 
-    nmap <C-f>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-f>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-f>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-f>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-f>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-f>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-f>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-f>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-a>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-a>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-a>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-a>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-a>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-a>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-a>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-a>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
 
 
 endif

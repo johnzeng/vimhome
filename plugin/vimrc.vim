@@ -2,7 +2,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'maxbrunsfeld/vim-yankstack'
 "ale is so bad 
 "Plug 'w0rp/ale', { 'for' : 'erlang' }
 Plug 'tpope/vim-fugitive'
@@ -21,6 +20,7 @@ Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
+" snipmat plugin end, all aboves are needed for sinpmate
 
 "Plug 'johnzeng/Scala-Completion-vim'
 Plug 'johnzeng/vim-erlang-tags' , {'for': 'erlang'}
@@ -67,14 +67,14 @@ au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 nmap <C-b> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.gcno','\.gcda', '\.o' ,'\~$']
 
-vmap <C-e> "+y
-imap <C-e> <F10><C-r>+<F10>
+vmap <C-d> "+y
+imap <C-d> <F10><C-r>+<F10>
 imap <C-f> <Right>
 imap <C-b> <Left>
-imap <C-a> <Home>
-imap <C-d> <End>
-imap <A-b> <S-Left>
-imap <A-f> <S-Right>
+imap <C-a> <Esc>I
+imap <C-e> <Esc>A
+imap <M-b> <S-Left>
+imap <M-f> <S-Right>
 nmap <leader>s <Esc>:wa<CR>
 nmap <leader>q <Esc>:qa<CR>
 " we don't use it usually, so we just use a far funcion
@@ -108,7 +108,7 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 
-nmap <C-e> :call ListRegAndPaste()<CR>
+nmap <C-d> :call ListRegAndPaste()<CR>
 
 func! ListRegAndPaste()
   exec "reg 0123456789\""
