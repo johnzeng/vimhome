@@ -9,11 +9,11 @@ Plug 'mhinz/vim-grepper'
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'altercation/vim-colors-solarized'
 else
     Plug 'Shougo/neocomplete.vim'
 endif
 
-Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
@@ -47,7 +47,6 @@ call plug#end()
 
 "colorscheme elflord
 set background=dark
-colorscheme solarized
 
 syntax on
 "let $LANG = 'en'
@@ -194,6 +193,7 @@ au BufNewFile,BufRead SConscript set filetype=python
 
 " I believe I should split them into different files, but, since they are just begined, let's just do it here
 if(has('neovim'))
+    colorscheme solarized
     let g:deoplete#enable_at_startup = 1
     if !exists('g:deoplete#omni#input_patterns')
         let g:deoplete#omni#input_patterns = {}
