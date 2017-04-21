@@ -6,7 +6,13 @@ Plug 'junegunn/fzf.vim'
 "Plug 'w0rp/ale', { 'for' : 'erlang' }
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/neocomplete.vim'
+endif
+
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
@@ -186,10 +192,25 @@ set nofoldenable
 au BufNewFile,BufRead SConstruct set filetype=python
 au BufNewFile,BufRead SConscript set filetype=python
 
-let g:deoplete#enable_at_startup = 1
+" I believe I should split them into different files, but, since they are just begined, let's just do it here
+if(has('neovim'))
+    let g:deoplete#enable_at_startup = 1
+    if !exists('g:deoplete#omni#input_patterns')
+        let g:deoplete#omni#input_patterns = {}
+    endif
+    let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
+else
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+      let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+    let g:neocomplete#sources#omni#input_patterns.erlang = '[^. *\t]:\w*'
+endif
+
 
 "au BufEnter *.erl call CreateAleOpts()
 
