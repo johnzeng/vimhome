@@ -19,7 +19,7 @@ Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
 Plug 'fatih/vim-go' , {'for' : 'go'}
 Plug 'Yggdroot/indentLine'
-Plug 'justmao945/vim-clang' , {'for' : ['c', 'cpp', 'objc']}
+Plug 'Rip-Rip/clang_complete', {'do': 'make install'}
 
 " snipmate and its dependency
 Plug 'garbas/vim-snipmate'
@@ -67,7 +67,12 @@ set pastetoggle=<F10>
 set autoread
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
-
+if has('mac')
+    let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
+    let g:clang_library_path='/Applications/Xcode.app/Contents/Frameworks/libclang.dylib'
+elseif has('unix')
+    let g:clang_library_path='/usr/lib/llvm-3.3/lib/libclang.so'
+endif
 
 nmap <C-b> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.gcno','\.gcda', '\.o' ,'\~$']
@@ -194,6 +199,9 @@ au BufNewFile,BufRead SConscript set filetype=python
 " I believe I should split them into different files, but, since they are just begined, let's just do it here
 if(has('neovim'))
     colorscheme solarized
+    let g:python_host_prog= '/usr/local/bin/python'
+
+
     let g:deoplete#enable_at_startup = 1
     if !exists('g:deoplete#omni#input_patterns')
         let g:deoplete#omni#input_patterns = {}
