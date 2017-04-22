@@ -195,7 +195,7 @@ au BufNewFile,BufRead SConstruct set filetype=python
 au BufNewFile,BufRead SConscript set filetype=python
 
 " I believe I should split them into different files, but, since they are just begined, let's just do it here
-if(has('neovim'))
+if(has('nvim'))
     colorscheme solarized
     let g:python_host_prog= '/usr/local/bin/python'
 
