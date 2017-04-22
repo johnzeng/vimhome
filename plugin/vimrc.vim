@@ -19,7 +19,7 @@ Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
 Plug 'fatih/vim-go' , {'for' : 'go'}
 Plug 'Yggdroot/indentLine'
-Plug 'Rip-Rip/clang_complete', {'do': 'make install'}
+Plug 'justmao945/vim-clang', {'for': ['cpp', 'c', 'objc']}
 
 " snipmate and its dependency
 Plug 'garbas/vim-snipmate'
@@ -69,9 +69,7 @@ au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 if has('mac')
     let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
-    let g:clang_library_path='/Applications/Xcode.app/Contents/Frameworks/libclang.dylib'
 elseif has('unix')
-    let g:clang_library_path='/usr/lib/llvm-3.3/lib/libclang.so'
 endif
 
 nmap <C-b> :NERDTreeToggle<CR>
