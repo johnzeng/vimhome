@@ -213,6 +213,8 @@ if(has('nvim'))
         let g:deoplete#sources.cpp = ['buffer', 'tag']
     endif
 
+    "start a timer to create erlang tags
+    autocmd bufEnter *.erl call CreateErlangTimmer()
 
 else
     if !exists('g:neocomplete#keyword_patterns')
@@ -226,6 +228,16 @@ else
     let g:neocomplete#sources#omni#input_patterns.erlang = '[^. *\t]:\w*'
 endif
 
+function! CreateErlangTimmer()
+    if !exists('g:erlang_tag_timer')
+        func! ErlangTimerHandler(timer)
+            exec ":ErlangTags"
+            echom "done"
+        endfunc
+        call timer_start(500000, 'ErlangTimerHandler', {'repeat': -1})
+        let g:erlang_tag_timer = 1
+    endif
+endfunction
 
 "au BufEnter *.erl call CreateAleOpts()
 
