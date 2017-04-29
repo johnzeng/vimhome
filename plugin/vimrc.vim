@@ -4,7 +4,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "ale is so bad 
 "Plug 'w0rp/ale', { 'for' : 'erlang' }
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
 
 if has('nvim')
@@ -110,6 +110,7 @@ nmap <leader>f :FZF<CR>
 nmap <C-l> :BLines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <M-t> :Tags<CR>
+imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
@@ -203,8 +204,16 @@ if(has('nvim'))
     let g:deoplete#enable_at_startup = 1
     if !exists('g:deoplete#omni#input_patterns')
         let g:deoplete#omni#input_patterns = {}
+        let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
     endif
-    let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
+
+    if !exists('g:deoplete#sources')
+        let g:deoplete#sources = {}
+        let g:deoplete#sources._ = ['buffer']
+        let g:deoplete#sources.cpp = ['buffer', 'tag']
+    endif
+
+
 else
     if !exists('g:neocomplete#keyword_patterns')
         let g:neocomplete#keyword_patterns = {}
