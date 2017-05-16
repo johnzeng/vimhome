@@ -2,9 +2,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"ale is so bad 
-"Plug 'w0rp/ale', { 'for' : 'erlang' }
-"Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
 
 if has('nvim')
@@ -41,7 +38,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
 Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
-"Plug 'mattboehm/vim-unstack'
 
 call plug#end()
 
@@ -110,14 +106,60 @@ nmap <leader>f :FZF<CR>
 nmap <C-l> :BLines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <M-t> :Tags<CR>
-imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
+imap <M-w> <Esc>:call SmartDelete()<CR>a
+"imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 
+
 nmap <C-d> :call ListRegAndPaste()<CR>
+
+func! SmartDelete()
+    let delete_num = CallDeleteNumber()
+    if delete_num != 0
+        let command = "normal lc" . delete_num . "h"
+    else
+        let command = "normal a\<C-w>"
+    endif
+
+    execute command
+endfunc
+
+func! CallDeleteNumber()
+    let cur_col = col('.')
+    normal mxb
+    let word_head_col = col('.')
+    normal `x
+    let cur_line = getline('.')
+    let first_upper_case = cur_col
+    let first_under_score = cur_col
+    while first_under_score >= word_head_col
+        if cur_line[first_under_score] == '_'
+            break
+        endif
+        let first_under_score = first_under_score - 1
+    endwhile
+
+    if first_under_score >= word_head_col
+        return cur_col-first_under_score-1
+    endif
+        
+    while first_upper_case >= word_head_col
+        if 'A' <= cur_line[first_upper_case] && cur_line[first_upper_case] <= 'Z'
+            break
+        endif
+        let first_upper_case = first_upper_case - 1
+    endwhile
+    if first_upper_case >= word_head_col
+        let ret = cur_col - first_upper_case
+        echom ret
+        return ret
+    endif
+    return 0
+endfunc
 
 func! ListRegAndPaste()
   exec "reg 0123456789\""
