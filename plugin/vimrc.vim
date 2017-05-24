@@ -5,12 +5,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 
 if has('nvim')
-"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'altercation/vim-colors-solarized'
 else
     Plug 'Shougo/neocomplete.vim'
 endif
-Plug 'maralla/completor.vim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
@@ -119,21 +118,22 @@ inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 nmap <C-d> :call ListRegAndPaste()<CR>
 
 func! SmartDelete()
-    let delete_till = CallDeleteNumber()
-    if delete_till != -1
-        let curpos = getpos('.')
-        let delete_pos = curpos
-        let delete_pos[2] = delete_till
-        echom string(delete_pos)
-        normal v
-        call setpos('.', delete_pos)
-        normal xi
-        call setpos('.', delete_pos)
-        return ""
+    set paste
+    let delete_num = CallDeleteNumber()
+    if delete_num != -100
+        let ret_str = ""
+        while delete_num > 0
+            echom delete_num
+            let ret_str = ret_str . "\<BS>"
+            let delete_num = delete_num - 1
+        endwhile
     else
-        return "\<C-w>"
+        let ret_str = "\<C-w>"
     endif
 
+    set nopaste
+    echom ret_str
+    return ret_str
 endfunc
 
 func! CallDeleteNumber()
@@ -144,35 +144,45 @@ func! CallDeleteNumber()
     normal i
     call setpos('.', curpos)
     let cur_line = getline('.')
-    let first_upper_case = cur_col
-    let first_under_score = cur_col
-    while first_under_score >= word_head_col
-        if cur_line[first_under_score] == '_'
+
+    "current col is still in input mode, so you should start search from cur_col - 1 col
+    "col is not index of cur_line, col - 2 is the index of the cur_col - 1
+    let first_upper_case_index = cur_col - 2
+    let first_under_score_index = cur_col - 2
+
+    "should not equal the word_head_col's index
+    while first_under_score_index >= word_head_col - 1
+        if cur_line[first_under_score_index] == '_'
             break
         endif
-        let first_under_score = first_under_score - 1
+        let first_under_score_index = first_under_score_index - 1
     endwhile
 
-    if first_under_score > word_head_col && first_under_score != cur_col
-        echom first_under_score
-        if first_under_score == cur_col - 2
-            return first_under_score + 1
+    "should not equal the word_head_col's index
+    if first_under_score_index > word_head_col - 1
+        echom first_under_score_index
+        if first_under_score_index == cur_col - 2
+            return cur_col - first_under_score_index - 1
         else
-            return first_under_score + 2
+            return cur_col - first_under_score_index - 2
         endif
     endif
         
-    while first_upper_case >= word_head_col
-        if 'A' <= cur_line[first_upper_case] && cur_line[first_upper_case] <= 'Z'
+    "should not equal the word_head_col's index
+    while first_upper_case_index >= word_head_col - 1
+        if 'A' <= cur_line[first_upper_case_index] && cur_line[first_upper_case_index] <= 'Z'
             break
         endif
-        let first_upper_case = first_upper_case - 1
+        let first_upper_case_index = first_upper_case_index - 1
     endwhile
-    if first_upper_case > word_head_col
-        echom first_upper_case
-        return first_upper_case + 1
+
+    "should not equal the word_head_col's index
+    if first_upper_case_index > word_head_col - 1
+        echom first_upper_case_index
+        return cur_col - first_upper_case_index - 1
     endif
-    return -1
+    echom 'first_upper_case_index:'.first_upper_case_index.",first_under_score_index:".first_under_score_index.',wordhead:'.word_head_col.',cur_col'.cur_col
+    return -100
 endfunc
 
 func! ListRegAndPaste()
