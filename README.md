@@ -86,6 +86,7 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 
 # custom feature that you may need to know
 - auto reload a vim script after saving it if you are editing a `.vim` file.
+- `<A-w>` in insert mode to use smart delete, this allows you to delete a word until under score or uppper case. Try it out.
 - `<leader>f` to open a fzf (fuzzy finder)
 - `<leader>b` to open a buff searcher
 - `<c-p>` to open a fuuzy history searcher
