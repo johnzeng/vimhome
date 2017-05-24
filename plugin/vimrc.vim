@@ -141,7 +141,6 @@ func! CallDeleteNumber()
     let curpos = getpos('.')
     normal b
     let word_head_col = col('.')
-    normal i
     call setpos('.', curpos)
     let cur_line = getline('.')
 
@@ -153,6 +152,9 @@ func! CallDeleteNumber()
     "should not equal the word_head_col's index
     while first_under_score_index >= word_head_col - 1
         if cur_line[first_under_score_index] == '_'
+            while first_under_score_index >= word_head_col - 1 && cur_line[first_under_score_index - 1] == '_'
+                let first_under_score_index = first_under_score_index - 1
+            endwhile
             break
         endif
         let first_under_score_index = first_under_score_index - 1
@@ -171,6 +173,9 @@ func! CallDeleteNumber()
     "should not equal the word_head_col's index
     while first_upper_case_index >= word_head_col - 1
         if 'A' <= cur_line[first_upper_case_index] && cur_line[first_upper_case_index] <= 'Z'
+            while first_upper_case_index >= word_head_col - 1 && 'A' <= cur_line[first_upper_case_index] && cur_line[first_upper_case_index] <= 'Z'
+                let first_upper_case_index = first_upper_case_index - 1
+            endwhile
             break
         endif
         let first_upper_case_index = first_upper_case_index - 1
