@@ -5,11 +5,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'altercation/vim-colors-solarized'
 else
     Plug 'Shougo/neocomplete.vim'
 endif
+Plug 'maralla/completor.vim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
@@ -103,10 +104,10 @@ nmap <leader>n :Grepper-query<CR>
 
 nmap <C-p> :History<CR>
 nmap <leader>f :FZF<CR>
-nmap <C-l> :BLines<CR>
+nmap <M-l> :BLines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <M-t> :Tags<CR>
-imap <M-w> <Esc>:call SmartDelete()<CR>a
+imap <M-w> <C-R>=SmartDelete()<CR>
 "imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -118,21 +119,30 @@ inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 nmap <C-d> :call ListRegAndPaste()<CR>
 
 func! SmartDelete()
-    let delete_num = CallDeleteNumber()
-    if delete_num != 0
-        let command = "normal lc" . delete_num . "h"
+    let delete_till = CallDeleteNumber()
+    if delete_till != -1
+        let curpos = getpos('.')
+        let delete_pos = curpos
+        let delete_pos[2] = delete_till
+        echom string(delete_pos)
+        normal v
+        call setpos('.', delete_pos)
+        normal xi
+        call setpos('.', delete_pos)
+        return ""
     else
-        let command = "normal a\<C-w>"
+        return "\<C-w>"
     endif
 
-    execute command
 endfunc
 
 func! CallDeleteNumber()
     let cur_col = col('.')
-    normal mxb
+    let curpos = getpos('.')
+    normal b
     let word_head_col = col('.')
-    normal `x
+    normal i
+    call setpos('.', curpos)
     let cur_line = getline('.')
     let first_upper_case = cur_col
     let first_under_score = cur_col
@@ -143,8 +153,13 @@ func! CallDeleteNumber()
         let first_under_score = first_under_score - 1
     endwhile
 
-    if first_under_score >= word_head_col
-        return cur_col-first_under_score-1
+    if first_under_score > word_head_col && first_under_score != cur_col
+        echom first_under_score
+        if first_under_score == cur_col - 2
+            return first_under_score + 1
+        else
+            return first_under_score + 2
+        endif
     endif
         
     while first_upper_case >= word_head_col
@@ -153,12 +168,11 @@ func! CallDeleteNumber()
         endif
         let first_upper_case = first_upper_case - 1
     endwhile
-    if first_upper_case >= word_head_col
-        let ret = cur_col - first_upper_case
-        echom ret
-        return ret
+    if first_upper_case > word_head_col
+        echom first_upper_case
+        return first_upper_case + 1
     endif
-    return 0
+    return -1
 endfunc
 
 func! ListRegAndPaste()
@@ -238,6 +252,7 @@ au BufNewFile,BufRead SConstruct set filetype=python
 au BufNewFile,BufRead SConscript set filetype=python
 
 " I believe I should split them into different files, but, since they are just begined, let's just do it here
+let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
 if(has('nvim'))
     colorscheme solarized
     let g:python_host_prog= '/usr/local/bin/python'
