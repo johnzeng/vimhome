@@ -5,18 +5,20 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'altercation/vim-colors-solarized'
 else
-    Plug 'Shougo/neocomplete.vim'
+"    Plug 'Shougo/neocomplete.vim'
 endif
+
+Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': ['erlang', 'java', 'go', 'c', 'cpp', 'objc', 'python', 'javascript']}
 
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
 Plug 'fatih/vim-go' , {'for' : 'go'}
 Plug 'Yggdroot/indentLine'
-Plug 'justmao945/vim-clang', {'for': ['cpp', 'c', 'objc']}
+"Plug 'justmao945/vim-clang', {'for': ['cpp', 'c', 'objc']}
 
 " snipmate and its dependency
 Plug 'garbas/vim-snipmate'
@@ -31,7 +33,7 @@ Plug 'vim-erlang/vim-erlang-omnicomplete' , {'for' : 'erlang'}
 Plug 'johnzeng/leader-c'
 Plug 'vim-airline/vim-airline'
 
-Plug 'davidhalter/jedi-vim' ,{'for' : 'python'}
+"Plug 'davidhalter/jedi-vim' ,{'for' : 'python'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'gregsexton/MatchTag'
 Plug 'jiangmiao/auto-pairs'
@@ -214,13 +216,13 @@ let g:airline_left_sep='>'
 let g:airline_theme='solarized'
 
 "jedi , just a little better, it's still not working with other define
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>d"
-let g:jedi#completions_command = "<C-n>"
-let g:jedi#rename_command = "<leader>e"
+"let g:jedi#goto_command = "<leader>d"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_definitions_command = ""
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>d"
+"let g:jedi#completions_command = "<C-n>"
+"let g:jedi#rename_command = "<leader>e"
 
 nmap J :call ListMarksAndJump()<CR>
 
@@ -271,30 +273,49 @@ let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
 if(has('nvim'))
     colorscheme solarized
     let g:python_host_prog= '/usr/local/bin/python'
+    let g:ycm_server_python_interpreter  = '/usr/local/bin/python'
+    let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.'],
+  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \             're!\[.*\]\s'],
+  \   'ocaml' : ['.', '#'],
+  \   'cpp,objcpp' : ['->', '.', '::'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+  \   'ruby' : ['.', '::'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':\w*'],
+  \ }
+    let g:ycm_cache_omnifunc = 1
+
+    let g:ycm_key_list_select_completion = []
+    let g:ycm_key_list_previous_completion = []
 
 
-    let g:deoplete#enable_at_startup = 1
-    if !exists('g:deoplete#omni#input_patterns')
-        let g:deoplete#omni#input_patterns = {}
-        let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
-    endif
 
-    if !exists('g:deoplete#sources')
-        let g:deoplete#sources = {}
-        let g:deoplete#sources._ = ['buffer']
-        let g:deoplete#sources.cpp = ['buffer', 'tag']
-    endif
+"    let g:deoplete#enable_at_startup = 1
+"    if !exists('g:deoplete#omni#input_patterns')
+"        let g:deoplete#omni#input_patterns = {}
+"        let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
+"    endif
+"
+"    if !exists('g:deoplete#sources')
+"        let g:deoplete#sources = {}
+"        let g:deoplete#sources._ = ['buffer']
+"        let g:deoplete#sources.cpp = ['buffer', 'tag']
+"    endif
 
 else
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-    let g:neocomplete#sources#omni#input_patterns.erlang = '[^. *\t]:\w*'
+"    if !exists('g:neocomplete#keyword_patterns')
+"        let g:neocomplete#keyword_patterns = {}
+"    endif
+"    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"
+"    if !exists('g:neocomplete#sources#omni#input_patterns')
+"      let g:neocomplete#sources#omni#input_patterns = {}
+"    endif
+"    let g:neocomplete#sources#omni#input_patterns.erlang = '[^. *\t]:\w*'
 endif
 
 "au BufEnter *.erl call CreateAleOpts()
