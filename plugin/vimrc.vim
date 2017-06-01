@@ -291,8 +291,8 @@ if(has('nvim'))
     let g:ycm_cache_omnifunc = 1
     let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
-    let g:ycm_key_list_select_completion = []
-    let g:ycm_key_list_previous_completion = []
+"    let g:ycm_key_list_select_completion = []
+"    let g:ycm_key_list_previous_completion = []
     let g:ycm_collect_identifiers_from_tags_files = 1
 
 
