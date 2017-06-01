@@ -21,10 +21,11 @@ Plug 'Yggdroot/indentLine'
 "Plug 'justmao945/vim-clang', {'for': ['cpp', 'c', 'objc']}
 
 " snipmate and its dependency
-Plug 'garbas/vim-snipmate'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
+"Plug 'garbas/vim-snipmate'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
 " snipmat plugin end, all aboves are needed for sinpmate
 
 "Plug 'johnzeng/Scala-Completion-vim'
@@ -288,10 +289,11 @@ if(has('nvim'))
   \   'erlang' : [':\w*'],
   \ }
     let g:ycm_cache_omnifunc = 1
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
     let g:ycm_key_list_select_completion = []
     let g:ycm_key_list_previous_completion = []
-
+    let g:ycm_collect_identifiers_from_tags_files = 1
 
 
 "    let g:deoplete#enable_at_startup = 1
