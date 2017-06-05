@@ -11,7 +11,7 @@ else
 "    Plug 'Shougo/neocomplete.vim'
 endif
 
-Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': ['erlang', 'java', 'go', 'c', 'cpp', 'objc', 'python', 'javascript']}
+Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': ['vim','erlang', 'java', 'go', 'c', 'cpp', 'objc', 'python', 'javascript', 'mysql']}
 
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
@@ -64,6 +64,7 @@ set expandtab
 set smartindent
 set pastetoggle=<F10>
 set autoread
+set pvh=1
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 if has('mac')
@@ -275,6 +276,7 @@ if(has('nvim'))
     colorscheme solarized
     let g:python_host_prog= '/usr/local/bin/python'
     let g:ycm_server_python_interpreter  = '/usr/local/bin/python'
+    let g:ycm_add_preview_to_completeopt = 1
     let g:ycm_semantic_triggers =  {
   \   'c' : ['->', '.'],
   \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
@@ -288,7 +290,7 @@ if(has('nvim'))
   \   'lua' : ['.', ':'],
   \   'erlang' : [':\w*'],
   \ }
-    let g:ycm_cache_omnifunc = 1
+    let g:ycm_cache_omnifunc = 0
     let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 "    let g:ycm_key_list_select_completion = []
