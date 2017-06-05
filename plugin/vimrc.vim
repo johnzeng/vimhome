@@ -5,10 +5,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 
 if has('nvim')
-"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'altercation/vim-colors-solarized'
-else
-"    Plug 'Shougo/neocomplete.vim'
 endif
 
 Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': ['vim','erlang', 'java', 'go', 'c', 'cpp', 'objc', 'python', 'javascript', 'mysql']}
@@ -44,8 +41,13 @@ Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
 
 call plug#end()
 
-"colorscheme elflord
-set background=dark
+if has('nvim')
+    colorscheme solarized
+    set background=dark
+else
+    colorscheme elflord
+endif
+
 
 syntax on
 "let $LANG = 'en'
@@ -117,7 +119,6 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
-
 
 nmap <C-d> :call ListRegAndPaste()<CR>
 
@@ -217,15 +218,6 @@ nmap <F3> :IndentLinesToggle<CR>
 let g:airline_left_sep='>'
 let g:airline_theme='solarized'
 
-"jedi , just a little better, it's still not working with other define
-"let g:jedi#goto_command = "<leader>d"
-"let g:jedi#goto_assignments_command = "<leader>g"
-"let g:jedi#goto_definitions_command = ""
-"let g:jedi#documentation_command = "K"
-"let g:jedi#usages_command = "<leader>d"
-"let g:jedi#completions_command = "<C-n>"
-"let g:jedi#rename_command = "<leader>e"
-
 nmap J :call ListMarksAndJump()<CR>
 
 func! ListMarksAndJump()
@@ -272,76 +264,28 @@ au BufNewFile,BufRead SConscript set filetype=python
 
 " I believe I should split them into different files, but, since they are just begined, let's just do it here
 let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
-if(has('nvim'))
-    colorscheme solarized
-    let g:python_host_prog= '/usr/local/bin/python'
-    let g:ycm_server_python_interpreter  = '/usr/local/bin/python'
-    let g:ycm_add_preview_to_completeopt = 1
-    let g:ycm_semantic_triggers =  {
-  \   'c' : ['->', '.'],
-  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
-  \             're!\[.*\]\s'],
-  \   'ocaml' : ['.', '#'],
-  \   'cpp,objcpp' : ['->', '.', '::'],
-  \   'perl' : ['->'],
-  \   'php' : ['->', '::'],
-  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-  \   'ruby' : ['.', '::'],
-  \   'lua' : ['.', ':'],
-  \   'erlang' : [':\w*'],
-  \ }
-    let g:ycm_cache_omnifunc = 0
-    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:python_host_prog= '/usr/local/bin/python'
+let g:ycm_server_python_interpreter  = '/usr/local/bin/python'
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_semantic_triggers =  {
+\   'c' : ['->', '.'],
+\   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+\             're!\[.*\]\s'],
+\   'ocaml' : ['.', '#'],
+\   'cpp,objcpp' : ['->', '.', '::'],
+\   'perl' : ['->'],
+\   'php' : ['->', '::'],
+\   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+\   'ruby' : ['.', '::'],
+\   'lua' : ['.', ':'],
+\   'erlang' : [':\w*'],
+\ }
+let g:ycm_cache_omnifunc = 0
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
-"    let g:ycm_key_list_select_completion = []
-"    let g:ycm_key_list_previous_completion = []
-    let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:UltiSnipsExpandTrigger="<M-j>"
+let g:UltiSnipsJumpForwardTrigger="<M-Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
-
-"    let g:deoplete#enable_at_startup = 1
-"    if !exists('g:deoplete#omni#input_patterns')
-"        let g:deoplete#omni#input_patterns = {}
-"        let g:deoplete#omni#input_patterns.erlang = '[^. *\t]:\w*'
-"    endif
-"
-"    if !exists('g:deoplete#sources')
-"        let g:deoplete#sources = {}
-"        let g:deoplete#sources._ = ['buffer']
-"        let g:deoplete#sources.cpp = ['buffer', 'tag']
-"    endif
-
-else
-"    if !exists('g:neocomplete#keyword_patterns')
-"        let g:neocomplete#keyword_patterns = {}
-"    endif
-"    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-"
-"    if !exists('g:neocomplete#sources#omni#input_patterns')
-"      let g:neocomplete#sources#omni#input_patterns = {}
-"    endif
-"    let g:neocomplete#sources#omni#input_patterns.erlang = '[^. *\t]:\w*'
-endif
-
-"au BufEnter *.erl call CreateAleOpts()
-
-function! CreateAleOpts()
-    if exists('g:ale_erlang_erlc_options') && g:ale_erlang_erlc_options != ''
-        return 0
-    endif
-    let $ERL_LIBS='deps:.'
-    let alllibs = finddir('lib', '**/', -1)
-    for one_lib in alllibs
-        let $ERL_LIBS.=':' . one_lib
-    endfor 
-    let g:ale_erlang_erlc_options = ''
-    let allinclude = finddir('include', '**/', -1)
-    for path in allinclude
-        let g:ale_erlang_erlc_options .= '-I ' . path . ' '
-    endfor
-endfunction
-
-let g:unstack_mapkey="<leader>u"
 command! JsonFormat execute('%!python -m json.tool')
-let g:yankstack_map_keys = 0
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
