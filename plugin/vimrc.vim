@@ -15,14 +15,10 @@ Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
 Plug 'fatih/vim-go' , {'for' : 'go'}
 Plug 'Yggdroot/indentLine'
-"Plug 'justmao945/vim-clang', {'for': ['cpp', 'c', 'objc']}
 
 " snipmate and its dependency
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-"Plug 'garbas/vim-snipmate'
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
 " snipmat plugin end, all aboves are needed for sinpmate
 
 "Plug 'johnzeng/Scala-Completion-vim'
@@ -38,6 +34,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
 Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -96,12 +93,10 @@ set formatoptions=ql
 
 nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
-nmap <leader>j :bn<CR>
-nmap <leader>k :bp<CR>
-nmap <leader>i :tabp<CR>
-nmap <leader>o :tabn<CR>
-nmap <leader>l :cn<CR>
-nmap <leader>h :ccl<CR>
+nmap <leader>i :bn<CR>
+nmap <leader>o :bp<CR>
+nmap <leader>j :cn<CR>
+nmap <leader>h :ccl<CR>:pclose<CR>
 nmap <leader>d "_d
 vmap <leader>d "_d
 nmap <C-n> :Grepper-cword<CR>
@@ -109,9 +104,9 @@ nmap <leader>n :Grepper-query<CR>
 
 nmap <C-p> :History<CR>
 nmap <leader>f :FZF<CR>
-nmap <M-l> :BLines<CR>
+nmap <leader>l :BLines<CR>
 nmap <leader>b :Buffers<CR>
-nmap <M-t> :Tags<CR>
+nmap <leader>t :Tags<CR>
 imap <M-w> <C-R>=SmartDelete()<CR>
 "imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
@@ -234,10 +229,7 @@ endfunc
 "java complete 2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-"file type setting
-autocmd FileType scala nmap <leader>t :SortScalaImports<CR>
-autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala imap <C-l> <ESC>:pclose<CR>a
-autocmd FileType erlang,go,java,python,c,cpp,objc,csharp,scala map <C-l> :pclose<CR>
+autocmd FileType scala nmap <leader>S :SortScalaImports<CR>
 
 "auto source
 nmap <F4> :TagbarToggle<CR>
@@ -267,6 +259,7 @@ let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
 let g:python_host_prog= '/usr/local/bin/python'
 let g:ycm_server_python_interpreter  = '/usr/local/bin/python'
 let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers =  {
 \   'c' : ['->', '.'],
 \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
@@ -284,7 +277,7 @@ let g:ycm_cache_omnifunc = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:UltiSnipsExpandTrigger="<M-j>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<M-Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
