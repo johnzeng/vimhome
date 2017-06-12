@@ -16,6 +16,8 @@ Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
 Plug 'fatih/vim-go' , {'for' : 'go'}
 Plug 'Yggdroot/indentLine'
 
+Plug 'tenfyzhong/CompleteParameter.vim'
+
 " snipmate and its dependency
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -277,6 +279,12 @@ let g:ycm_cache_omnifunc = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 let g:ycm_collect_identifiers_from_tags_files = 1
+
+let g:erlang_complete_left_bracket = 0
+let g:erlang_complete_extend_arbit = 1
+let g:complete_parameter_mapping_complete = "<c-y>"
+let g:complete_parameter_mapping_goto_next = '<m-i>'
+let g:complete_parameter_mapping_goto_previous = '<m-u>'
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<M-Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
