@@ -11,7 +11,7 @@ endif
 Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
             \ 'vim','erlang', 'java', 'go', 'c', 'cpp', 
             \ 'objc', 'python', 'javascript', 'mysql',
-            \ 'scala',  'lua']}
+            \ 'scala',  'lua', 'sh']}
 
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
