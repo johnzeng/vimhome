@@ -8,7 +8,10 @@ if has('nvim')
     Plug 'altercation/vim-colors-solarized'
 endif
 
-Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': ['vim','erlang', 'java', 'go', 'c', 'cpp', 'objc', 'python', 'javascript', 'mysql']}
+Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
+            \ 'vim','erlang', 'java', 'go', 'c', 'cpp', 
+            \ 'objc', 'python', 'javascript', 'mysql',
+            \ 'scala',  'lua']}
 
 Plug 'scrooloose/nerdtree'
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
@@ -16,7 +19,7 @@ Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
 Plug 'fatih/vim-go' , {'for' : 'go'}
 Plug 'Yggdroot/indentLine'
 
-Plug 'tenfyzhong/CompleteParameter.vim'
+Plug 'tenfyzhong/CompleteParameter.vim', {'branch': 'develop'}
 
 " snipmate and its dependency
 Plug 'SirVer/ultisnips'
