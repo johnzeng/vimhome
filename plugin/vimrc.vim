@@ -112,7 +112,7 @@ nmap <leader>f :FZF<CR>
 nmap <leader>l :BLines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :Tags<CR>
-imap <M-w> <C-R>=SmartDelete()<CR>
+imap <M-w> <C-R>=SmartDelete_v2()<CR>
 "imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -122,26 +122,25 @@ inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 
 nmap <C-d> :call ListRegAndPaste()<CR>
 
-func! SmartDelete()
-    set paste
-    let delete_num = CallDeleteNumber()
-    if delete_num != -100
-        let ret_str = ""
-        while delete_num > 0
-            echom delete_num
-            let ret_str = ret_str . "\<BS>"
-            let delete_num = delete_num - 1
-        endwhile
+func! SmartDelete_v2()
+    let delete_till = CalDeleteTillForSmartDelete()
+    if delete_till == -100
+        return "\<C-w>"
     else
-        let ret_str = "\<C-w>"
-    endif
-
-    set nopaste
-    echom ret_str
-    return ret_str
+        let cur_line = getline('.')
+        let cur_col = col('.')
+        let curpos = getpos('.')
+        let partA = strpart(cur_line, 0, delete_till)
+        let partB = strpart(cur_line, cur_col - 1)
+        let new_line = partA . partB
+        call setline('.', new_line)
+        let curpos[2] = delete_till + 1
+        call setpos('.', curpos)
+        return ""
+    end
 endfunc
 
-func! CallDeleteNumber()
+func! CalDeleteTillForSmartDelete()
     let cur_col = col('.')
     let curpos = getpos('.')
     normal b
@@ -169,10 +168,11 @@ func! CallDeleteNumber()
     if first_under_score_index > word_head_col - 1
         echom first_under_score_index
         if first_under_score_index == cur_col - 2
-            return cur_col - first_under_score_index - 1
+            let delete_till = first_under_score_index 
         else
-            return cur_col - first_under_score_index - 2
+            let delete_till = first_under_score_index + 1
         endif
+        return delete_till
     endif
         
     "should not equal the word_head_col's index
@@ -188,10 +188,9 @@ func! CallDeleteNumber()
 
     "should not equal the word_head_col's index
     if first_upper_case_index > word_head_col - 1
-        echom first_upper_case_index
-        return cur_col - first_upper_case_index - 1
+        let delete_till = first_upper_case_index + 1
+        return delete_till
     endif
-    echom 'first_upper_case_index:'.first_upper_case_index.",first_under_score_index:".first_under_score_index.',wordhead:'.word_head_col.',cur_col'.cur_col
     return -100
 endfunc
 
