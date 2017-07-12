@@ -55,6 +55,7 @@ syntax on
 "let $LANG = 'en'
 let mapleader = " "
 set incsearch
+set nofsync
 set so=5
 set hlsearch
 set number
@@ -89,6 +90,7 @@ imap <M-b> <S-Left>
 imap <M-f> <S-Right>
 nmap <leader>s <Esc>:wa<CR>
 nmap <leader>q <Esc>:qa<CR>
+nmap <leader>Q <Esc>:qa!<CR>
 " we don't use it usually, so we just use a far funcion
 nmap <F11> :%!xxd<CR>
 nmap <F12> :%!xxd -r<CR>
