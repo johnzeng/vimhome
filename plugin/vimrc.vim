@@ -69,6 +69,7 @@ set expandtab
 set smartindent
 set pastetoggle=<F10>
 set autoread
+set autowriteall
 set pvh=1
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -294,3 +295,10 @@ let g:UltiSnipsJumpForwardTrigger="<M-Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
 command! JsonFormat execute('%!python -m json.tool')
+
+function! AutoReadBuffer(timer)
+    execute ":checktime"
+endfunction
+
+call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
+
