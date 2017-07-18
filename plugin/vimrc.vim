@@ -211,6 +211,7 @@ func! ListRegAndPaste()
 endfunc
 
 au BufEnter *.pig set filetype=pig
+au BufWritePost *.c,*.cpp,*.h execute ":silent !ctags -R .&"
 
 "config for indent
 let g:indentLine_enabled = 0
