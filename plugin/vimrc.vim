@@ -211,7 +211,7 @@ func! ListRegAndPaste()
 endfunc
 
 au BufEnter *.pig set filetype=pig
-au BufWritePost *.c,*.cpp,*.h execute ":silent !ctags -R .&"
+au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R .&"
 
 "config for indent
 let g:indentLine_enabled = 0
@@ -252,6 +252,8 @@ function! FormatHtml()
 endfunction
 
 au BufEnter *.erl,*.hrl imap <buffer> << <<>><Esc>hi
+let g:erlang_tags_auto_update=1
+let g:erlang_tags_ignore=['rel']
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 let g:AutoPairsShortcutBackInsert="<M-d>"
 
