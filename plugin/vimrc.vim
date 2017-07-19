@@ -44,7 +44,8 @@ Plug 'majutsushi/tagbar'
 call plug#end()
 
 if has('nvim')
-    colorscheme solarized
+"    colorscheme solarized
+    colorscheme elflord
     set background=dark
 else
     colorscheme elflord
