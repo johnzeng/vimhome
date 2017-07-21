@@ -8,6 +8,8 @@ if has('nvim')
     Plug 'altercation/vim-colors-solarized'
 endif
 
+Plug 'posva/vim-vue'
+
 Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
             \ 'vim','erlang', 'java', 'go', 'c', 'cpp', 
             \ 'objc', 'python', 'javascript', 'mysql',
@@ -45,7 +47,7 @@ call plug#end()
 
 if has('nvim')
 "    colorscheme solarized
-    colorscheme elflord
+    colorscheme default
     set background=dark
 else
     colorscheme elflord
@@ -213,6 +215,29 @@ endfunc
 
 au BufEnter *.pig set filetype=pig
 au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R .&"
+au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp let g:c_cscope_need_update=1
+au BufEnter *.erl,*.hrl call timer_start(60000, 'AutoUpdateCscopeForC', {"repeat": -1})
+
+function! SetUpAutoUpdateCCscopeCmd()
+endfunc
+
+function! SetUpAutoUpdateErlangCscopeCmd()
+endfunc
+
+function! AutoUpdateCscopeForC()
+    if exists('g:c_cscope_need_update') && g:c_cscope_need_update == 1
+        execute ":silent !cscope -qbR &"
+    endif
+
+    let g:c_cscope_need_update=0
+endfunction
+
+function! AutoUpdateCscopeForErlang()
+    if exists('g:erlang_cscope_need_update') && g:erlang_cscope_need_update == 1
+        execute ":silent !erlcscope . &"
+    endif
+    let g:erlang_cscope_need_update=0
+endfunction
 
 "config for indent
 let g:indentLine_enabled = 0
