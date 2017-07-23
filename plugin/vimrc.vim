@@ -16,6 +16,10 @@ Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
             \ 'scala',  'lua', 'sh']}
 
 Plug 'scrooloose/nerdtree'
+Plug 'Shougo/unite.vim'
+Plug 'devjoe/vim-codequery'
+Plug 'mileszs/ack.vim'
+
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
 Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
 Plug 'fatih/vim-go' , {'for' : 'go'}
@@ -216,13 +220,13 @@ endfunc
 au BufEnter *.pig set filetype=pig
 au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R .&"
 au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp let g:c_cscope_need_update=1
-au BufEnter *.erl,*.hrl call timer_start(60000, 'AutoUpdateCscopeForC', {"repeat": -1})
-
-function! SetUpAutoUpdateCCscopeCmd()
-endfunc
-
-function! SetUpAutoUpdateErlangCscopeCmd()
-endfunc
+"au BufEnter *.erl,*.hrl call timer_start(60000, 'AutoUpdateCscopeForC', {"repeat": -1})
+"
+"function! SetUpAutoUpdateCCscopeCmd(timer)
+"endfunc
+"
+"function! SetUpAutoUpdateErlangCscopeCmd(timer)
+"endfunc
 
 function! AutoUpdateCscopeForC()
     if exists('g:c_cscope_need_update') && g:c_cscope_need_update == 1

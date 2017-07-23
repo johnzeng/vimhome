@@ -31,7 +31,8 @@ if has("cscope") && executable('cscope')
     """"""""""""" Standard cscope/vim boilerplate
 
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-    set cscopetag
+    " don't use cscope tag....
+    "set cscopetag
 
     " check cscope for definition of a symbol before checking ctags: set to 1
     " if you want the reverse search order.
@@ -95,6 +96,8 @@ if has("cscope") && executable('cscope')
     nmap <C-a>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
     nmap <C-a>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
     nmap <C-a>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
+    set cscopequickfix=s+,c+,d+,i+,t+,e+,a+
+
 
 
 endif
