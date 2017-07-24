@@ -109,6 +109,7 @@ if has("cscope") && executable('cscope')
     "
 
     nmap <C-a>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-a>a :cs find a <C-R>=expand("<cword>")<CR><CR>	
     nmap <C-a>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
     nmap <C-a>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
     nmap <C-a>t :cs find t <C-R>=expand("<cword>")<CR><CR>	

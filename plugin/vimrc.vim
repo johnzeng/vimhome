@@ -79,6 +79,8 @@ set autoread
 set autowriteall
 set pvh=1
 set tags+=c_tags,erlang_tags
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+set cursorline
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 if has('mac')
@@ -336,3 +338,9 @@ endfunction
 
 call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
 
+nmap <C-s>s :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-s>g :CodeQuery Global <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-s>c :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-s>t :CodeQuery Text <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-s>e :CodeQuery Callee <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-s>d :CodeQuery Definition <C-R>=expand("<cword>")<CR><CR>	
