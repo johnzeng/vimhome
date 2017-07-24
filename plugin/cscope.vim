@@ -46,6 +46,26 @@ if has("cscope") && executable('cscope')
         cs add $CSCOPE_DB
     endif
 
+    if filereadable("c_cscope.out")
+        cs add c_cscope.out  
+    endif
+
+    if filereadable("java_cscope.out")
+        cs add java_cscope.out  
+    endif
+    if filereadable("go_cscope.out")
+        cs add go_cscope.out  
+    endif
+    if filereadable("python_cscope.out")
+        cs add python_cscope.out  
+    endif
+    if filereadable("ruby_cscope.out")
+        cs add ruby_cscope.out  
+    endif
+    if filereadable("javascript_cscope.out")
+        cs add javascript_cscope.out  
+    endif
+
     " show msg when any other cscope db added
     set cscopeverbose  
 

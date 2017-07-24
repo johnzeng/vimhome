@@ -17,7 +17,7 @@ Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
 
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
-Plug 'devjoe/vim-codequery'
+Plug 'johnzeng/vim-codequery'
 Plug 'mileszs/ack.vim'
 
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
@@ -78,6 +78,7 @@ set pastetoggle=<F10>
 set autoread
 set autowriteall
 set pvh=1
+set tags+=c_tags,erlang_tags
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 if has('mac')
