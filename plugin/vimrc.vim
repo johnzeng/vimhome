@@ -50,8 +50,8 @@ Plug 'majutsushi/tagbar'
 call plug#end()
 
 if has('nvim')
-"    colorscheme solarized
-    colorscheme default
+    colorscheme solarized
+"    colorscheme default
     set background=dark
 else
     colorscheme elflord
@@ -78,9 +78,11 @@ set pastetoggle=<F10>
 set autoread
 set autowriteall
 set pvh=1
-set tags+=c_tags,erlang_tags
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-set cursorline
+set tags+=c_tags
+set tags+=erlang_tags
+hi CursorLine   cterm=NONE ctermbg=black ctermfg=NONE guibg=darkred guifg=white
+au BufEnter * set cursorline
+au BufLeave * set nocursorline
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 if has('mac')
@@ -221,7 +223,7 @@ func! ListRegAndPaste()
 endfunc
 
 au BufEnter *.pig set filetype=pig
-au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R .&"
+au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R . &"
 au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp let g:c_cscope_need_update=1
 "au BufEnter *.erl,*.hrl call timer_start(60000, 'AutoUpdateCscopeForC', {"repeat": -1})
 "
