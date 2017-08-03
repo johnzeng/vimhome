@@ -15,6 +15,7 @@ Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
             \ 'objc', 'python', 'javascript', 'mysql',
             \ 'scala',  'lua', 'sh']}
 
+Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
 Plug 'johnzeng/vim-codequery'
