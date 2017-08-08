@@ -79,6 +79,8 @@ set pastetoggle=<F10>
 set autoread
 set autowriteall
 set pvh=1
+"mode is shown by airline
+set noshowmode
 set tags+=c_tags
 set tags+=erlang_tags
 hi CursorLine   cterm=NONE ctermbg=black ctermfg=NONE guibg=darkred guifg=white
@@ -224,8 +226,8 @@ func! ListRegAndPaste()
 endfunc
 
 au BufEnter *.pig set filetype=pig
-au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R . &"
-au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp let g:c_cscope_need_update=1
+"au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R . &"
+"au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp let g:c_cscope_need_update=1
 "au BufEnter *.erl,*.hrl call timer_start(60000, 'AutoUpdateCscopeForC', {"repeat": -1})
 "
 "function! SetUpAutoUpdateCCscopeCmd(timer)
@@ -291,7 +293,7 @@ au BufEnter *.erl,*.hrl imap <buffer> << <<>><Esc>hi
 let g:erlang_tags_auto_update=1
 let g:erlang_tags_ignore=['rel']
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
-let g:AutoPairsShortcutBackInsert="<M-d>"
+let g:AutoPairsShortcutBackInsert="<M-b>"
 
 " seting about markdown
 let g:vim_markdown_folding_disabled = 1
@@ -326,12 +328,19 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 
 let g:erlang_complete_left_bracket = 0
 let g:erlang_complete_extend_arbit = 1
-let g:complete_parameter_mapping_complete = "<c-y>"
-let g:complete_parameter_mapping_goto_next = '<m-i>'
-let g:complete_parameter_mapping_goto_previous = '<m-u>'
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<M-Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+inoremap <silent><expr> <C-y> complete_parameter#pre_complete("()")
+smap <M-j> <Plug>(complete_parameter#goto_next_parameter)
+imap <M-j> <Plug>(complete_parameter#goto_next_parameter)
+smap <M-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <M-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <m-d> <Plug>(complete_parameter#overload_down)
+smap <m-d> <Plug>(complete_parameter#overload_down)
+imap <m-u> <Plug>(complete_parameter#overload_up)
+smap <m-u> <Plug>(complete_parameter#overload_up)
 
 command! JsonFormat execute('%!python -m json.tool')
 

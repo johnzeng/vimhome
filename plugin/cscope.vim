@@ -26,46 +26,15 @@
 
 " This tests to see if vim was configured with the '--enable-cscope' option
 " when it was compiled.  If it wasn't, time to recompile vim... 
-if has("cscope") && executable('cscope')
-
-    """"""""""""" Standard cscope/vim boilerplate
-
-    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-    " don't use cscope tag....
-    "set cscopetag
-
-    " check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order.
-    set csto=1
-
-    " add any cscope database in current directory
+if has('cscope') && executable('cscope')
     if filereadable("cscope.out")
         cs add cscope.out  
-    " else add the database pointed to by environment variable 
+        " else add the database pointed to by environment variable 
     elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
     endif
 
-    if filereadable("c_cscope.out")
-        cs add c_cscope.out  
-    endif
-
-    if filereadable("java_cscope.out")
-        cs add java_cscope.out  
-    endif
-    if filereadable("go_cscope.out")
-        cs add go_cscope.out  
-    endif
-    if filereadable("python_cscope.out")
-        cs add python_cscope.out  
-    endif
-    if filereadable("ruby_cscope.out")
-        cs add ruby_cscope.out  
-    endif
-    if filereadable("javascript_cscope.out")
-        cs add javascript_cscope.out  
-    endif
-
+    set csto=1
     " show msg when any other cscope db added
     set cscopeverbose  
 
@@ -119,8 +88,4 @@ if has("cscope") && executable('cscope')
     nmap <C-a>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
     set cscopequickfix=s+,c+,d+,i+,t+,e+,a+
 
-
-
 endif
-
-
