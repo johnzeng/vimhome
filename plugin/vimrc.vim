@@ -9,6 +9,7 @@ if has('nvim')
 endif
 
 Plug 'posva/vim-vue'
+Plug 'johnzeng/vim-clang-tags'
 
 Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
             \ 'vim','erlang', 'java', 'go', 'c', 'cpp', 
@@ -45,7 +46,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
-Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
+"Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
 Plug 'majutsushi/tagbar'
 
 call plug#end()
@@ -273,7 +274,8 @@ func! ListMarksAndJump()
 endfunc
 
 "java complete 2
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+let g:EclimCompletionMethod = 'omnifunc'
 
 autocmd FileType scala nmap <leader>S :SortScalaImports<CR>
 
@@ -321,7 +323,9 @@ let g:ycm_semantic_triggers =  {
 \   'lua' : ['.', ':'],
 \   'erlang' : [':\w*'],
 \ }
-let g:ycm_cache_omnifunc = 0
+
+"let g:ycm_cache_omnifunc = 0
+
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -356,3 +360,5 @@ nmap <C-s>c :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>
 nmap <C-s>t :CodeQuery Text <C-R>=expand("<cword>")<CR><CR>	
 nmap <C-s>e :CodeQuery Callee <C-R>=expand("<cword>")<CR><CR>	
 nmap <C-s>d :CodeQuery Definition <C-R>=expand("<cword>")<CR><CR>	
+
+let g:comment_key="<M-c>"
