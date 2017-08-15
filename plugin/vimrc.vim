@@ -46,7 +46,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
-"Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
+Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
 Plug 'majutsushi/tagbar'
 
 call plug#end()
@@ -274,8 +274,8 @@ func! ListMarksAndJump()
 endfunc
 
 "java complete 2
-"autocmd FileType java setlocal omnifunc=javacomplete#Complete
-let g:EclimCompletionMethod = 'omnifunc'
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"let g:EclimCompletionMethod = 'omnifunc'
 
 autocmd FileType scala nmap <leader>S :SortScalaImports<CR>
 
