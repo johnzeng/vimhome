@@ -9,6 +9,7 @@ if has('nvim')
 endif
 
 Plug 'posva/vim-vue'
+Plug 'mbbill/undotree'
 Plug 'johnzeng/vim-clang-tags'
 
 Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
@@ -306,8 +307,8 @@ au BufNewFile,BufRead SConscript set filetype=python
 
 " I believe I should split them into different files, but, since they are just begined, let's just do it here
 let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
-let g:python_host_prog= '/usr/local/bin/python'
-let g:ycm_server_python_interpreter  = '/usr/local/bin/python'
+let g:python_host_prog= '/usr/local/bin/python2'
+let g:ycm_server_python_interpreter  = '/usr/local/bin/python2'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers =  {
@@ -362,3 +363,9 @@ nmap <C-s>e :CodeQuery Callee <C-R>=expand("<cword>")<CR><CR>
 nmap <C-s>d :CodeQuery Definition <C-R>=expand("<cword>")<CR><CR>	
 
 let g:comment_key="<M-c>"
+
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
+nmap <leader>u :UndotreeToggle<CR>
