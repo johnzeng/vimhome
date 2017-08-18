@@ -3,6 +3,7 @@ Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
+Plug 'johnzeng/xml.vim'
 
 if has('nvim')
     Plug 'altercation/vim-colors-solarized'
@@ -41,10 +42,9 @@ Plug 'vim-erlang/vim-erlang-omnicomplete' , {'for' : 'erlang'}
 Plug 'johnzeng/leader-c'
 Plug 'vim-airline/vim-airline'
 
-"Plug 'davidhalter/jedi-vim' ,{'for' : 'python'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'gregsexton/MatchTag'
-Plug 'jiangmiao/auto-pairs'
+Plug 'johnzeng/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
 Plug 'artur-shaik/vim-javacomplete2' , {'for' : 'java'}
@@ -64,6 +64,7 @@ endif
 syntax on
 "let $LANG = 'en'
 let mapleader = " "
+let maplocalleader = " "
 set incsearch
 set nofsync
 set so=5
@@ -296,7 +297,10 @@ au BufEnter *.erl,*.hrl imap <buffer> << <<>><Esc>hi
 let g:erlang_tags_auto_update=1
 let g:erlang_tags_ignore=['rel']
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
-let g:AutoPairsShortcutBackInsert="<M-b>"
+let g:AutoPairsShortcutBackInsert= ""
+let g:AutoPairsShortcutToggle = ""
+let g:AutoPairsMultilineClose = 0
+let g:AutoPairsMapSpace = 0
 
 " seting about markdown
 let g:vim_markdown_folding_disabled = 1
