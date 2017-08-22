@@ -20,7 +20,7 @@ Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
 
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
-Plug 'Shougo/unite.vim'
+"Plug 'Shougo/unite.vim'
 Plug 'johnzeng/vim-codequery'
 Plug 'mileszs/ack.vim'
 
