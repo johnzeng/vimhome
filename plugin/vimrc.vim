@@ -6,9 +6,10 @@ Plug 'mhinz/vim-grepper'
 Plug 'johnzeng/xml.vim'
 
 if has('nvim')
-    Plug 'altercation/vim-colors-solarized'
+    Plug 'altercation/vim-colors-solarized'  
 endif
 
+Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}
 Plug 'posva/vim-vue'
 Plug 'mbbill/undotree'
 Plug 'johnzeng/vim-clang-tags'
@@ -119,10 +120,11 @@ set formatoptions=ql
 
 nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
-nmap <leader>i :bn<CR>
-nmap <leader>o :bp<CR>
 nmap <leader>j :cn<CR>
-nmap <leader>h :ccl<CR>:pclose<CR>
+nmap <leader>k :cp<CR>
+nmap <leader>i :lne<CR>
+nmap <leader>o :lp<CR>
+nmap <leader>h :ccl<CR>:lcl<CR>
 nmap <leader>d "_d
 vmap <leader>d "_d
 nmap <C-n> :Grepper-cword<CR>
@@ -294,12 +296,14 @@ function! FormatHtml()
 endfunction
 
 au BufEnter *.erl,*.hrl imap <buffer> << <<>><Esc>hi
+
 let g:erlang_tags_auto_update=1
 let g:erlang_tags_ignore=['rel']
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 let g:AutoPairsShortcutBackInsert= ""
 let g:AutoPairsShortcutToggle = ""
 let g:AutoPairsMultilineClose = 0
+let g:AutoPairsJump = ""
 let g:AutoPairsMapSpace = 0
 
 " seting about markdown
@@ -316,7 +320,7 @@ let g:ycm_server_python_interpreter  = '/usr/local/bin/python2'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers =  {
-\   'c' : ['->', '.'],
+\   'c' : ['->', '.', '\w\w\w'],
 \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
 \             're!\[.*\]\s'],
 \   'ocaml' : ['.', '#'],
@@ -359,12 +363,17 @@ endfunction
 
 call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
 
-nmap <C-s>s :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-s>g :CodeQuery Global <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-s>c :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-s>t :CodeQuery Text <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-s>e :CodeQuery Callee <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-s>d :CodeQuery Definition <C-R>=expand("<cword>")<CR><CR>	
+au BufEnter *.c,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>set_up_code_query()
+
+func! s:SetUpCodeQuery()
+    nmap <buffer> <C-s>s :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
+    nmap <buffer> <C-s>g :CodeQuery Global <C-R>=expand("<cword>")<CR><CR>	
+    nmap <buffer> <C-s>c :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>	
+    nmap <buffer> <C-s>t :CodeQuery Text <C-R>=expand("<cword>")<CR><CR>	
+    nmap <buffer> <C-s>e :CodeQuery Callee <C-R>=expand("<cword>")<CR><CR>	
+    nmap <buffer> <C-s>d :CodeQuery Definition <C-R>=expand("<cword>")<CR><CR>	
+endfunc
+    
 
 let g:comment_key="<M-c>"
 
