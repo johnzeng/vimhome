@@ -1,9 +1,9 @@
 call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'frozen':1, 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
-Plug 'johnzeng/xml.vim'
+Plug 'johnzeng/xml.vim' , {'for': ['xml', 'html']}
 
 if has('nvim')
     Plug 'altercation/vim-colors-solarized'  
@@ -20,8 +20,8 @@ Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
             \ 'scala',  'lua', 'sh']}
 
 Plug 'tpope/vim-fugitive'
+Plug '907th/vim-auto-save'
 Plug 'scrooloose/nerdtree'
-"Plug 'Shougo/unite.vim'
 Plug 'johnzeng/vim-codequery'
 Plug 'mileszs/ack.vim'
 
@@ -108,7 +108,7 @@ imap <C-a> <Esc>I
 imap <C-e> <Esc>A
 imap <M-b> <S-Left>
 imap <M-f> <S-Right>
-nmap <leader>s <Esc>:wa<CR>
+"nmap <leader>s <Esc>:wa<CR>
 nmap <leader>q <Esc>:qa<CR>
 nmap <leader>Q <Esc>:qa!<CR>
 " we don't use it usually, so we just use a far funcion
@@ -300,10 +300,12 @@ au BufEnter *.erl,*.hrl imap <buffer> << <<>><Esc>hi
 let g:erlang_tags_auto_update=1
 let g:erlang_tags_ignore=['rel']
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+let g:AutoPairsShortcutFastWrap = ""
+let g:AutoPairsMoveCharacter = ""
 let g:AutoPairsShortcutBackInsert= ""
 let g:AutoPairsShortcutToggle = ""
 let g:AutoPairsMultilineClose = 0
-let g:AutoPairsJump = ""
+let g:AutoPairsShortcutJump = ""
 let g:AutoPairsMapSpace = 0
 
 " seting about markdown
@@ -363,7 +365,7 @@ endfunction
 
 call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
 
-au BufEnter *.c,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>set_up_code_query()
+au BufEnter *.c,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>SetUpCodeQuery()
 
 func! s:SetUpCodeQuery()
     nmap <buffer> <C-s>s :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
@@ -382,3 +384,6 @@ if has("persistent_undo")
     set undofile
 endif
 nmap <leader>u :UndotreeToggle<CR>
+
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
