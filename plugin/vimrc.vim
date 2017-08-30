@@ -358,11 +358,14 @@ smap <m-u> <Plug>(complete_parameter#overload_up)
 
 command! JsonFormat execute('%!python -m json.tool')
 
-function! AutoReadBuffer(timer)
-    execute ":checktime"
-endfunction
 
-call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
+if has('nvim')
+    function! AutoReadBuffer(timer)
+        execute ":checktime"
+    endfunction
+
+    call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
+endif
 
 au BufEnter *.c,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>SetUpCodeQuery()
 
