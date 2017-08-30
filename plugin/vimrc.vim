@@ -316,12 +316,14 @@ au BufNewFile,BufRead SConscript set filetype=python
 
 " I believe I should split them into different files, but, since they are just begined, let's just do it here
 let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
-let g:python_host_prog= '/usr/local/bin/python2'
-let g:ycm_server_python_interpreter  = '/usr/local/bin/python2'
+let g:python_host_prog = substitute(system('which python2'), '\n','', '') 
+let g:ycm_server_python_interpreter  = substitute(system('which python2'), '\n','', '') 
+"let g:python_host_prog = '/usr/local/bin/python2'
+"let g:ycm_server_python_interpreter  = '/usr/local/bin/python2'  
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers =  {
-\   'c' : ['->', '.', '\w\w\w'],
+\   'c' : ['->', '.', 're!\w{3}'],
 \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
 \             're!\[.*\]\s'],
 \   'ocaml' : ['.', '#'],
@@ -331,7 +333,7 @@ let g:ycm_semantic_triggers =  {
 \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
 \   'ruby' : ['.', '::'],
 \   'lua' : ['.', ':'],
-\   'erlang' : [':\w*'],
+\   'erlang' : [':\w*', 're!\w{3}'],
 \ }
 
 "let g:ycm_cache_omnifunc = 0
