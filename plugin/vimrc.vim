@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/bundle')
 Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
+Plug 't9md/vim-choosewin'
 Plug 'junegunn/fzf', { 'frozen':1, 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim' , {'fozen': 1}
 Plug 'mhinz/vim-grepper'
 Plug 'johnzeng/xml.vim' , {'for': ['xml', 'html']}
 
@@ -388,3 +389,6 @@ if has("persistent_undo")
     set undofile
 endif
 nmap <leader>u :UndotreeToggle<CR>
+nmap  -  <Plug>(choosewin)
+let g:choosewin_overlay_enable = 1
+nmap <leader>w <C-w>
