@@ -14,6 +14,8 @@ Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}
 Plug 'posva/vim-vue'
 Plug 'mbbill/undotree'
 Plug 'johnzeng/vim-clang-tags'
+Plug 'mhinz/vim-startify'
+Plug 'MattesGroeger/vim-bookmarks'
 
 Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
             \ 'vim','erlang', 'java', 'go', 'c', 'cpp', 
@@ -392,3 +394,27 @@ nmap <leader>u :UndotreeToggle<CR>
 nmap  -  <Plug>(choosewin)
 let g:choosewin_overlay_enable = 1
 nmap <leader>w <C-w>
+
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+let g:bookmark_sign = '♥'
+let g:bookmark_highlight_lines = 1
+let g:bookmark_auto_save_file = '.vim-bookmarks'
+
+let g:startify_list_order = [
+            \ ['MRU '.getcwd()],
+            \ 'dir',
+            \ ['Commands:'],
+            \ 'commands',
+            \ ['MRU'],
+            \ 'files',
+            \ ['Sessions:'],
+            \ 'sessions',
+            \ ]
+
+let g:startify_commands = [
+            \ {'f': ['FZF', 'FZF']},
+            \ {'m': ['Bookmark', 'BookmarkShowAll']},
+            \ ]
+
+
