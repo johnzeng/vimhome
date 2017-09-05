@@ -128,7 +128,6 @@ nmap <leader>i :lne<CR>
 nmap <leader>o :lp<CR>
 nmap <leader>h :ccl<CR>:lcl<CR>
 nmap <leader>d "_d
-vmap <leader>d "_d
 nmap <C-n> :Grepper-cword<CR>
 nmap <leader>n :Grepper-query<CR>
 
@@ -339,6 +338,11 @@ let g:ycm_semantic_triggers =  {
 \   'erlang' : [':\w*', 're!\w{3}'],
 \ }
 
+au BufEnter *.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gt :YcmCompleter GoTo<CR>
+au BufEnter *.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gd :YcmCompleter GoToDefinition<CR>
+au BufEnter *.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gc :YcmCompleter GoToDeclaration<CR>
+au BufEnter *.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp nmap <buffer> <leader>gi :YcmCompleter GoToInclude<CR>
+
 "let g:ycm_cache_omnifunc = 0
 
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
@@ -418,4 +422,5 @@ let g:startify_commands = [
             \ ]
 
 let g:startify_change_to_dir = 0
+
 
