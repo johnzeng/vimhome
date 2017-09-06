@@ -376,9 +376,10 @@ if has('nvim')
     call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
 endif
 
-au BufEnter *.c,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>SetUpCodeQuery()
+au BufEnter *.c,*.cc,*.cxx,*.hxx,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>SetUpCodeQuery()
 
 func! s:SetUpCodeQuery()
+    nmap <buffer> <C-s>f :ClangTagsGrep<CR>	
     nmap <buffer> <C-s>s :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
     nmap <buffer> <C-s>g :CodeQuery Global <C-R>=expand("<cword>")<CR><CR>	
     nmap <buffer> <C-s>c :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>	
