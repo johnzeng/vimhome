@@ -403,6 +403,19 @@ highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=194 ctermfg=NONE
 let g:bookmark_sign = '♥'
 let g:bookmark_highlight_lines = 1
+let g:bookmark_no_default_key_mappings = 1
+nmap <Leader>mm <Plug>BookmarkToggle
+nmap <Leader>ma <Plug>BookmarkAnnotate
+nmap <Leader>ma <Plug>BookmarkShowAll
+nmap <Leader>mj <Plug>BookmarkNext
+nmap <Leader>mk <Plug>BookmarkPrev
+nmap <Leader>mc <Plug>BookmarkClear
+nmap <Leader>mx <Plug>BookmarkClearAll
+nmap <Leader>mu <Plug>BookmarkMoveUp
+nmap <Leader>md <Plug>BookmarkMoveDown
+nmap <Leader>mg <Plug>BookmarkMoveToLine
+
+
 let g:bookmark_auto_save_file = '.vim-bookmarks'
 
 let g:startify_list_order = [
