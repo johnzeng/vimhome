@@ -1,1 +1,1 @@
-/Users/johnzeng/.vimrc
+source ~/.vim/plugin/vimrc.vim

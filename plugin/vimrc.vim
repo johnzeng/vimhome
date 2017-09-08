@@ -55,12 +55,20 @@ Plug 'majutsushi/tagbar'
 
 call plug#end()
 
-if has('nvim')
+if has('mac')
     colorscheme solarized
+    "TODO should move to a relative path
+    let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
+    let g:comment_key="<M-c>"
 "    colorscheme default
     set background=dark
 else
-    colorscheme elflord
+    if(has('nvim'))
+        colorscheme elflord
+    else
+        colorscheme delek
+    endif
+    let g:comment_key="<leader>c"
 endif
 
 
@@ -95,7 +103,6 @@ au BufLeave * set nocursorline
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 if has('mac')
-    let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
 elseif has('unix')
 endif
 
@@ -125,8 +132,8 @@ vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
 nmap <leader>j :cn<CR>
 nmap <leader>k :cp<CR>
 nmap <leader>i :lne<CR>
-nmap <leader>o :lp<CR>
-nmap <leader>h :ccl<CR>:lcl<CR>
+nmap <leader>o za
+"nmap <leader>h :ccl<CR>:lcl<CR>
 nmap <leader>d "_d
 nmap <C-n> :Grepper-cword<CR>
 nmap <leader>n :Grepper-query<CR>
@@ -389,7 +396,6 @@ func! s:SetUpCodeQuery()
 endfunc
     
 
-let g:comment_key="<M-c>"
 
 if has("persistent_undo")
     set undodir=~/.undodir/
@@ -436,5 +442,12 @@ let g:startify_commands = [
             \ ]
 
 let g:startify_change_to_dir = 0
+set foldmethod=syntax
+set foldlevelstart=20
 
-
+au BufReadPost quickfix setlocal foldmethod=expr
+au BufReadPost quickfix setlocal foldlevelstart=0
+au BufReadPost quickfix setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
+au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
+au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
+au BufReadPost quickfix map <buffer> <silent> o za
