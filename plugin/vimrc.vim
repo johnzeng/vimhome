@@ -6,8 +6,9 @@ Plug 'junegunn/fzf.vim' , {'fozen': 1}
 Plug 'mhinz/vim-grepper'
 Plug 'johnzeng/xml.vim' , {'for': ['xml', 'html']}
 
+Plug 'altercation/vim-colors-solarized'  
 if has('nvim')
-    Plug 'altercation/vim-colors-solarized'  
+    Plug 'huawenyu/neogdb.vim'
 endif
 
 Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}
@@ -63,11 +64,7 @@ if has('mac')
 "    colorscheme default
     set background=dark
 else
-    if(has('nvim'))
-        colorscheme elflord
-    else
-        colorscheme delek
-    endif
+    colorscheme solarized
     let g:comment_key="<leader>c"
 endif
 
@@ -131,9 +128,9 @@ nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
 nmap <leader>j :cn<CR>
 nmap <leader>k :cp<CR>
-nmap <leader>i :lne<CR>
+"nmap <leader>i :lne<CR>
 nmap <leader>o za
-"nmap <leader>h :ccl<CR>:lcl<CR>
+nmap <leader>h :ccl<CR>
 nmap <leader>d "_d
 nmap <C-n> :Grepper-cword<CR>
 nmap <leader>n :Grepper-query<CR>
