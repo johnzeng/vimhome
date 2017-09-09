@@ -5,6 +5,7 @@ Plug 'junegunn/fzf', { 'frozen':1, 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' , {'fozen': 1}
 Plug 'mhinz/vim-grepper'
 Plug 'johnzeng/xml.vim' , {'for': ['xml', 'html']}
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 Plug 'altercation/vim-colors-solarized'  
 if has('nvim')
@@ -65,6 +66,7 @@ if has('mac')
     set background=dark
 else
     colorscheme solarized
+    set background=dark
     let g:comment_key="<leader>c"
 endif
 
@@ -324,12 +326,17 @@ au BufNewFile,BufRead SConscript set filetype=python
 let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
 let g:python_host_prog = substitute(system('which python2'), '\n','', '') 
 let g:ycm_server_python_interpreter  = substitute(system('which python2'), '\n','', '') 
+let g:ycm_min_num_of_chars_for_completion = 5
+let g:ycm_key_list_select_completion = ['<Tab>']
+let g:ycm_key_list_previous_completion = ['<S-Tab>']
+let g:ycm_key_invoke_completion = '<C-j>'
+
 "let g:python_host_prog = '/usr/local/bin/python2'
 "let g:ycm_server_python_interpreter  = '/usr/local/bin/python2'  
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers =  {
-\   'c' : ['->', '.', 're!\w{3}'],
+\   'c' : ['->', '.'],
 \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
 \             're!\[.*\]\s'],
 \   'ocaml' : ['.', '#'],
@@ -355,9 +362,7 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 
 let g:erlang_complete_left_bracket = 0
 let g:erlang_complete_extend_arbit = 1
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<M-Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+let g:UltiSnipsExpandTrigger="<C-u>"
 
 inoremap <silent><expr> <C-y> complete_parameter#pre_complete("()")
 smap <M-j> <Plug>(complete_parameter#goto_next_parameter)
