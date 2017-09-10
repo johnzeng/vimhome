@@ -20,7 +20,7 @@ Plug 'mhinz/vim-startify'
 Plug 'MattesGroeger/vim-bookmarks'
 
 Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
-            \ 'vim','erlang', 'java', 'go', 'c', 'cpp', 
+            \ 'erlang', 'java', 'go', 'c', 'cpp', 
             \ 'objc', 'python', 'javascript', 'mysql',
             \ 'scala',  'lua', 'sh']}
 
@@ -39,6 +39,7 @@ Plug 'tenfyzhong/CompleteParameter.vim', {'branch': 'develop'}
 " snipmate and its dependency
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
 " snipmat plugin end, all aboves are needed for sinpmate
 
 "Plug 'johnzeng/Scala-Completion-vim'
@@ -327,9 +328,12 @@ let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
 let g:python_host_prog = substitute(system('which python2'), '\n','', '') 
 let g:ycm_server_python_interpreter  = substitute(system('which python2'), '\n','', '') 
 let g:ycm_min_num_of_chars_for_completion = 5
-let g:ycm_key_list_select_completion = ['<Tab>']
-let g:ycm_key_list_previous_completion = ['<S-Tab>']
-let g:ycm_key_invoke_completion = '<C-j>'
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "let g:python_host_prog = '/usr/local/bin/python2'
 "let g:ycm_server_python_interpreter  = '/usr/local/bin/python2'  
@@ -362,7 +366,6 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 
 let g:erlang_complete_left_bracket = 0
 let g:erlang_complete_extend_arbit = 1
-let g:UltiSnipsExpandTrigger="<C-u>"
 
 inoremap <silent><expr> <C-y> complete_parameter#pre_complete("()")
 smap <M-j> <Plug>(complete_parameter#goto_next_parameter)
