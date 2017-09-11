@@ -15,7 +15,7 @@ endif
 Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}
 Plug 'posva/vim-vue'
 Plug 'mbbill/undotree'
-Plug 'johnzeng/vim-clang-tags'
+Plug 'johnzeng/vim-clang-tags', {'for': ['cpp','c']}
 Plug 'mhinz/vim-startify'
 Plug 'MattesGroeger/vim-bookmarks'
 
