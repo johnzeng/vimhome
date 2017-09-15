@@ -1,21 +1,27 @@
 call plug#begin('~/.vim/bundle')
-Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 Plug 't9md/vim-choosewin'
 Plug 'junegunn/fzf', { 'frozen':1, 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' , {'fozen': 1}
 Plug 'mhinz/vim-grepper'
 Plug 'johnzeng/xml.vim' , {'for': ['xml', 'html']}
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp']}
 
 Plug 'altercation/vim-colors-solarized'  
-if has('nvim')
+if has('nvim') && executable('gdb')
     Plug 'huawenyu/neogdb.vim'
 endif
 
-Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}
+if executable('erl')
+    Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}
+    Plug 'johnzeng/vim-erlang-tags' , {'for': 'erlang'}
+    Plug 'johnzeng/vim-erlang-omnicomplete' , {'for' : 'erlang'}
+    Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
+endif
 Plug 'posva/vim-vue'
 Plug 'mbbill/undotree'
-Plug 'johnzeng/vim-clang-tags', {'for': ['cpp','c']}
+if executable('clang-tags')
+    Plug 'johnzeng/vim-clang-tags', {'for': ['cpp']}
+endif
 Plug 'mhinz/vim-startify'
 Plug 'MattesGroeger/vim-bookmarks'
 
@@ -26,15 +32,18 @@ Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
 
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
-Plug 'johnzeng/vim-codequery'
-Plug 'mileszs/ack.vim'
+if executable('cqmakedb')
+    Plug 'johnzeng/vim-codequery'
+endif
 
+if executable('scala')
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
+endif
 Plug 'plasticboy/vim-markdown' , { 'for' : 'markdown' }
+if executable('go')
 Plug 'fatih/vim-go' , {'for' : 'go'}
+endif
 Plug 'Yggdroot/indentLine'
-
-Plug 'tenfyzhong/CompleteParameter.vim', {'branch': 'develop'}
 
 " snipmate and its dependency
 Plug 'SirVer/ultisnips'
@@ -43,8 +52,6 @@ Plug 'ervandew/supertab'
 " snipmat plugin end, all aboves are needed for sinpmate
 
 "Plug 'johnzeng/Scala-Completion-vim'
-Plug 'johnzeng/vim-erlang-tags' , {'for': 'erlang'}
-Plug 'vim-erlang/vim-erlang-omnicomplete' , {'for' : 'erlang'}
 Plug 'johnzeng/leader-c'
 Plug 'vim-airline/vim-airline'
 
@@ -101,10 +108,6 @@ hi CursorLine   cterm=NONE ctermbg=black ctermfg=NONE guibg=darkred guifg=white
 au BufEnter * set cursorline
 au BufLeave * set nocursorline
 au BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
-
-if has('mac')
-elseif has('unix')
-endif
 
 nmap <C-b> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.gcno','\.gcda', '\.o' ,'\~$']
@@ -249,14 +252,6 @@ au BufEnter *.pig set filetype=pig
 "function! SetUpAutoUpdateErlangCscopeCmd(timer)
 "endfunc
 
-function! AutoUpdateCscopeForC()
-    if exists('g:c_cscope_need_update') && g:c_cscope_need_update == 1
-        execute ":silent !cscope -qbR &"
-    endif
-
-    let g:c_cscope_need_update=0
-endfunction
-
 function! AutoUpdateCscopeForErlang()
     if exists('g:erlang_cscope_need_update') && g:erlang_cscope_need_update == 1
         execute ":silent !erlcscope . &"
@@ -335,8 +330,6 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-"let g:python_host_prog = '/usr/local/bin/python2'
-"let g:ycm_server_python_interpreter  = '/usr/local/bin/python2'  
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers =  {
@@ -368,16 +361,6 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:erlang_complete_left_bracket = 0
 let g:erlang_complete_extend_arbit = 1
 
-inoremap <silent><expr> <C-y> complete_parameter#pre_complete("()")
-smap <M-j> <Plug>(complete_parameter#goto_next_parameter)
-imap <M-j> <Plug>(complete_parameter#goto_next_parameter)
-smap <M-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <M-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <m-d> <Plug>(complete_parameter#overload_down)
-smap <m-d> <Plug>(complete_parameter#overload_down)
-imap <m-u> <Plug>(complete_parameter#overload_up)
-smap <m-u> <Plug>(complete_parameter#overload_up)
-
 command! JsonFormat execute('%!python -m json.tool')
 
 
@@ -385,20 +368,23 @@ if has('nvim')
     function! AutoReadBuffer(timer)
         execute ":checktime"
     endfunction
-
     call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
 endif
 
 au BufEnter *.c,*.cc,*.cxx,*.hxx,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>SetUpCodeQuery()
 
 func! s:SetUpCodeQuery()
-    nmap <buffer> <leader>aa :ClangTagsGrep<CR>	
-    nmap <buffer> <leader>as :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
-    nmap <buffer> <leader>ag :CodeQuery Global <C-R>=expand("<cword>")<CR><CR>	
-    nmap <buffer> <leader>ac :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>	
-    nmap <buffer> <leader>at :CodeQuery Text <C-R>=expand("<cword>")<CR><CR>	
-    nmap <buffer> <leader>ae :CodeQuery Callee <C-R>=expand("<cword>")<CR><CR>	
-    nmap <buffer> <leader>ad :CodeQuery Definition <C-R>=expand("<cword>")<CR><CR>	
+    if executable('clang-tags')
+        nmap <buffer> <leader>aa :ClangTagsGrep<CR>	
+    endif
+    if executable('cqmakedb')
+        nmap <buffer> <leader>as :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
+        nmap <buffer> <leader>ag :CodeQuery Global <C-R>=expand("<cword>")<CR><CR>	
+        nmap <buffer> <leader>ac :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>	
+        nmap <buffer> <leader>at :CodeQuery Text <C-R>=expand("<cword>")<CR><CR>	
+        nmap <buffer> <leader>ae :CodeQuery Callee <C-R>=expand("<cword>")<CR><CR>	
+        nmap <buffer> <leader>ad :CodeQuery Definition <C-R>=expand("<cword>")<CR><CR>	
+    endif
 endfunc
     
 
