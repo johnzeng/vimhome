@@ -132,11 +132,12 @@ set formatoptions=ql
 
 nmap <leader>r :%s/<C-r>=expand("<cword>")<CR>/
 vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
+nmap <leader>h :ccl<CR>
 nmap <leader>j :cn<CR>
 nmap <leader>k :cp<CR>
-"nmap <leader>i :lne<CR>
-nmap <leader>o za
-nmap <leader>h :ccl<CR>
+nmap <leader>z za
+nmap <leader>i :bn<CR>
+nmap <leader>o :bp<CR>
 nmap <leader>d "_d
 nmap <C-n> :Grepper-cword<CR>
 nmap <leader>n :Grepper-query<CR>
