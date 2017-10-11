@@ -20,7 +20,7 @@ endif
 Plug 'posva/vim-vue'
 Plug 'mbbill/undotree'
 if executable('clang-tags')
-    Plug 'johnzeng/vim-clang-tags', {'for': ['cpp']}
+    Plug 'johnzeng/vim-clang-tags', {'for': ['cpp', 'c']}
 endif
 Plug 'mhinz/vim-startify'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -33,7 +33,7 @@ Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 if executable('cqmakedb')
-    Plug 'johnzeng/vim-codequery'
+    Plug 'johnzeng/vim-codequery' , {'for': ['c']}
 endif
 
 if executable('scala')
@@ -367,7 +367,7 @@ command! JsonFormat execute('%!python -m json.tool')
 
 if has('nvim')
     function! AutoReadBuffer(timer)
-        execute ":checktime"
+        checktime
     endfunction
     call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
 endif
@@ -379,6 +379,7 @@ func! s:SetUpCodeQuery()
         nmap <buffer> <leader>aa :ClangTagsGrep<CR>	
     endif
     if executable('cqmakedb')
+        nmap <buffer> <leader>am :CodeQueryMakeDB<CR>	
         nmap <buffer> <leader>as :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
         nmap <buffer> <leader>ag :CodeQuery Global <C-R>=expand("<cword>")<CR><CR>	
         nmap <buffer> <leader>ac :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>	
@@ -438,9 +439,13 @@ let g:startify_change_to_dir = 0
 set foldmethod=syntax
 set foldlevelstart=20
 
+command! -narg=0 SetDosFormat :ed ++ff=dos %
+
 au BufReadPost quickfix setlocal foldmethod=expr
 au BufReadPost quickfix setlocal foldlevelstart=0
 au BufReadPost quickfix setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
 au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
 au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
 au BufReadPost quickfix map <buffer> <silent> o za
+
+au BufEnter *.erl,*.hrl nmap <buffer> <leader>as :FindErlangUsage<CR>
