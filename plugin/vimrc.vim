@@ -344,7 +344,7 @@ let g:ycm_semantic_triggers =  {
 \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
 \   'ruby' : ['.', '::'],
 \   'lua' : ['.', ':'],
-\   'erlang' : [':\w*', 're!\w{3}'],
+\   'erlang' : ['rel!\w*:\w*', 're!\w{3}'],
 \ }
 
 au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gt :YcmCompleter GoTo<CR>
