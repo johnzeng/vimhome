@@ -5,6 +5,7 @@ Plug 'junegunn/fzf.vim' , {'fozen': 1}
 Plug 'mhinz/vim-grepper'
 Plug 'johnzeng/xml.vim' , {'for': ['xml', 'html']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp']}
+Plug 'luochen1990/rainbow'
 
 Plug 'altercation/vim-colors-solarized'  
 if has('nvim') && executable('gdb')
@@ -344,7 +345,7 @@ let g:ycm_semantic_triggers =  {
 \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
 \   'ruby' : ['.', '::'],
 \   'lua' : ['.', ':'],
-\   'erlang' : ['rel!\w*:\w*', 're!\w{3}'],
+\   'erlang' : ['rel!\w*:\w*'],
 \ }
 
 au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gt :YcmCompleter GoTo<CR>
@@ -449,3 +450,5 @@ au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
 au BufReadPost quickfix map <buffer> <silent> o za
 
 au BufEnter *.erl,*.hrl nmap <buffer> <leader>as :FindErlangUsage<CR>
+
+let g:rainbow_active = 1
