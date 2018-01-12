@@ -6,6 +6,8 @@ Plug 'mhinz/vim-grepper'
 Plug 'johnzeng/xml.vim' , {'for': ['xml', 'html']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp']}
 Plug 'luochen1990/rainbow'
+Plug 'terryma/vim-expand-region'
+Plug 'junegunn/vim-easy-align'
 
 Plug 'altercation/vim-colors-solarized'  
 if has('nvim') && executable('gdb')
@@ -244,6 +246,7 @@ func! ListRegAndPaste()
 endfunc
 
 au BufEnter *.pig set filetype=pig
+set tags+=c_tags
 "au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R . &"
 "au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp let g:c_cscope_need_update=1
 "au BufEnter *.erl,*.hrl call timer_start(60000, 'AutoUpdateCscopeForC', {"repeat": -1})
@@ -322,8 +325,6 @@ au BufNewFile,BufRead SConscript set filetype=python
 
 " I believe I should split them into different files, but, since they are just begined, let's just do it here
 let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
-let g:python_host_prog = substitute(system('which python2'), '\n','', '') 
-let g:ycm_server_python_interpreter  = substitute(system('which python2'), '\n','', '') 
 let g:ycm_min_num_of_chars_for_completion = 5
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -452,3 +453,10 @@ au BufReadPost quickfix map <buffer> <silent> o za
 au BufEnter *.erl,*.hrl nmap <buffer> <leader>as :FindErlangUsage<CR>
 
 let g:rainbow_active = 1
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap <leader>e <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap <leader>e <Plug>(EasyAlign)
+

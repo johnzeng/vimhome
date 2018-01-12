@@ -116,4 +116,10 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 - shell
 - xml
 
+# python support
 
+The python support seting is really 
+```
+let g:python_host_prog = substitute(system('which python'), '\n','', '') 
+let g:ycm_server_python_interpreter  = substitute(system('which python'), '\n','', '') 
+```
