@@ -8,6 +8,7 @@ Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp']}
 Plug 'luochen1990/rainbow'
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
+Plug 'haya14busa/incsearch.vim'
 
 Plug 'altercation/vim-colors-solarized'  
 if has('nvim') && executable('gdb')
@@ -459,4 +460,8 @@ xmap <leader>e <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <leader>e <Plug>(EasyAlign)
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
