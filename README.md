@@ -4,6 +4,18 @@ This is my vim setting colleciton, it's make for OSX , so I am not sure if it ca
 
 Some of these settings may need a vim version large than 7.4 with pyhton2 support, if you are using native vim on Mac OSX, you may need to install a new one by `brew`
 
+# Supporting language
+
+- erlang
+- c/cpp/ojbc
+- golang
+- java
+- markdown
+- python
+- scala
+- shell
+- xml
+
 # install by one command
 
 **The installation will take a long time to run :BundleInstall in vi, if you get stuck at the last step, you can just reopen a vim and re-run `:BundleInstall`**
@@ -104,22 +116,14 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 - `<F2>` to save a session in the current directory
 - `<F4>` Toggle the tagbar (this will need ctags support, and it must be exuberant ctags🙃)
 
-# Supporting language
-
-- erlang
-- c/cpp/ojbc
-- golang
-- java
-- markdown
-- python
-- scala
-- shell
-- xml
-
 # python support
 
-The python support seting is really 
+If you are using nvim, or ycm , you may need to set up python program in your `.vimrc` file like this:
+
 ```
-let g:python_host_prog = substitute(system('which python'), '\n','', '') 
-let g:ycm_server_python_interpreter  = substitute(system('which python'), '\n','', '') 
+let g:python3_host_prog = "/usr/local/bin/python3"
+let g:python_host_prog = "/usr/local/bin/python"
+let g:ycm_server_python_interpreter = "/usr/bin/python"
 ```
+
+**the python path need to fix with your own system, please use `which python3` or `which python` to check it out

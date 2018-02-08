@@ -465,3 +465,34 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+call expand_region#custom_text_objects('ruby', {
+      \ 'im' :0,
+      \ 'am' :0
+      \ })
+
+call expand_region#custom_text_objects('c', {
+      \ 'i}' :1,
+      \ 'i(' :1,
+      \ 'a}' :1,
+      \ 'a(' :1
+      \ })
+
+call expand_region#custom_text_objects('cpp', {
+      \ 'i}' :1,
+      \ 'i(' :1,
+      \ 'a}' :1,
+      \ 'a(' :1,
+      \ 'i<' :1,
+      \ 'i>' :1
+      \ })
+
+call expand_region#custom_text_objects('erlang', {
+      \ 'i(' :1,
+      \ 'a(' :1,
+      \ 'i{' :1,
+      \ 'a{' :1,
+      \ 'i[' :1,
+      \ 'a[' :1,
+      \ 'i<' :1,
+      \ 'a<' :1
+      \ })
