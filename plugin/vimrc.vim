@@ -128,8 +128,8 @@ nmap <leader>s <Esc>:wa<CR>
 nmap <leader>q <Esc>:qa<CR>
 nmap <leader>Q <Esc>:qa!<CR>
 " we don't use it usually, so we just use a far funcion
-nmap <F11> :%!xxd<CR>
-nmap <F12> :%!xxd -r<CR>
+nmap <F8> :%!xxd<CR>
+nmap <F9> :%!xxd -r<CR>
 
 
 set formatoptions=ql
