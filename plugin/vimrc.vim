@@ -29,7 +29,8 @@ endif
 Plug 'mhinz/vim-startify'
 Plug 'MattesGroeger/vim-bookmarks'
 
-Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
+"Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
+Plug 'johnzeng/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
             \ 'erlang', 'java', 'go', 'c', 'cpp', 
             \ 'objc', 'python', 'javascript', 'mysql',
             \ 'scala',  'lua', 'sh']}
@@ -37,7 +38,7 @@ Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 if executable('cqmakedb')
-    Plug 'johnzeng/vim-codequery' , {'for': ['c']}
+    Plug 'johnzeng/vim-codequery' , {'for': ['c', 'cpp']}
 endif
 
 if executable('scala')
@@ -104,6 +105,7 @@ set pastetoggle=<F10>
 set autoread
 set autowriteall
 set pvh=1
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 "mode is shown by airline
 set noshowmode
 set tags+=c_tags

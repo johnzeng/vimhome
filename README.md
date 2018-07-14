@@ -55,20 +55,9 @@ If you need to do **pyhotn completion**, please install jedi, which is needed by
 pip install jedi
 ```
 
-## c completion
-If you need to use **c family completion**, please install clang compiler by yourself, c family completion is provied by [vim-clang](https://github.com/justmao945/vim-clang). I believe it's not that hard, you will also need to create a `.clang` file under your working dir to specify some pre-compile options. Here are some command you may use to install clang:
+## cpp reference searching
 
-```
-#For mac brew user
-brew install clang
-#For debain/ubuntu user
-apt install clang
-#for centos/redhat user
-yum install clang
-```
-
-🙃Yes, I haven't tested any one of the above commands, just wanna remind you that you need to install a clang to make it work.
-What, you use gcc? Drop it , trust me.
+You can use clang-tags to source the cpp reference, check it out [here](https://github.com/johnzeng/clang-tags)
 
 ## go completion
 If you need to use **golang completion**, please run  the following command provided by [vim-go](https://github.com/fatih/vim-go) in vim after you have finished installing all package
@@ -126,4 +115,4 @@ let g:python_host_prog = "/usr/local/bin/python"
 let g:ycm_server_python_interpreter = "/usr/bin/python"
 ```
 
-**the python path need to fix with your own system, please use `which python3` or `which python` to check it out
+**the python path need to fix with your own system, please use `which python3` or `which python` to check it out**
