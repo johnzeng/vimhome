@@ -523,3 +523,15 @@ let g:easy_align_delimiters = {
 \     'right_margin': 0
 \   }
 \ }
+
+for i in ['cterm', 'gui']
+  for j in ['fg', 'bg']
+    let c = synIDattr(hlID('Normal'), 'bg', i)
+    if (!empty(c))
+      exec 'highlight CarriageReturn ' . i . j . '=' . c
+    endif
+  endfor
+endfor
+if hlID('CarriageReturn')
+  match CarriageReturn /\r$/
+endif
