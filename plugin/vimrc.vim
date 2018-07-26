@@ -322,6 +322,7 @@ let g:AutoPairsMapSpace = 0
 " seting about markdown
 let g:vim_markdown_folding_disabled = 1
 set nofoldenable
+set foldmethod=manual
 
 au BufNewFile,BufRead SConstruct set filetype=python
 au BufNewFile,BufRead SConscript set filetype=python
