@@ -9,6 +9,8 @@ Plug 'luochen1990/rainbow'
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
 Plug 'haya14busa/incsearch.vim'
+"Plug 'johnzeng/vim-sync'
+"Plug 'kshenoy/vim-signature'
 
 Plug 'altercation/vim-colors-solarized'  
 if has('nvim') && executable('gdb')
@@ -336,6 +338,8 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snips"]
+
 
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_confirm_extra_conf = 0
@@ -475,18 +479,22 @@ call expand_region#custom_text_objects('ruby', {
 
 call expand_region#custom_text_objects('c', {
       \ 'i}' :1,
-      \ 'i(' :1,
       \ 'a}' :1,
-      \ 'a(' :1
+      \ 'i(' :1,
+      \ 'a(' :1,
+      \ 'i[' :1,
+      \ 'a[' :1
       \ })
 
 call expand_region#custom_text_objects('cpp', {
       \ 'i}' :1,
-      \ 'i(' :1,
       \ 'a}' :1,
+      \ 'i(' :1,
       \ 'a(' :1,
       \ 'i<' :1,
-      \ 'i>' :1
+      \ 'i>' :1,
+      \ 'i[' :1,
+      \ 'a[' :1
       \ })
 
 call expand_region#custom_text_objects('erlang', {
@@ -536,3 +544,5 @@ endfor
 if hlID('CarriageReturn')
   match CarriageReturn /\r$/
 endif
+
+command! SuWrite w !sudo tee "%" > /dev/null
