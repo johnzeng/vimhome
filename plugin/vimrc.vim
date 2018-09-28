@@ -9,6 +9,7 @@ Plug 'luochen1990/rainbow'
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
 Plug 'haya14busa/incsearch.vim'
+Plug 'RRethy/vim-illuminate'
 "Plug 'johnzeng/vim-sync'
 "Plug 'kshenoy/vim-signature'
 
@@ -546,3 +547,4 @@ if hlID('CarriageReturn')
 endif
 
 command! SuWrite w !sudo tee "%" > /dev/null
+hi illuminatedWord cterm=underline gui=underline
