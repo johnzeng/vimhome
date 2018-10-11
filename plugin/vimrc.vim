@@ -163,6 +163,7 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
+let g:fzf_tags_command = 'ctags --fields=+i -N -R -f "c_tags"'
 
 nmap <C-d> :call ListRegAndPaste()<CR>
 
@@ -450,7 +451,8 @@ let g:startify_change_to_dir = 0
 set foldmethod=syntax
 set foldlevelstart=20
 
-command! -narg=0 SetDosFormat :ed ++ff=dos %
+"command! -narg=0 SetDosFormat :ed ++ff=dos %
+set ffs=mac,unix,dos
 
 au BufReadPost quickfix setlocal foldmethod=expr
 au BufReadPost quickfix setlocal foldlevelstart=0
@@ -548,3 +550,4 @@ endif
 
 command! SuWrite w !sudo tee "%" > /dev/null
 hi illuminatedWord cterm=underline gui=underline
+let g:Illuminate_ftblacklist = ['nerdtree', 'qf', 'startify']
