@@ -452,7 +452,7 @@ set foldmethod=syntax
 set foldlevelstart=20
 
 "command! -narg=0 SetDosFormat :ed ++ff=dos %
-set ffs=mac,unix,dos
+set ffs=unix,mac,dos
 
 au BufReadPost quickfix setlocal foldmethod=expr
 au BufReadPost quickfix setlocal foldlevelstart=0
@@ -549,5 +549,9 @@ if hlID('CarriageReturn')
 endif
 
 command! SuWrite w !sudo tee "%" > /dev/null
-hi illuminatedWord cterm=underline gui=underline
 let g:Illuminate_ftblacklist = ['nerdtree', 'qf', 'startify']
+hi illuminatedWord ctermfg=180 ctermbg=240
+"hi illuminatedWord ctermbg=240
+if has("autocmd")                                                          
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif                                                        
+endif
