@@ -451,7 +451,7 @@ let g:startify_change_to_dir = 0
 set foldmethod=syntax
 set foldlevelstart=20
 
-"command! -narg=0 SetDosFormat :ed ++ff=dos %
+command! -narg=0 SetDosFormat :ed ++ff=dos %
 set ffs=unix,mac,dos
 
 au BufReadPost quickfix setlocal foldmethod=expr
