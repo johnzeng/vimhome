@@ -10,6 +10,8 @@ Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
 Plug 'haya14busa/incsearch.vim'
 Plug 'RRethy/vim-illuminate'
+Plug 'previm/previm'
+"Plug 'inkarkat/vim-mark'
 "Plug 'johnzeng/vim-sync'
 "Plug 'kshenoy/vim-signature'
 
@@ -163,7 +165,7 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
-let g:fzf_tags_command = 'ctags --fields=+i -N -R -f "c_tags"'
+let g:fzf_tags_command = 'ctags --fields=+i -n -R -f "c_tags"'
 
 nmap <C-d> :call ListRegAndPaste()<CR>
 
@@ -387,17 +389,22 @@ endif
 au BufEnter *.c,*.cc,*.cxx,*.hxx,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>SetUpCodeQuery()
 
 func! s:SetUpCodeQuery()
+    let g:codequery_disable_qf_key_bindings=1
     if executable('clang-tags')
         nmap <buffer> <leader>aa :ClangTagsGrep<CR>	
     endif
     if executable('cqmakedb')
         nmap <buffer> <leader>am :CodeQueryMakeDB<CR>	
-        nmap <buffer> <leader>as :CodeQuery Symbol <C-R>=expand("<cword>")<CR><CR>	
-        nmap <buffer> <leader>ag :CodeQuery Global <C-R>=expand("<cword>")<CR><CR>	
-        nmap <buffer> <leader>ac :CodeQuery Caller <C-R>=expand("<cword>")<CR><CR>	
-        nmap <buffer> <leader>at :CodeQuery Text <C-R>=expand("<cword>")<CR><CR>	
-        nmap <buffer> <leader>ae :CodeQuery Callee <C-R>=expand("<cword>")<CR><CR>	
-        nmap <buffer> <leader>ad :CodeQuery Definition <C-R>=expand("<cword>")<CR><CR>	
+        nmap <buffer> <leader>as :CodeQuery Symbol<CR>	
+        nmap <buffer> <leader>ac :CodeQuery Caller<CR>	
+        nmap <buffer> <leader>at :CodeQuery Text<CR>	
+        nmap <buffer> <leader>ae :CodeQuery Callee<CR>	
+        nmap <buffer> <leader>ad :CodeQuery Definition<CR>	
+        nmap <buffer> <leader>afc :CodeQuery Child<CR>	
+        nmap <buffer> <leader>afp :CodeQuery Parent<CR>	
+        nmap <buffer> <leader>afm :CodeQuery Member<CR>	
+        nmap <buffer> <leader>afl :CodeQuery FunctionList<CR>	
+        nmap <buffer> <leader>afi :CodeQuery FileImporter<CR>	
     endif
 endfunc
     
@@ -420,13 +427,16 @@ let g:bookmark_no_default_key_mappings = 1
 nmap <Leader>mm <Plug>BookmarkToggle
 nmap <Leader>ma <Plug>BookmarkAnnotate
 nmap <Leader>ma <Plug>BookmarkShowAll
-nmap <Leader>mj <Plug>BookmarkNext
-nmap <Leader>mk <Plug>BookmarkPrev
+nmap <Leader>mw <Plug>MarkToggle
+nmap <Leader>mx <Plug>MarkAllClear
+"nmap <Leader>mj <Plug>BookmarkNext
+"nmap <Leader>mk <Plug>BookmarkPrev
 nmap <Leader>mc <Plug>BookmarkClear
-nmap <Leader>mx <Plug>BookmarkClearAll
-nmap <Leader>mu <Plug>BookmarkMoveUp
-nmap <Leader>md <Plug>BookmarkMoveDown
-nmap <Leader>mg <Plug>BookmarkMoveToLine
+"nmap <Leader>mx <Plug>BookmarkClearAll
+"nmap <Leader>mu <Plug>BookmarkMoveUp
+"nmap <Leader>md <Plug>BookmarkMoveDown
+"nmap <Leader>mg <Plug>BookmarkMoveToLine
+
 
 
 let g:bookmark_auto_save_file = '.vim-bookmarks'
@@ -471,9 +481,11 @@ xmap <leader>e <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <leader>e <Plug>(EasyAlign)
 
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+if has('nvim')
+    map /  <Plug>(incsearch-forward)
+    map ?  <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
+endif
 
 call expand_region#custom_text_objects('ruby', {
       \ 'im' :0,
@@ -555,3 +567,8 @@ hi illuminatedWord ctermfg=180 ctermbg=240
 if has("autocmd")                                                          
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif                                                        
 endif
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+let g:previm_open_cmd='open -a Google\ Chrome'
