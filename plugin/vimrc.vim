@@ -1,5 +1,7 @@
 call plug#begin('~/.vim/bundle')
 Plug 't9md/vim-choosewin'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
 Plug 'junegunn/fzf', { 'frozen':1, 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' , {'fozen': 1}
 Plug 'mhinz/vim-grepper'
@@ -10,10 +12,9 @@ Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
 Plug 'haya14busa/incsearch.vim'
 Plug 'RRethy/vim-illuminate'
+Plug 'skywind3000/vim-preview'
 Plug 'previm/previm'
 "Plug 'inkarkat/vim-mark'
-"Plug 'johnzeng/vim-sync'
-"Plug 'kshenoy/vim-signature'
 
 Plug 'altercation/vim-colors-solarized'  
 if has('nvim') && executable('gdb')
@@ -42,9 +43,6 @@ Plug 'johnzeng/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': 
 
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
-if executable('cqmakedb')
-    Plug 'johnzeng/vim-codequery' , {'for': ['c', 'cpp']}
-endif
 
 if executable('scala')
 Plug 'derekwyatt/vim-scala' , { 'for' : 'scala' }
@@ -131,7 +129,7 @@ imap <C-a> <Esc>I
 imap <C-e> <Esc>A
 imap <M-b> <S-Left>
 imap <M-f> <S-Right>
-nmap <leader>s <Esc>:wa<CR>
+"nmap <leader>s <Esc>:wa<CR>
 nmap <leader>q <Esc>:qa<CR>
 nmap <leader>Q <Esc>:qa!<CR>
 " we don't use it usually, so we just use a far funcion
@@ -256,28 +254,13 @@ endfunc
 
 au BufEnter *.pig set filetype=pig
 set tags+=c_tags
-"au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp execute ":silent !ctags -R . &"
-"au BufWritePost *.c,*.cpp,*.h,*.cxx,*.hpp let g:c_cscope_need_update=1
-"au BufEnter *.erl,*.hrl call timer_start(60000, 'AutoUpdateCscopeForC', {"repeat": -1})
-"
-"function! SetUpAutoUpdateCCscopeCmd(timer)
-"endfunc
-"
-"function! SetUpAutoUpdateErlangCscopeCmd(timer)
-"endfunc
-
-function! AutoUpdateCscopeForErlang()
-    if exists('g:erlang_cscope_need_update') && g:erlang_cscope_need_update == 1
-        execute ":silent !erlcscope . &"
-    endif
-    let g:erlang_cscope_need_update=0
-endfunction
 
 "config for indent
 let g:indentLine_enabled = 0
 nmap <F3> :IndentLinesToggle<CR>
 
 "config for airline
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep='>'
 let g:airline_theme='solarized'
 
@@ -379,36 +362,14 @@ let g:erlang_complete_extend_arbit = 1
 command! JsonFormat execute('%!python -m json.tool')
 
 
-if has('nvim')
-    function! AutoReadBuffer(timer)
-        checktime
-    endfunction
-    call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
-endif
-
-au BufEnter *.c,*.cc,*.cxx,*.hxx,*.cpp,*.h,*.hpp,*.scala,*.py,*.lua,*.java call <SID>SetUpCodeQuery()
-
-func! s:SetUpCodeQuery()
-    let g:codequery_disable_qf_key_bindings=1
-    if executable('clang-tags')
-        nmap <buffer> <leader>aa :ClangTagsGrep<CR>	
+function! AutoReadBuffer(timer)
+    if(mode() != 'n')
+        return
     endif
-    if executable('cqmakedb')
-        nmap <buffer> <leader>am :CodeQueryMakeDB<CR>	
-        nmap <buffer> <leader>as :CodeQuery Symbol<CR>	
-        nmap <buffer> <leader>ac :CodeQuery Caller<CR>	
-        nmap <buffer> <leader>at :CodeQuery Text<CR>	
-        nmap <buffer> <leader>ae :CodeQuery Callee<CR>	
-        nmap <buffer> <leader>ad :CodeQuery Definition<CR>	
-        nmap <buffer> <leader>afc :CodeQuery Child<CR>	
-        nmap <buffer> <leader>afp :CodeQuery Parent<CR>	
-        nmap <buffer> <leader>afm :CodeQuery Member<CR>	
-        nmap <buffer> <leader>afl :CodeQuery FunctionList<CR>	
-        nmap <buffer> <leader>afi :CodeQuery FileImporter<CR>	
-    endif
-endfunc
-    
-
+    wa
+    checktime
+endfunction
+call timer_start(1000, 'AutoReadBuffer', {"repeat": -1})
 
 if has("persistent_undo")
     set undodir=~/.undodir/
@@ -429,15 +390,7 @@ nmap <Leader>ma <Plug>BookmarkAnnotate
 nmap <Leader>ma <Plug>BookmarkShowAll
 nmap <Leader>mw <Plug>MarkToggle
 nmap <Leader>mx <Plug>MarkAllClear
-"nmap <Leader>mj <Plug>BookmarkNext
-"nmap <Leader>mk <Plug>BookmarkPrev
 nmap <Leader>mc <Plug>BookmarkClear
-"nmap <Leader>mx <Plug>BookmarkClearAll
-"nmap <Leader>mu <Plug>BookmarkMoveUp
-"nmap <Leader>md <Plug>BookmarkMoveDown
-"nmap <Leader>mg <Plug>BookmarkMoveToLine
-
-
 
 let g:bookmark_auto_save_file = '.vim-bookmarks'
 
@@ -481,11 +434,9 @@ xmap <leader>e <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <leader>e <Plug>(EasyAlign)
 
-if has('nvim')
-    map /  <Plug>(incsearch-forward)
-    map ?  <Plug>(incsearch-backward)
-    map g/ <Plug>(incsearch-stay)
-endif
+nmap /  <Plug>(incsearch-forward)
+nmap ?  <Plug>(incsearch-backward)
+nmap g/ <Plug>(incsearch-stay)
 
 call expand_region#custom_text_objects('ruby', {
       \ 'im' :0,
@@ -572,3 +523,31 @@ augroup PrevimSettings
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
 let g:previm_open_cmd='open -a Google\ Chrome'
+set guifont=Menlo\ Regular:h14
+
+
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+" config project root markers.
+let g:gutentags_project_root = ['.root']
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" forbid gutentags adding gtags databases
+let g:gutentags_auto_add_gtags_cscope = 0
+
+let g:gutentags_plus_nomap = 1
+
+noremap <silent> <leader>as :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>ag :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>ac :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>at :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>ae :GscopeFind e <C-R><C-W><cr>
+noremap <silent> <leader>af :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>ai :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>ad :GscopeFind d <C-R><C-W><cr>
+noremap <silent> <leader>aa :GscopeFind a <C-R><C-W><cr>
+
+let g:gutentags_add_default_project_roots=0
