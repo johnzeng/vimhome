@@ -14,26 +14,26 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'RRethy/vim-illuminate'
 Plug 'skywind3000/vim-preview'
 Plug 'previm/previm'
-"Plug 'inkarkat/vim-mark'
+Plug 'johnvzeng/vim-mark'
 
-Plug 'altercation/vim-colors-solarized'  
-if has('nvim') && executable('gdb')
-    Plug 'huawenyu/neogdb.vim'
-endif
-
-if executable('erl')
-    Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}
+Plug 'altercation/vim-colors-solarized'                                                  
+if has('nvim') && executable('gdb')                                                      
+    Plug 'huawenyu/neogdb.vim'                                                           
+endif                                                                                    
+                                                                                         
+if executable('erl')                                                                     
+    Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}                             
     Plug 'johnzeng/vim-erlang-tags' , {'for': 'erlang'}
     Plug 'johnzeng/vim-erlang-omnicomplete' , {'for' : 'erlang'}
     Plug 'johnzeng/vim-erlang', {'for': 'erlang'}
 endif
-Plug 'posva/vim-vue'
+Plug 'posva/vim-vue', {'for': ['javascript']}
 Plug 'mbbill/undotree'
 if executable('clang-tags')
     Plug 'johnzeng/vim-clang-tags', {'for': ['cpp', 'c']}
 endif
 Plug 'mhinz/vim-startify'
-Plug 'MattesGroeger/vim-bookmarks'
+"Plug 'MattesGroeger/vim-bookmarks'
 
 "Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
 Plug 'johnzeng/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
@@ -111,7 +111,6 @@ set pvh=1
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 "mode is shown by airline
 set noshowmode
-set tags+=c_tags
 set tags+=erlang_tags
 hi CursorLine   cterm=NONE ctermbg=black ctermfg=NONE guibg=darkred guifg=white
 au BufEnter * set cursorline
@@ -130,12 +129,12 @@ imap <C-e> <Esc>A
 imap <M-b> <S-Left>
 imap <M-f> <S-Right>
 "nmap <leader>s <Esc>:wa<CR>
-nmap <leader>q <Esc>:qa<CR>
-nmap <leader>Q <Esc>:qa!<CR>
+nmap <leader>q <Esc>:wqa<CR>
+nmap <leader>Q <Esc>:wqa!<CR>
 " we don't use it usually, so we just use a far funcion
-nmap <F8> :%!xxd<CR>
-nmap <F9> :%!xxd -r<CR>
 
+command! -nargs=0 HexDump :%!xxd<cr>
+command! -nargs=0 HexDumpRevert :%!xxd -r<cr>
 
 set formatoptions=ql
 
@@ -144,18 +143,17 @@ vmap <leader>r :s/<C-r>=expand("<cword>")<CR>/
 nmap <leader>h :ccl<CR>
 nmap <leader>j :cn<CR>
 nmap <leader>k :cp<CR>
-nmap <leader>z za
-nmap <leader>i :bn<CR>
-nmap <leader>o :bp<CR>
-nmap <leader>d "_d
 nmap <C-n> :Grepper-cword<CR>
 nmap <leader>n :Grepper-query<CR>
 
+nmap <leader>x :Commands<CR>
 nmap <C-p> :History<CR>
 nmap <leader>f :FZF<CR>
+nmap <leader>M :Marks<CR>
 nmap <leader>l :BLines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :Tags<CR>
+
 imap <M-w> <C-R>=SmartDelete_v2()<CR>
 "imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
@@ -165,7 +163,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 let g:fzf_tags_command = 'ctags --fields=+i -n -R -f "c_tags"'
 
-nmap <C-d> :call ListRegAndPaste()<CR>
+command! -nargs=0 Regop :call ListRegAndPaste()<CR>
 
 func! SmartDelete_v2()
     let delete_till = CalDeleteTillForSmartDelete()
@@ -253,38 +251,18 @@ func! ListRegAndPaste()
 endfunc
 
 au BufEnter *.pig set filetype=pig
-set tags+=c_tags
 
 "config for indent
 let g:indentLine_enabled = 0
-nmap <F3> :IndentLinesToggle<CR>
 
 "config for airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep='>'
 let g:airline_theme='solarized'
 
-nmap J :call ListMarksAndJump()<CR>
-
-func! ListMarksAndJump()
-  exec "marks"
-  let a:markId = input("which mark do you want?[0-9,\"a-zA-Z]:")
-  if strlen(a:markId) != 0 && -1 == match(a:markId, "[0-9\"a-zA-Z]")
-    exec "redraw"
-    echon 'illegal mark id'
-    return 
-  endif
-  exec "normal `".a:markId
-endfunc
-
 "java complete 2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 "let g:EclimCompletionMethod = 'omnifunc'
-
-autocmd FileType scala nmap <leader>S :SortScalaImports<CR>
-
-"auto source
-nmap <F4> :TagbarToggle<CR>
 
 let g:html_indent_script1 = "inc" 
 let g:html_indent_style1 = "inc" 
@@ -344,12 +322,6 @@ let g:ycm_semantic_triggers =  {
 \   'erlang' : ['rel!\w*:\w*'],
 \ }
 
-au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gt :YcmCompleter GoTo<CR>
-au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gd :YcmCompleter GoToDefinition<CR>
-au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gc :YcmCompleter GoToDeclaration<CR>
-au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp nmap <buffer> <leader>gi :YcmCompleter GoToInclude<CR>
-au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp nmap <buffer> <leader>gf :YcmCompleter FixIt<CR>
-
 "let g:ycm_cache_omnifunc = 0
 
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
@@ -369,28 +341,25 @@ function! AutoReadBuffer(timer)
     wa
     checktime
 endfunction
-call timer_start(1000, 'AutoReadBuffer', {"repeat": -1})
+call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
 
 if has("persistent_undo")
     set undodir=~/.undodir/
     set undofile
 endif
-nmap <leader>u :UndotreeToggle<CR>
-nmap  -  <Plug>(choosewin)
+nmap - <Plug>(choosewin)
 let g:choosewin_overlay_enable = 1
 nmap <leader>w <C-w>
 
-highlight BookmarkSign ctermbg=NONE ctermfg=160
-highlight BookmarkLine ctermbg=194 ctermfg=NONE
-let g:bookmark_sign = '♥'
-let g:bookmark_highlight_lines = 1
-let g:bookmark_no_default_key_mappings = 1
-nmap <Leader>mm <Plug>BookmarkToggle
-nmap <Leader>ma <Plug>BookmarkAnnotate
-nmap <Leader>ma <Plug>BookmarkShowAll
-nmap <Leader>mw <Plug>MarkToggle
-nmap <Leader>mx <Plug>MarkAllClear
-nmap <Leader>mc <Plug>BookmarkClear
+"highlight BookmarkSign ctermbg=NONE ctermfg=160
+"highlight BookmarkLine ctermbg=194 ctermfg=NONE
+"let g:bookmark_sign = '♥'
+"let g:bookmark_highlight_lines = 1
+"let g:bookmark_no_default_key_mappings = 1
+"nmap <Leader>mm <Plug>BookmarkToggle
+"nmap <Leader>ma <Plug>BookmarkAnnotate
+"nmap <Leader>ma <Plug>BookmarkShowAll
+nmap <Leader>m <Plug>MarkSet
 
 let g:bookmark_auto_save_file = '.vim-bookmarks'
 
@@ -540,14 +509,21 @@ let g:gutentags_auto_add_gtags_cscope = 0
 
 let g:gutentags_plus_nomap = 1
 
-noremap <silent> <leader>as :GscopeFind s <C-R><C-W><cr>
-noremap <silent> <leader>ag :GscopeFind g <C-R><C-W><cr>
-noremap <silent> <leader>ac :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>at :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>ae :GscopeFind e <C-R><C-W><cr>
-noremap <silent> <leader>af :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>ai :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>ad :GscopeFind d <C-R><C-W><cr>
-noremap <silent> <leader>aa :GscopeFind a <C-R><C-W><cr>
-
 let g:gutentags_add_default_project_roots=0
+
+let g:mark_disable_default_mapping=1 
+
+au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>] :YcmCompleter GoTo<CR>
+au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gd :YcmCompleter GoToDefinition<CR>
+au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gc :YcmCompleter GoToDeclaration<CR>
+au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp nmap <buffer> <leader>gi :YcmCompleter GoToInclude<CR>
+au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp nmap <buffer> <leader>gf :YcmCompleter FixIt<CR>
+noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>ge :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>gr :GscopeFind d <C-R><C-W><cr>
+let g:mwDefaultHighlightingPalette = 'extended'
+
+autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+nnoremap <silent><buffer> <leader>P :PreviewClose<cr>
+autocmd FileType cpp,c nnoremap <silent><buffer> <leader>p :PreviewTag<cr>
+
