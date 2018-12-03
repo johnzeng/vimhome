@@ -14,7 +14,8 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'RRethy/vim-illuminate'
 Plug 'skywind3000/vim-preview'
 Plug 'previm/previm'
-Plug 'johnvzeng/vim-mark'
+Plug 'johnzeng/vim-mark'
+Plug 'inkarkat/vim-ingo-library'
 
 Plug 'altercation/vim-colors-solarized'                                                  
 if has('nvim') && executable('gdb')                                                      
@@ -106,6 +107,7 @@ set expandtab
 set smartindent
 set pastetoggle=<F10>
 set autoread
+set noreadonly
 set autowriteall
 set pvh=1
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
@@ -133,8 +135,15 @@ nmap <leader>q <Esc>:wqa<CR>
 nmap <leader>Q <Esc>:wqa!<CR>
 " we don't use it usually, so we just use a far funcion
 
-command! -nargs=0 HexDump :%!xxd<cr>
-command! -nargs=0 HexDumpRevert :%!xxd -r<cr>
+command! -nargs=0 HexDump call HexDumpFun()
+command! -nargs=0 HexDumpRevert call HexDumpFunRevert()
+
+function! HexDumpFun()
+    exec '%!xxd'
+endfunc
+function! HexDumpFunRevert()
+    exec '%!xxd -r'
+endfunc
 
 set formatoptions=ql
 
@@ -338,7 +347,9 @@ function! AutoReadBuffer(timer)
     if(mode() != 'n')
         return
     endif
-    wa
+    if(expand('%') != '')
+        wa
+    endif
     checktime
 endfunction
 call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
@@ -383,7 +394,7 @@ let g:startify_change_to_dir = 0
 set foldmethod=syntax
 set foldlevelstart=20
 
-command! -narg=0 SetDosFormat :ed ++ff=dos %
+command! -nargs=0 SetDosFormat :ed ++ff=dos %
 set ffs=unix,mac,dos
 
 au BufReadPost quickfix setlocal foldmethod=expr
