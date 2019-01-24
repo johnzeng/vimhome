@@ -5,6 +5,7 @@ Plug 'skywind3000/gutentags_plus'
 Plug 'junegunn/fzf', { 'frozen':1, 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' , {'fozen': 1}
 Plug 'mhinz/vim-grepper'
+Plug 'johnzeng/Smart-deleteion-vim'
 Plug 'johnzeng/xml.vim' , {'for': ['xml', 'html']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp']}
 Plug 'luochen1990/rainbow'
@@ -17,11 +18,12 @@ Plug 'previm/previm'
 Plug 'johnzeng/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
 
+Plug 'danilo-augusto/vim-afterglow'
 Plug 'altercation/vim-colors-solarized'                                                  
 if has('nvim') && executable('gdb')                                                      
     Plug 'huawenyu/neogdb.vim'                                                           
 endif                                                                                    
-                                                                                         
+                                                                                      
 if executable('erl')                                                                     
     Plug 'johnzeng/erlang-find-usage.vim', {'for': 'erlang'}                             
     Plug 'johnzeng/vim-erlang-tags' , {'for': 'erlang'}
@@ -75,15 +77,16 @@ Plug 'majutsushi/tagbar'
 call plug#end()
 
 if has('mac')
-    colorscheme solarized
+    colorscheme afterglow
+"    colorscheme solarized
     "TODO should move to a relative path
     let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
     let g:comment_key="<M-c>"
 "    colorscheme default
-    set background=dark
+"    set background=dark
 else
     colorscheme solarized
-    set background=dark
+"    set background=dark
     let g:comment_key="<leader>c"
 endif
 
@@ -163,7 +166,8 @@ nmap <leader>l :BLines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :Tags<CR>
 
-imap <M-w> <C-R>=SmartDelete_v2()<CR>
+imap <C-c> <Esc>:wa<CR>
+
 "imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -171,93 +175,6 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 let g:fzf_tags_command = 'ctags --fields=+i -n -R -f "c_tags"'
-
-command! -nargs=0 Regop :call ListRegAndPaste()<CR>
-
-func! SmartDelete_v2()
-    let delete_till = CalDeleteTillForSmartDelete()
-    if delete_till == -100
-        return "\<C-w>"
-    else
-        let cur_line = getline('.')
-        let cur_col = col('.')
-        let curpos = getpos('.')
-        let partA = strpart(cur_line, 0, delete_till)
-        let partB = strpart(cur_line, cur_col - 1)
-        let new_line = partA . partB
-        call setline('.', new_line)
-        let curpos[2] = delete_till + 1
-        call setpos('.', curpos)
-        return ""
-    end
-endfunc
-
-func! CalDeleteTillForSmartDelete()
-    let cur_col = col('.')
-    let curpos = getpos('.')
-    normal b
-    let word_head_col = col('.')
-    call setpos('.', curpos)
-    let cur_line = getline('.')
-
-    "current col is still in input mode, so you should start search from cur_col - 1 col
-    "col is not index of cur_line, col - 2 is the index of the cur_col - 1
-    let first_upper_case_index = cur_col - 2
-    let first_under_score_index = cur_col - 2
-
-    "should not equal the word_head_col's index
-    while first_under_score_index >= word_head_col - 1
-        if cur_line[first_under_score_index] == '_'
-            while first_under_score_index >= word_head_col - 1 && cur_line[first_under_score_index - 1] == '_'
-                let first_under_score_index = first_under_score_index - 1
-            endwhile
-            break
-        endif
-        let first_under_score_index = first_under_score_index - 1
-    endwhile
-
-    "should not equal the word_head_col's index
-    if first_under_score_index > word_head_col - 1
-        echom first_under_score_index
-        if first_under_score_index == cur_col - 2
-            let delete_till = first_under_score_index 
-        else
-            let delete_till = first_under_score_index + 1
-        endif
-        return delete_till
-    endif
-        
-    "should not equal the word_head_col's index
-    while first_upper_case_index >= word_head_col - 1
-        if 'A' <= cur_line[first_upper_case_index] && cur_line[first_upper_case_index] <= 'Z'
-            while first_upper_case_index >= word_head_col - 1 && 'A' <= cur_line[first_upper_case_index] && cur_line[first_upper_case_index] <= 'Z'
-                let first_upper_case_index = first_upper_case_index - 1
-            endwhile
-            break
-        endif
-        let first_upper_case_index = first_upper_case_index - 1
-    endwhile
-
-    "should not equal the word_head_col's index
-    if first_upper_case_index > word_head_col - 1
-        let delete_till = first_upper_case_index + 1
-        return delete_till
-    endif
-    return -100
-endfunc
-
-func! ListRegAndPaste()
-  exec "reg 0123456789\""
-  let a:regId = input("which reg do you want?[0-9,\"]:")
-  if strlen(a:regId) != 0 && -1 == match(a:regId, "[0-9\"]")
-    exec "redraw"
-    echon 'illegal register id'
-    return 
-  endif
-  exec "set paste"
-  exec "normal \"".a:regId."p"
-  exec "set nopaste"
-endfunc
 
 au BufEnter *.pig set filetype=pig
 
@@ -267,7 +184,9 @@ let g:indentLine_enabled = 0
 "config for airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep='>'
-let g:airline_theme='solarized'
+"let g:airline_theme='solarized'
+let g:airline_theme='afterglow'
+
 
 "java complete 2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
@@ -308,6 +227,7 @@ let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
 let g:ycm_min_num_of_chars_for_completion = 5
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_global_ycm_extra_conf = '/Users/johnvzeng/working/ycm_extra_conf.py'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
@@ -537,4 +457,3 @@ let g:mwDefaultHighlightingPalette = 'extended'
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 nnoremap <silent><buffer> <leader>P :PreviewClose<cr>
 autocmd FileType cpp,c nnoremap <silent><buffer> <leader>p :PreviewTag<cr>
-
