@@ -214,6 +214,7 @@ let g:AutoPairsShortcutToggle = ""
 let g:AutoPairsMultilineClose = 0
 let g:AutoPairsShortcutJump = ""
 let g:AutoPairsMapSpace = 0
+let g:AutoPairsSkipCharacter = 0
 
 " seting about markdown
 let g:vim_markdown_folding_disabled = 1
