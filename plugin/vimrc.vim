@@ -36,7 +36,7 @@ if executable('clang-tags')
     Plug 'johnzeng/vim-clang-tags', {'for': ['cpp', 'c']}
 endif
 Plug 'mhinz/vim-startify'
-"Plug 'MattesGroeger/vim-bookmarks'
+Plug 'MattesGroeger/vim-bookmarks'
 
 "Plug 'Valloric/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
 Plug 'johnzeng/YouCompleteMe', {'frozen': 1, 'do': './install.py --all', 'for': [ 
@@ -205,6 +205,7 @@ au BufEnter *.erl,*.hrl imap <buffer> << <<>><Esc>hi
 
 let g:erlang_tags_auto_update=1
 let g:erlang_tags_ignore=['rel']
+
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 let g:AutoPairsShortcutFastWrap = ""
 let g:AutoPairsMoveCharacter = ""
@@ -282,15 +283,16 @@ nmap - <Plug>(choosewin)
 let g:choosewin_overlay_enable = 1
 nmap <leader>w <C-w>
 
-"highlight BookmarkSign ctermbg=NONE ctermfg=160
-"highlight BookmarkLine ctermbg=194 ctermfg=NONE
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+
 "let g:bookmark_sign = '♥'
-"let g:bookmark_highlight_lines = 1
-"let g:bookmark_no_default_key_mappings = 1
-"nmap <Leader>mm <Plug>BookmarkToggle
-"nmap <Leader>ma <Plug>BookmarkAnnotate
-"nmap <Leader>ma <Plug>BookmarkShowAll
-nmap <Leader>m <Plug>MarkSet
+let g:bookmark_highlight_lines = 1
+
+let g:bookmark_no_default_key_mappings = 1
+nmap <leader>a <Plug>BookmarkToggle
+nmap <leader>A <Plug>BookmarkShowAll
+nmap <leader>m <Plug>MarkSet
 
 let g:bookmark_auto_save_file = '.vim-bookmarks'
 
@@ -324,7 +326,7 @@ au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
 au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
 au BufReadPost quickfix map <buffer> <silent> o za
 
-au BufEnter *.erl,*.hrl nmap <buffer> <leader>as :FindErlangUsage<CR>
+au BufEnter *.erl,*.hrl nmap <buffer> <leader>gs :FindErlangUsage<CR>
 
 let g:rainbow_active = 1
 
