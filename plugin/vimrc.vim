@@ -460,4 +460,5 @@ autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 nnoremap <silent><buffer> <leader>P :PreviewClose<cr>
 autocmd FileType cpp,c nnoremap <silent><buffer> <leader>p :PreviewTag<cr>
 
-command! CSwitch call fzf#run({'source': "ag --hidden --ignore .git --ignore deps --ignore .swp --ignore ".expand("%:t")." -g '".expand("%:t:r")."'", "down": 4})
+command! CSwitch call fzf#run(fzf#wrap('switcher', {'source': "ag --hidden --ignore .git --ignore deps --ignore .swp --ignore ".expand("%:t")." -g '".expand("%:t:r")."'", "down": 4}))
+nmap <leader>s :CSwitch<CR>
