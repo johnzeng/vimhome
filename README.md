@@ -76,6 +76,12 @@ If you need to use **erlang completion** , you may need to have escript excutabl
 
 Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , you will  need to set up wrangler and host name to make the plugin work
 
+also, you should define the path for wrangler:
+
+```
+let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
+```
+
 # custom keyboard mapping that is different from official plugin
 - For all completion plugin I use `<C-o>` to trigger completion list .But I still recommand that you use `<C-p>` and `<C-n>`  to do most of your completion, that is faster and more vim style.
 - `<leader>` key is ` <space> ` instead of `\ ` 
@@ -86,13 +92,13 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 
 
 # custom feature that you may need to know
-- auto reload a vim script after saving it if you are editing a `.vim` file.
+- auto save file.
+- undo history. You can undo it even after you reopen a file
 - `<A-w>` in insert mode to use smart delete, this allows you to delete a word until under score or uppper case. Try it out.
 - `<leader>f` to open a fzf (fuzzy finder)
 - `<leader>b` to open a buff searcher
 - `<c-p>` to open a fuuzy history searcher
 - `<leader>q` to quit vim
-- `<leader>s` to save all files you have opened
 - `<leader>j` and `<leader>k` to move to next buffer or previous buffer
 - `<C-e>` in normal mode to open a register list and then input any id so you can paste the content in the register into your buffer
 - `<C-e>` in virsual mode to copy from vim to system clipboard (need clipboard feature support, read `:help clipboard` for more info)
@@ -100,8 +106,6 @@ Refer to the readme in [vim-erlang](https://github.com/johnzeng/vim-erlang) , yo
 - `<C-l>` in insert mode or normal mode to close preview window
 - J (Shift + j)in normal mode to show all bookmarks and input a key for it to jump to it.
 - `<leader>d` to begin a delete that will cut to black whole register (like `<leader>dd` will delete a line, and you won't get it again even if you us `p` command)
-- `<F11>` to trans content in vim to binary viewer (if you press multiple time, it will trans the binary code to the "binary code 's binary code", intersting ha?)
-- `<F12>` to turn the binary veiw back(same as F11, pressing multiple time will do some strange thing)
 - `<F2>` to save a session in the current directory
 - `<F4>` Toggle the tagbar (this will need ctags support, and it must be exuberant ctags🙃)
 
@@ -116,3 +120,4 @@ let g:ycm_server_python_interpreter = "/usr/bin/python"
 ```
 
 **the python path need to fix with your own system, please use `which python3` or `which python` to check it out**
+

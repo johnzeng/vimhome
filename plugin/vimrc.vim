@@ -18,7 +18,7 @@ Plug 'previm/previm'
 Plug 'johnzeng/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
 
-Plug 'danilo-augusto/vim-afterglow'
+"Plug 'danilo-augusto/vim-afterglow'
 Plug 'altercation/vim-colors-solarized'                                                  
 if has('nvim') && executable('gdb')                                                      
     Plug 'huawenyu/neogdb.vim'                                                           
@@ -77,10 +77,10 @@ Plug 'majutsushi/tagbar'
 call plug#end()
 
 if has('mac')
-    colorscheme afterglow
-"    colorscheme solarized
+"    colorscheme afterglow
+    colorscheme solarized
     "TODO should move to a relative path
-    let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
+"    let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
     let g:comment_key="<M-c>"
 "    colorscheme default
 "    set background=dark
@@ -184,8 +184,8 @@ let g:indentLine_enabled = 0
 "config for airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep='>'
-"let g:airline_theme='solarized'
-let g:airline_theme='afterglow'
+let g:airline_theme='solarized'
+"let g:airline_theme='afterglow'
 
 
 "java complete 2
