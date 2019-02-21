@@ -82,8 +82,7 @@ if has('mac')
     "TODO should move to a relative path
 "    let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
     let g:comment_key="<M-c>"
-"    colorscheme default
-"    set background=dark
+    set background=dark
 else
     colorscheme solarized
 "    set background=dark
@@ -166,7 +165,8 @@ nmap <leader>l :BLines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :Tags<CR>
 
-imap <C-c> <Esc>:wa<CR>
+imap <C-c> <Esc>:w<CR>
+au BufLeave * call AutoSave()
 
 "imap <M-w> <Esc>:set iskeyword-=_<CR>a<C-w><Esc>:set iskeyword+=_<CR>a
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore deps --ignore '."'.swp'".' -g ""'
@@ -229,7 +229,8 @@ let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
 let g:ycm_min_num_of_chars_for_completion = 5
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_global_ycm_extra_conf = '/Users/johnvzeng/working/ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '/Users/johnvzeng/working/ycm_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
@@ -264,15 +265,22 @@ let g:erlang_complete_extend_arbit = 1
 
 command! JsonFormat execute('%!python -m json.tool')
 
-
-function! AutoReadBuffer(timer)
+function! AutoSave()
     if(mode() != 'n')
         return
     endif
+    if(&readonly == 1)
+        return
+    endif
+
     if(expand('%') != '')
-        wa
+        w
     endif
     checktime
+endfunc
+
+function! AutoReadBuffer(timer)
+    call AutoSave()
 endfunction
 call timer_start(5000, 'AutoReadBuffer', {"repeat": -1})
 
