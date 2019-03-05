@@ -272,6 +272,9 @@ function! AutoSave()
     if(&readonly == 1)
         return
     endif
+    if(&modified == 0)
+        return
+    endif
 
     if(expand('%') != '')
         w
