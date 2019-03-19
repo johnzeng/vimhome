@@ -16,6 +16,16 @@ Some of these settings may need a vim version large than 7.4 with pyhton2 suppor
 - shell
 - xml
 
+# key features
+
+- auto saving(when you exit insert mode, or every 5 seconds in normal mode)
+- code snippet
+- code completion ( supported by YCM )
+- fuzzy file finding, tag finding, command finding
+- auto tag generating for c,cpp
+- comment plugin
+- auto pairing(suported by auto-pairs)
+
 # install by one command
 
 **The installation will take a long time to run :BundleInstall in vi, if you get stuck at the last step, you can just reopen a vim and re-run `:BundleInstall`**
@@ -92,22 +102,19 @@ let g:erlangWranglerPath='/Users/johnzeng/bin/wrangler'
 
 
 # custom feature that you may need to know
-- auto save file.
-- undo history. You can undo it even after you reopen a file
 - `<A-w>` in insert mode to use smart delete, this allows you to delete a word until under score or uppper case. Try it out.
 - `<leader>f` to open a fzf (fuzzy finder)
 - `<leader>b` to open a buff searcher
+- `<leader>t` To search all generated tags in fuzzy mode
 - `<c-p>` to open a fuuzy history searcher
 - `<leader>q` to quit vim
 - `<leader>j` and `<leader>k` to move to next buffer or previous buffer
-- `<C-e>` in normal mode to open a register list and then input any id so you can paste the content in the register into your buffer
-- `<C-e>` in virsual mode to copy from vim to system clipboard (need clipboard feature support, read `:help clipboard` for more info)
-- `<C-e>` in insert mode to paste to vim from system clipboard (need clipboard feature support, read `:help clipboard` for more info)
-- `<C-l>` in insert mode or normal mode to close preview window
+- `<C-d>` in virsual mode to copy from vim to system clipboard (need clipboard feature support, read `:help clipboard` for more info)
+- `<C-d>` in insert mode to paste to vim from system clipboard (need clipboard feature support, read `:help clipboard` for more info)
 - J (Shift + j)in normal mode to show all bookmarks and input a key for it to jump to it.
-- `<leader>d` to begin a delete that will cut to black whole register (like `<leader>dd` will delete a line, and you won't get it again even if you us `p` command)
 - `<F2>` to save a session in the current directory
 - `<F4>` Toggle the tagbar (this will need ctags support, and it must be exuberant ctags🙃)
+- `<leader>x` To check all supported command from plugins
 
 # python support
 
