@@ -186,6 +186,17 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep='>'
 let g:airline_theme='solarized'
 "let g:airline_theme='afterglow'
+function! AirLineSvnFucker(...)
+    let pwdTail = fnamemodify(getcwd(), ":t")
+    if pwdTail == 'trunk'
+        let builder = a:1
+        let w:airline_section_c = g:airline_section_c.' -> %{fnamemodify(getcwd(), ":h:t")}'
+    endif
+endfunction
+if !exists('g:FuckerLoaded')
+    let g:FuckerLoaded = 1
+    call airline#add_statusline_func('AirLineSvnFucker')
+endif
 
 
 "java complete 2
