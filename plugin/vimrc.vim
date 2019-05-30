@@ -17,6 +17,7 @@ Plug 'skywind3000/vim-preview'
 Plug 'previm/previm'
 Plug 'johnzeng/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
+Plug 'juneedahamed/svnj.vim'
 
 "Plug 'danilo-augusto/vim-afterglow'
 Plug 'altercation/vim-colors-solarized'                                                  
@@ -240,7 +241,6 @@ let g:completor_erlang_omni_trigger = '([^. *\t]:\w*)$'
 let g:ycm_min_num_of_chars_for_completion = 5
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"let g:ycm_global_ycm_extra_conf = '/Users/johnvzeng/working/ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -474,6 +474,7 @@ au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,
 au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp,*.go,*.py,*.cs nmap <buffer> <leader>gc :YcmCompleter GoToDeclaration<CR>
 au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp nmap <buffer> <leader>gi :YcmCompleter GoToInclude<CR>
 au BufEnter *.hxx,*.cc,*.c,*.cpp,*.h,*.js,*.cxx,*.hpp,*.objc,*.ojbcpp nmap <buffer> <leader>gf :YcmCompleter FixIt<CR>
+"let g:ycm_log_level ='debug'
 noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>ge :GscopeFind c <C-R><C-W><cr>
 noremap <silent> <leader>gr :GscopeFind d <C-R><C-W><cr>
